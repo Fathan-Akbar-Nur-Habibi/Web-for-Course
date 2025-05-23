@@ -11,7 +11,10 @@
     rel="stylesheet"
     crossorigin="anonymous"
   />
-  <!-- Custom CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  
+<!-- Custom CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -211,9 +214,59 @@
       </div>
     </div>
   </div>
+
+  <!-- Features Section -->
+  <div class="container my-5">
+    <div class="row">
+      <!-- Feature 1 -->
+      <div class="col-xl-4 col-lg-4 col-md-6 mb-lg-0 mb-4">
+        <div class="d-flex align-items-center">
+          <span class="icon-shape icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md">
+            <i data-feather="video"></i> <!-- feather icon -->
+          </span>
+          <div class="ms-3"> <!-- Ganti 'ml-3' (Bootstrap 4) dengan 'ms-3' (Bootstrap 5) -->
+            <h4 class="mb-0 font-weight-semi-bold">30,000 Online Courses</h4>
+            <p class="mb-0">Enjoy a variety of fresh topics</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="col-xl-4 col-lg-4 col-md-6 mb-lg-0 mb-4">
+        <div class="d-flex align-items-center">
+          <span class="icon-shape icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md">
+            <i data-feather="users"></i> <!-- feather icon -->
+          </span>
+          <div class="ms-3">
+            <h4 class="mb-0 font-weight-semi-bold">Expert Instruction</h4>
+            <p class="mb-0">Find the right instructor for you</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="col-xl-4 col-lg-4 col-md-12">
+        <!-- Perbaikan class dari 'col-x1-4' ke 'col-xl-4' -->
+        <div class="d-flex align-items-center">
+          <span class="icon-shape icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md">
+            <i data-feather="clock"></i> <!-- feather icon -->
+          </span>
+          <div class="ms-3">
+            <h4 class="mb-0 font-weight-semi-bold">Lifetime Access</h4>
+            <p class="mb-0">Learn on your schedule</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"
   ></script>
+    <!-- Feather Icons Replace -->
+  <script>
+    feather.replace(); // Wajib untuk render ikon Feather
+  </script>
 </body>
 </html>
