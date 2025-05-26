@@ -5,10 +5,12 @@
   color: #6c757d;
 }
 
-/* Styling profil agar bulat dan proporsional */
 .profile-img {
   border-radius: 50%;
   object-fit: cover;
   display: block;
-  /* kalau perlu bisa atur width/height di HTML */
+}
+.dropdown-menu .dropdown-menu {
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
 }
