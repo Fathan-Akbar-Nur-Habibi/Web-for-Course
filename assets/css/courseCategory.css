@@ -1,0 +1,147 @@
+    .js-header {
+      background-color: #4dabf7; /* biru terang */
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    /* 3) Tab container styling */
+    .tab-menu {
+      background: white;
+      padding: 1rem 0;
+      border-bottom: none;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      position: relative;
+      user-select: none;
+    }
+    .tab-menu button {
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #000;
+      outline: none;
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      border-radius: 0;
+    }
+    .tab-menu button:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    /* Hapus garis kotak */
+    .tab-menu button:focus-visible,
+    .tab-menu button:hover {
+      outline: none;
+      box-shadow: none;
+    }
+
+    /* garis bawah tab */
+    .tab-menu .underline {
+      position: absolute;
+      bottom: 0;
+      height: 3px;
+      background-color: #ddd;
+      transition: all 0.3s ease;
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* garis bawah aktif dan hover */
+    .tab-menu button.active,
+    .tab-menu button:hover {
+      color: #0d6efd; /* biru bootstrap */
+    }
+
+    /* garis bawah berwarna biru untuk active/hover */
+    .tab-menu button.active ~ .underline,
+    .tab-menu button:hover ~ .underline {
+      background-color: #0d6efd;
+    }
+
+    /* Bookmark icon container */
+    .bookmark-icon {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .bookmark-tooltip {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #000;
+      color: #fff;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+
+    .bookmark-icon:hover .bookmark-tooltip {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Card styling */
+    .course-card img.rounded-circle {
+      width: 35px;
+      height: 35px;
+      object-fit: cover;
+    }
+
+    .star-rating {
+      color: #f59e0b; /* gold star color */
+      font-weight: 600;
+    }
+
+    .tab-content {
+      background: white;
+      padding: 2rem 1rem 3rem;
+    }
+
+/* ✅ Container Trending Scroll */
+.trending-wrapper {
+  padding: 1rem 0;
+}
+
+.trending-scroll {
+  scroll-behavior: smooth;
+  padding: 1rem 3rem;
+}
+
+/* ✅ Scroll Tombol */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.scroll-btn:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.left-btn {
+  left: 0.5rem;
+}
+
+.right-btn {
+  right: 0.5rem;
+}
