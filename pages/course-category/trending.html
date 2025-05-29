@@ -262,100 +262,86 @@
   <p>6,979,934 students are learning JavaScript.</p>
 </section>
 
-<!--2 background tab and content-->
-<!-- ✅ Tab Menu Section: DITAMBAHKAN -->
-  <div class="tab-menu">
-    <button id="btnMostPopular" class="active">Most Popular</button>
-    <button id="btnTrending">Trending</button>
-    <div class="underline" id="tabUnderline"></div> <!-- ✅ underline bergerak -->
-  </div>
+<div class="tab-menu">
 
-  <!-- ✅ Tab Content Section -->
+  <a href="./mostpopular.html" id="btnMostPopular" class="btn btn-link p-0 text-decoration-none active">Most Popular</a>
+  <a href="./trending.html" id="btnTrending" class="btn btn-link p-0 text-decoration-none">Trending</a>
+  <div class="underline" id="tabUnderline"></div>
+</div>
+
+ <!-- ✅ Tab Content Section -->
   <div class="tab-content container">
-    <!-- ✅ Most Popular Tab -->
-    <div id="mostPopular" class="row g-4">
+    <!-- ✅ Trending Tab -->
+    <div id="trending" class="row g-4">
       <!-- Card 1 -->
-      <div class="col-md-4">
-        <div class="card course-card h-100">
-          <img src="/assets/images/course-javascript.jpg" class="card-img-top" alt="Creating a Custom Event in JavaScript" />
-          <div class="card-body">
-            <h5 class="card-title">Creating a Custom Event in JavaScript</h5>
-            <p class="card-text mb-1">3h 56m Beginner</p>
-            <p class="star-rating mb-2">★ 4.5 (9,300)</p>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
-                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Morris Mccoy" class="rounded-circle me-2" />
-                <small>Morris Mccoy</small>
-              </div>
-              <div class="bookmark-icon" tabindex="0" role="button" aria-label="Add to Bookmark">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
-                </svg>
-                <div class="bookmark-tooltip">Add to Bookmark</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="col-md-4">
-        <div class="card course-card h-100">
-          <img src="/assets/images/course-javascript.jpg" class="card-img-top" alt="Creating a Custom Event in JavaScript" />
-          <div class="card-body">
-            <h5 class="card-title">Modern JavaScript Beginner Tutorial - Simple</h5>
-            <p class="card-text mb-1">2h 46m Advance</p>
-            <p class="star-rating mb-2">★ 4.5 (7,800)</p>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
-                <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Morris Mccoy" class="rounded-circle me-2" />
-                <small>Ted Hawkins</small>
-              </div>
-              <div class="bookmark-icon" tabindex="0" role="button" aria-label="Add to Bookmark">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
-                </svg>
-                <div class="bookmark-tooltip">Add to Bookmark</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="col-md-4">
-        <div class="card course-card h-100">
-          <img src="/assets/images/course-javascript.jpg" class="card-img-top" alt="Creating a Custom Event in JavaScript" />
-          <div class="card-body">
-            <h5 class="card-title">Applying JavaScript and Console</h5>
-            <p class="card-text mb-1">1h 30m Beginner</p>
-            <p class="star-rating mb-2">★ 4.5 (8,245)</p>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Morris Mccoy" class="rounded-circle me-2" />
-                <small>Juanita Bell</small>
-              </div>
-              <div class="bookmark-icon" tabindex="0" role="button" aria-label="Add to Bookmark">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
-                </svg>
-                <div class="bookmark-tooltip">Add to Bookmark</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>      
-    </div>
-
-<!-- ✅ Wrapper trending yang bisa discroll horizontal -->
-<div id="trending" class="trending-wrapper d-none position-relative">
-  <!-- ✅ Scrollable Container -->
-  <div class="trending-scroll d-flex overflow-auto">
-    <!-- Ubah col-md-4 jadi card biasa karena pakai flex -->
-    <!--Card 1 Trending-->
     <div class="card course-card me-3 flex-shrink-0" style="width: 300px;">
-      <img src="/assets/images/course-css.jpg" class="card-img-top" alt="Css Beginner Tutorial" />
+      <img src="/assets/images/course-python.jpg" class="card-img-top" alt="Css Beginner Tutorial" />
       <div class="card-body">
-        <h5 class="card-title">CSS: ultimate CSS course from beginner to advanced</h5>
+        <h5 class="card-title">The Python Course: build web application</h5>
+        <p class="card-text mb-1">2h 30m · Intermediate </p>
+        <p class="star-rating mb-2">★ 4.5 (9,300)</p>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <img src="/assets/images/avatar-5.jpg" alt="Morris Mccoy" class="rounded-circle me-2" />
+            <small>Morris Mccoy</small>
+          </div>
+          <div class="bookmark-icon">
+            <!-- Bookmark SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentnoneColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
+                </svg>
+          </div>
+        </div>
+      </div>
+    </div> 
+      <!-- Card 2 -->
+    <div class="card course-card me-3 flex-shrink-0" style="width: 300px;">
+      <img src="/assets/images/course-javascript.jpg" class="card-img-top" alt="Css Beginner Tutorial" />
+      <div class="card-body">
+        <h5 class="card-title">Modern JavaScript Beginner Tutorial - Simple</h5>
+        <p class="card-text mb-1">2h 46m · Advance</p>
+        <p class="star-rating mb-2">★ 4.5 (7,800)</p>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <img src="/assets/images/avatar-4.jpg" alt="Ted Hawkins" class="rounded-circle me-2" />
+            <small>Ted Hawkins</small>
+          </div>
+          <div class="bookmark-icon">
+            <!-- Bookmark SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentnoneColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
+                </svg>
+          </div>
+        </div>
+      </div>
+    </div> 
+      <!-- Card 3 -->
+    <div class="card course-card me-3 flex-shrink-0" style="width: 300px;">
+      <img src="/assets/images/course-wordpress.jpg" class="card-img-top" alt="wordpress Tutorial" />
+      <div class="card-body">
+        <h5 class="card-title">Wordpress: complete WordPress theme & plugin development</h5>
+        <p class="card-text mb-1">2h 30m  Intermediate</p>
+        <p class="star-rating mb-2">★ 4.5 (8,245)</p>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <img src="/assets/images/avatar-3.jpg" alt="Juanita Bell" class="rounded-circle me-2" />
+            <small>Juanita Bell</small>
+          </div>
+          <div class="bookmark-icon">
+            <!-- Bookmark SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentnoneColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
+                </svg>
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <!--Card 4-->
+    <div class="card course-card me-3 flex-shrink-0" style="width: 300px;">
+      <img src="/assets/images/course-angular.jpg" class="card-img-top" alt="Angular Beginner Tutorial" />
+      <div class="card-body">
+        <h5 class="card-title">Angular - The Complete Guide For Beginner</h5>
         <p class="card-text mb-1">2h 46m · Beginner</p>
         <p class="star-rating mb-2">★ 4.5 (7,800)</p>
         <div class="d-flex align-items-center justify-content-between">
@@ -373,76 +359,130 @@
       </div>
     </div>
 
-    <!--Card 2 Trending-->
-    <div class="card course-card me-3 flex-shrink-0" style="width: 300px;">
-      <img src="/assets/images/course-angular.jpg" class="card-img-top" alt="Angular Tutorial" />
-      <div class="card-body">
-        <h5 class="card-title">Angular - The Complete Guide For Beginner</h5>
-        <p class="card-text mb-1">1h 36m · Beginner</p>
-        <p class="star-rating mb-2">★ 4.5 (7,800)</p>
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <img src="/assets/images/avatar-3.jpg" alt="Juanita Bell" class="rounded-circle me-2" />
-            <small>Juanita Bell</small>
+<!-- Popular Instructors Section -->
+<div class="container my-5">
+  <h3 class="mb-1">Popular Instructor</h3>
+  <small class="text-muted">Popular instructors in JavaScript Courses.</small>
+
+  <!-- Instructors Grid -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-3">
+
+    <!-- Instructor Card -->
+    <div class="col">
+      <div class="card p-4 text-center shadow-sm h-100">
+        <img src="/assets/images/avatar-1.jpg" class="rounded-circle mx-auto mb-3" alt="Wade Warren" width="100" height="100">
+        <h5 class="mb-1">Wade Warren</h5>
+        <small class="text-muted">Web Developer, Designer</small>
+
+        <div class="mt-4 text-start">
+          <div class="d-flex justify-content-between border-top pt-3 pb-2">
+            <span class="fw-bold">Students</span>
+            <span>50,274</span>
           </div>
-          <div class="bookmark-icon">
-            <!-- Bookmark SVG -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentnoneColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
-                </svg>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Instructor Rating</span>
+            <span>4.5 ★</span>
+          </div>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Courses</span>
+            <span>12</span>
+          </div>
+          <div class="d-flex justify-content-between border-top pt-2">
+            <span class="fw-bold">Experience</span>
+            <span>5 Years</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!--Card 3 Trending-->
-    <div class="card course-card me-3 flex-shrink-0" style="width: 300px;">
-      <img src="/assets/images/course-react.jpg" class="card-img-top" alt="React Tutorial" />
-      <div class="card-body">
-        <h5 class="card-title"> React For Beginner</h5>
-        <p class="card-text mb-1">1h 36m · Beginner</p>
-        <p class="star-rating mb-2">★ 4.5 (7,800)</p>
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <img src="/assets/images/avatar-5.jpg" alt="Jack Wilson" class="rounded-circle me-2" />
-            <small>Jack Wilson</small>
+    <!-- Copy this card 3 more times with different content if needed -->
+    <div class="col">
+      <div class="card p-4 text-center shadow-sm h-100">
+        <img src="/assets/images/avatar-2.jpg" class="rounded-circle mx-auto mb-3" alt="Jane Doe" width="100" height="100">
+        <h5 class="mb-1">Jane Doe</h5>
+        <small class="text-muted">Frontend Engineer</small>
+        <div class="mt-4 text-start">
+          <div class="d-flex justify-content-between border-top pt-3 pb-2">
+            <span class="fw-bold">Students</span>
+            <span>32,100</span>
           </div>
-          <div class="bookmark-icon">
-             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentnoneColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
-             </svg>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Instructor Rating</span>
+            <span>4.7 ★</span>
           </div>
-        </div>
-      </div>
-    </div>
-<!--Card 4 Trending-->
-    <div class="card course-card me-3 flex-shrink-0" style="width: 300px;">
-      <img src="/assets/images/course-graphql.jpg" class="card-img-top" alt="Graphql Beginner Tutorial" />
-      <div class="card-body">
-        <h5 class="card-title">GraphQL: introduction to GraphQL for beginners</h5>
-        <p class="card-text mb-1">2h 46m · Advanced</p>
-        <p class="star-rating mb-2">★ 4.5 (10,800)</p>
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <img src="/assets/images/avatar-2.jpg" alt="Ted Hawkins" class="rounded-circle me-2" />
-            <small>Kim Seon</small>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Courses</span>
+            <span>8</span>
           </div>
-          <div class="bookmark-icon">
-            <!-- Bookmark SVG -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentnoneColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                  <path d="M2 2v13.5l6-3.5 6 3.5V2z"/>
-                </svg>
+          <div class="d-flex justify-content-between border-top pt-2">
+            <span class="fw-bold">Experience</span>
+            <span>6 Years</span>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Instructor 3 -->
+    <div class="col">
+      <div class="card p-4 text-center shadow-sm h-100">
+        <img src="/assets/images/avatar-3.jpg" class="rounded-circle mx-auto mb-3" alt="Alex Smith" width="100" height="100">
+        <h5 class="mb-1">Alex Smith</h5>
+        <small class="text-muted">UI/UX Designer</small>
+        <div class="mt-4 text-start">
+          <div class="d-flex justify-content-between border-top pt-3 pb-2">
+            <span class="fw-bold">Students</span>
+            <span>41,890</span>
+          </div>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Instructor Rating</span>
+            <span>4.6 ★</span>
+          </div>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Courses</span>
+            <span>10</span>
+          </div>
+          <div class="d-flex justify-content-between border-top pt-2">
+            <span class="fw-bold">Experience</span>
+            <span>7 Years</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructor 4 -->
+    <div class="col">
+      <div class="card p-4 text-center shadow-sm h-100">
+        <img src="/assets/images/avatar-4.jpg" class="rounded-circle mx-auto mb-3" alt="Linda Johnson" width="100" height="100">
+        <h5 class="mb-1">Linda Johnson</h5>
+        <small class="text-muted">Full Stack Developer</small>
+        <div class="mt-4 text-start">
+          <div class="d-flex justify-content-between border-top pt-3 pb-2">
+            <span class="fw-bold">Students</span>
+            <span>62,400</span>
+          </div>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Instructor Rating</span>
+            <span>4.8 ★</span>
+          </div>
+          <div class="d-flex justify-content-between border-top py-2">
+            <span class="fw-bold">Courses</span>
+            <span>15</span>
+          </div>
+          <div class="d-flex justify-content-between border-top pt-2">
+            <span class="fw-bold">Experience</span>
+            <span>9 Years</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
 </div>
 
   </div>
-</section>
+    </div>
+
+
+
 
  <footer class="bg-light py-3 mt-5">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -457,6 +497,7 @@
       </div>
     </div>
   </footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/pages/assets/js/courseCategory.js"></script>
