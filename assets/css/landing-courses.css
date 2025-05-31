@@ -26,3 +26,31 @@
     margin-right: 0.5rem; 
     font-size: 18px;
 }
+
+// Container
+//Features IN
+/* Beri margin-top lebih besar agar jarak dari hero section terasa */
+.bg-white {
+  margin-top: 4rem; /* 64px jarak dari hero section, bisa disesuaikan */
+  padding-top: 3rem; /* Padding atas agar konten tidak terlalu mepet */
+  padding-bottom: 3rem; /* Padding bawah agar nyaman */
+}
+
+/* Styling span "Featured In" agar lebih mencolok */
+.bg-white .text-primary {
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+/* Buat logo-logo dalam fitur lebih rapi */
+.bg-white .row > div {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* Responsive tweaks: pada layar kecil beri sedikit margin vertikal antar logo */
+@media (max-width: 576px) {
+  .bg-white .row > div {
+    margin-bottom: 1.5rem;
+  }
+}
