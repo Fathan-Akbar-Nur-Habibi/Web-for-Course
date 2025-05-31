@@ -1,0 +1,28 @@
+// custom spacing
+.hero-section h1 { 
+    margin-bottom: 1rem;
+}
+.hero-section p { 
+    margin-bottom: 2.5rem;
+}
+.hero-buttons > a { 
+    margin-right: 1rem;
+}
+
+.hero-features { 
+    margin-top: 3rem;
+}
+
+// style icon
+.check-icon { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; 
+    width: 28px;
+    height: 28px; 
+    border-radius: 50%; 
+    background-color: #d4edda; // light green
+    color: #28a745; 
+    margin-right: 0.5rem; 
+    font-size: 18px;
+}
