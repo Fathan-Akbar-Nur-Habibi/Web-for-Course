@@ -54,3 +54,17 @@
     margin-bottom: 1.5rem;
   }
 }
+
+.category-btn.active { 
+  background-color: white;
+  color:#0d6efd;
+}
+
+@media (max-width: 576px) {
+  h2 { 
+    font-size: 1.5rem;
+  } 
+  p { 
+    font-size: 0.95rem;
+  }
+}
