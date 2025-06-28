@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SaaS | Geeks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/cpurse-lead.css">
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.css" rel="stylesheet">
+
+    <style>
+    .chevron-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .chevron-arrow.rotate {
+      transform: rotate(180deg);
+    }
+
+    /* untuk area filter scrollable */
+    .filter-section {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .course-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    /* Cursor disabled for pagination buttons */
+    .page-link.disabled {
+      pointer-events: none;
+      cursor: default;
+      opacity: 0.5;
+    }
+  </style>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-primary bg-white shadow-sm">
+        <div class="container">
+            <!--logo-->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/assets/images/computer_geeks.png" alt="logo" width="90" height="50" class="me-2 bg-white" />
+            </a>
+
+            <!--Toggler for mobile-->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Navbar menu-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!--left menu-->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!--Browse-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="browserDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Browse</a>
+
+                        <ul class="dropdown-menu" aria-labelledby="browseDropdown">
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Web Development</a>
+                            </li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Design</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Mobile App</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">IT Software</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Marketing</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Music</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Life Style</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Business</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Photography</a></li>
+                        </ul>
+                    </li>
+
+                    <!--Landing-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="landingsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Landings</a>
+                        <ul class="dropdown-menu" aria-labelledby="landingsDropdown">
+                            <li><a href="#Course" class="dropdown-item">Courses</a></li>
+                            <li><a href="#lead-course" class="dropdown-item">Lead Course</a></li>
+                            <li><a href="#request-course" class="dropdown-item">Request Course</a></li>
+                            <li><a href="#saas" class="dropdown-item">Saas</a></li>
+                        </ul>
+                    </li>
+
+                    <!--Pages-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Pages </a>
+                        <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                            <li><a href="#courses" class="dropdown-item">Courses</a></li>
+                            <li><a href="#paths" class="dropdown-item">Paths</a></li>
+                            <li><a href="#blog" class="dropdown-item">Blog</a></li>
+                            <li><a href="#career" class="dropdown-item">Career</a></li>
+                            <li><a href="#specialty" class="dropdown-item">Specialty</a></li>
+                            <li><a href="#about" class="dropdown-item">About</a></li>
+                            <li><a href="#help-center" class="dropdown-item">Help Center</a></li>
+                            <li><a href="#price" class="dropdown-item">Pricing</a></li>
+                            <li><a href="#compare" class="dropdown-item">Compare</a></li>
+                            <li><a href="#contact" class="dropdown-item">Contact</a></li>
+                        </ul>
+                    </li>
+
+                    <!--Accounts-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Accounts</a>
+                        <ul class="dropdown-menu" aria-labelledby="accountsDropdown">
+                            <li><a href="#instructor" class="dropdown-item">Instructors</a></li>
+                            <li><a href="#student" class="dropdown-item">Student</a></li>
+                            <li><a href="#admin" class="dropdown-item">Admin</a></li>
+                            <li><a href="#sign-in" class="dropdown-item">Sign In</a></li>
+                            <li><a href="#sign-out" class="dropdown-item">Sign Out</a></li>
+                            <li><a href="#forgot-password" class="dropdown-item">Forgot Password</a></li>
+                            <li><a href="#edit-profile" class="dropdown-item">Edit Profile</a></li>
+                            <li><a href="#security" class="dropdown-item">Security</a></li>
+                            <li><a href="#social-profile" class="dropdown-item">Social Profile</a></li>
+                            <li><a href="#notification" class="dropdown-item">Notification</a></li>
+                            <li><a href="#privacy-settings" class="dropdown-item">Privacy Settings</a></li>
+                            <li><a href="#delete-profile" class="dropdown-item">Delete Profile</a></li>
+                            <li><a href="#linked-accounts" class="dropdown-item">Linked Accounts</a></li>
+                        </ul>
+                    </li>
+
+                    <!--...-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">...</a>
+                        <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#documentation">
+                                    Documentations
+                                    <p>Browse the all documentations</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="log">
+                                    Changelog V1.04
+                                    <p>See what's new</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--Mobile View nav wrap-->
+            <div class="ms-auto d-flex align-items-center order-lg-3">
+                <div class="d-flex gap-2 align-items-center">
+                    <a href="#langaugeModal" id="languageSwitcher" class="text-inherit me-2 text-decoration-none"
+                        data-bs-toggle="modal">
+                        <span id="currentLanguage" class="me-1">English</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            class="bi bi-globe text-gray-500" viewBox="0 0 16 16">
+                            <path
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="../pages/sign-in.html" class="btn btn-outline-dark">Login</a>
+                    <a href="../pages/sign-up.html" class="btn btn-dark d-none d-md-block">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--Modal for choose language-->
+    <div class="modal fade" id="langaugeModal" tabindex="-1" aria-labelledby="langaugeModalLabel" style="display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="modal-title" id="langaugeModalLabel">Choose a language</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+                        <a class="text-inherit fw-semibold active text-decoration-none" href="#!">English</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Deutsch</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Español</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Français</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Indonesia</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Italiano</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">日本語</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">한국어</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Nederlands</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Polski</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Português</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Română</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Русский</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">ภาษาไทย</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Türkçe</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">Tiếng Việt</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">中文(简体)</a>
+                        <a class="text-inherit fw-semibold text-decoration-none" href="#!">中文(繁體)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <main>
+    <!-- Hero Section -->
+    <section class="py-5">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item text-primary fw-bold"><a href="#!">Web Design</a></li>
+            <li class="breadcrumb-item text-primary fw-bold"><a href="#!">Course Design</a></li>
+            <li class="breadcrumb-item text-primary fw-bold active" aria-current="page">Courses</li>
+          </ol>
+        </nav>
+
+        <h1 class="mb-1">Courses</h1>
+        <p class="mb-4">Explore courses from experienced, real-world experts.</p>
+      </div>
+    </section>
+
+    <!-- Filters, Sorting and Courses Section -->
+    <section class="pb-5">
+      <div class="container">
+        <div class="row">
+
+          <!-- Filters Sidebar -->
+          <aside class="col-12 col-lg-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex align-items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-sliders text-dark" viewBox="0 0 16 16">
+                  <path
+                    d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z">
+                  </path>
+                </svg>
+                <span class="fw-semibold text-dark">Filters</span>
+              </div>
+              <button id="clearButton" class="btn btn-light btn-sm" style="display:none;">
+                Clear
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                  class="bi bi-x-circle" viewBox="0 0 16 16">
+                  <path
+                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16">
+                  </path>
+                  <path
+                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708">
+                  </path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="filter-section">
+
+              <!-- Filter Group Template -->
+              <div class="card mb-3">
+                <div class="card-body p-3 bg-dark">
+                  <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none"
+                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="topicFilter" role="button"
+                    id="topicToggle">
+                    <h5 class="mb-0">Topic</h5>
+                    <span class="chevron-arrow"><i class="bi bi-chevron-down fs-4"></i></span>
+                  </a>
+                  <div class="collapse show mt-3" id="topicFilter" data-parent=".filter-section">
+                    <ul class="list-unstyled mb-0" id="topicListShort">
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="React" id="topicReact" />
+                          <label class="form-check-label text-light" for="topicReact">React</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="JavaScript"
+                            id="topicJavaScript" />
+                          <label class="form-check-label text-light" for="topicJavaScript">JavaScript</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Angular"
+                            id="topicAngular" />
+                          <label class="form-check-label text-light" for="topicAngular">Angular</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Node" id="topicNode" />
+                          <label class="form-check-label text-light" for="topicNode">Node</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Angular JS"
+                            id="topicAngularJS" />
+                          <label class="form-check-label text-light" for="topicAngularJS">Angular JS</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Gatsby" id="topicGatsby" />
+                          <label class="form-check-label text-light" for="topicGatsby">Gatsby</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="GraphQL" id="topicGraphQL" />
+                          <label class="form-check-label text-light" for="topicGraphQL">GraphQL</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="VueJs" id="topicVueJs" />
+                          <label class="form-check-label text-light" for="topicVueJs">VueJs</label>
+                        </div>
+                      </li>
+                    </ul>
+                    <ul class="list-unstyled mb-0 collapse" id="topicListMore">
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="SCSS" id="topicSCSS" />
+                          <label class="form-check-label text-light" for="topicSCSS">SCSS</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="JavaScript 1"
+                            id="topicJavaScript1" />
+                          <label class="form-check-label text-light" for="topicJavaScript1">JavaScript</label>
+                        </div>
+                      </li>
+                    </ul>
+                    <a href="#" class="btn btn-link p-0 mt-2" id="toggleTopicBtn">Show More</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Price Filter -->
+              <div class="card mb-3">
+                <div class="card-body p-3 bg-dark">
+                  <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none"
+                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="priceFilter" role="button"
+                    id="priceToggle">
+                    <h5 class="mb-0">Price</h5>
+                    <span class="chevron-arrow"><i class="bi bi-chevron-down fs-4"></i></span>
+                  </a>
+                  <div class="collapse show mt-3" id="priceFilter" data-parent=".filter-section">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="All" id="priceAll" />
+                          <label class="form-check-label text-light" for="priceAll">All</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Free" id="priceFree" />
+                          <label class="form-check-label text-light" for="priceFree">Free</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Paid" id="pricePaid" />
+                          <label class="form-check-label text-light" for="pricePaid">Paid</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Skill Level Filter -->
+              <div class="card mb-3">
+                <div class="card-body p-3 bg-dark">
+                  <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none"
+                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="skillFilter" role="button"
+                    id="skillToggle">
+                    <h5 class="mb-0">Skill Level</h5>
+                    <span class="chevron-arrow"><i class="bi bi-chevron-down fs-4"></i></span>
+                  </a>
+                  <div class="collapse show mt-3" id="skillFilter" data-parent=".filter-section">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="All Level" id="skillAll" />
+                          <label class="form-check-label text-light" for="skillAll">All Level</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Beginner" id="skillBeginner" />
+                          <label class="form-check-label text-light" for="skillBeginner">Beginner</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Intermediate" id="skillIntermediate" />
+                          <label class="form-check-label text-light" for="skillIntermediate">Intermediate</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Expert" id="skillExpert" />
+                          <label class="form-check-label text-light" for="skillExpert">Expert</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Language Filter -->
+              <div class="card mb-3">
+                <div class="card-body p-3 bg-dark">
+                  <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none"
+                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="languageFilter" role="button"
+                    id="languageToggle">
+                    <h5 class="mb-0">Language</h5>
+                    <span class="chevron-arrow"><i class="bi bi-chevron-down fs-4"></i></span>
+                  </a>
+                  <div class="collapse show mt-3" id="languageFilter" data-parent=".filter-section">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="English" id="langEnglish" />
+                          <label class="form-check-label text-light" for="langEnglish">English (13,245)</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Portuguese" id="langPortuguese" />
+                          <label class="form-check-label text-light" for="langPortuguese">Portuguese (13,245)</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Hindi" id="langHindi" />
+                          <label class="form-check-label text-light" for="langHindi">Hindi (13,245)</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="French" id="langFrench" />
+                          <label class="form-check-label text-light" for="langFrench">French (13,245)</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Rating Filter -->
+              <div class="card mb-3">
+                <div class="card-body p-3 bg-dark">
+                  <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none"
+                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="ratingFilter" role="button"
+                    id="ratingToggle">
+                    <h5 class="mb-0">Rating</h5>
+                    <span class="chevron-arrow"><i class="bi bi-chevron-down fs-4"></i></span>
+                  </a>
+                  <div class="collapse show mt-3" id="ratingFilter" data-parent=".filter-section">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="4.5" id="rating4_5" />
+                          <label class="form-check-label text-light" for="rating4_5">⭐ 4.5 & up (13,245)</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="4.0" id="rating4_0" />
+                          <label class="form-check-label text-light" for="rating4_0">⭐ 4.0 & up (13,245)</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="3.5" id="rating3_5" />
+                          <label class="form-check-label text-light" for="rating3_5">⭐ 3.5 & up (13,245)</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video Duration Filter -->
+              <div class="card mb-3">
+                <div class="card-body p-3 bg-dark">
+                  <a href="#" class="d-flex align-items-center justify-content-between text-decoration-none"
+                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="durationFilter" role="button"
+                    id="durationToggle">
+                    <h5 class="mb-0">Video Duration</h5>
+                    <span class="chevron-arrow"><i class="bi bi-chevron-down fs-4"></i></span>
+                  </a>
+                  <div class="collapse show mt-3" id="durationFilter" data-parent=".filter-section">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="All" id="durationAll" />
+                          <label class="form-check-label text-light" for="durationAll">All</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Short (< 2h)" id="durationShort" />
+                          <label class="form-check-label text-light" for="durationShort">Short (&lt; 2h)</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Medium (2-10h)" id="durationMedium" />
+                          <label class="form-check-label text-light" for="durationMedium">Medium (2-10h)</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <input class="form-check-input filter-checkbox" type="checkbox" value="Long (> 10h)" id="durationLong" />
+                          <label class="form-check-label text-light" for="durationLong">Long (&gt; 10h)</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main Content: Sorting & Courses -->
+          <section class="col-12 col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <h2 class="fs-5 fw-semibold">All Courses</h2>
+                <p class="mb-0 text-muted" id="coursesCount">Showing 1-10 of 50 results</p>
+              </div>
+
+              <div>
+                <label for="sortSelect" class="form-label me-2 mb-0 fw-semibold">Sort by:</label>
+                <select class="form-select form-select-sm" id="sortSelect" aria-label="Sort courses">
+                  <option value="free">Free</option>
+                  <option value="highestRanked">Highest Ranked</option>
+                  <option value="mostPopular">Most Popular</option>
+                  <option value="newest">Newest</option>
+                  <option value="sorting">Sorting</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Course Cards -->
+            <div id="coursesContainer" class="row g-3">
+              <!-- Cards will be loaded here via JS-->
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Courses pagination" class="mt-4">
+              <ul class="pagination justify-content-center" id="pagination">
+                <li class="page-item">
+                  <button class="page-link" id="prevPage" aria-label="Previous page">&lt;</button>
+                </li>
+                <!-- Dynamic page number -->
+                <li class="page-item"><button class="page-link page-num active" data-page="1">1</button></li>
+                <li class="page-item"><button class="page-link page-num" data-page="2">2</button></li>
+                <li class="page-item"><button class="page-link page-num" data-page="3">3</button></li>
+                <li class="page-item">
+                  <button class="page-link" id="nextPage" aria-label="Next page">&gt;</button>
+                </li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+ <script>
+    // --- Toggle Show More / Show Less for Topics ---
+    const toggleTopicBtn = document.getElementById("toggleTopicBtn");
+    const topicListMore = document.getElementById("topicListMore");
+
+    toggleTopicBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (topicListMore.classList.contains("show")) {
+        topicListMore.classList.remove("show");
+        toggleTopicBtn.textContent = "Show More";
+      } else {
+        topicListMore.classList.add("show");
+        toggleTopicBtn.textContent = "Show Less";
+      }
+    });
+
+    // --- Toggle chevron rotation on filter group collapse ---
+    const filterToggles = document.querySelectorAll('[data-bs-toggle="collapse"]');
+    filterToggles.forEach(toggle => {
+      const icon = toggle.querySelector(".chevron-arrow i");
+      const targetId = toggle.getAttribute("aria-controls");
+      const target = document.getElementById(targetId);
+      // Initial rotation if collapse shown
+      if (target.classList.contains("show")) {
+        icon.classList.add("bi-chevron-up");
+        icon.classList.remove("bi-chevron-down");
+      }
+      toggle.addEventListener("click", () => {
+        setTimeout(() => {
+          if (target.classList.contains("show")) {
+            icon.classList.add("bi-chevron-up");
+            icon.classList.remove("bi-chevron-down");
+          } else {
+            icon.classList.add("bi-chevron-down");
+            icon.classList.remove("bi-chevron-up");
+          }
+        }, 200);
+      });
+    });
+
+    // --- Sample courses data ---
+    const coursesData = [
+      {
+        id: 1,
+        title: "React for Beginners",
+        price: "Free",
+        skill: "Beginner",
+        language: "English",
+        rating: 4.5,
+        duration: "Short (< 2h)",
+        topic: ["React", "JavaScript"],
+        popularity: 90,
+        dateAdded: "2023-01-10",
+        image: "/assets/images/course-react.jpg",
+      },
+      {
+        id: 2,
+        title: "Advanced JavaScript",
+        price: "Paid",
+        skill: "Expert",
+        language: "English",
+        rating: 4.8,
+        duration: "Long (> 10h)",
+        topic: ["JavaScript"],
+        popularity: 85,
+        dateAdded: "2023-03-15",
+        image: "/assets/images/course-javascript.jpg",
+      },
+      {
+        id: 3,
+        title: "Angular Crash Course",
+        price: "Free",
+        skill: "Intermediate",
+        language: "Portuguese",
+        rating: 4.2,
+        duration: "Medium (2-10h)",
+        topic: ["Angular", "Angular JS"],
+        popularity: 80,
+        dateAdded: "2023-04-10",
+        image: "/assets/images/course-angular.jpg",
+      },
+      {
+        id: 4,
+        title: "Node.js Essentials",
+        price: "Paid",
+        skill: "Beginner",
+        language: "Hindi",
+        rating: 4.1,
+        duration: "Medium (2-10h)",
+        topic: ["Node"],
+        popularity: 70,
+        dateAdded: "2023-02-05",
+        image: "/assets/images/course-javascript.jpg",
+      },
+      {
+        id: 5,
+        title: "Vue.js Complete Guide",
+        price: "Paid",
+        skill: "Intermediate",
+        language: "French",
+        rating: 4.7,
+        duration: "Long (> 10h)",
+        topic: ["VueJs"],
+        popularity: 95,
+        dateAdded: "2023-01-20",
+        image: "/assets/images/course-vue.png",
+      },
+      // Add more courses for pagination demo
+      {
+        id: 6,
+        title: "GraphQL Basics",
+        price: "Free",
+        skill: "Beginner",
+        language: "English",
+        rating: 4.0,
+        duration: "Short (< 2h)",
+        topic: ["GraphQL"],
+        popularity: 75,
+        dateAdded: "2023-05-01",
+        image: "/assets/images/course-graphql.jpg",
+      },
+      {
+        id: 7,
+        title: "Gatsby for React Developers",
+        price: "Paid",
+        skill: "Intermediate",
+        language: "English",
+        rating: 4.3,
+        duration: "Medium (2-10h)",
+        topic: ["Gatsby", "React"],
+        popularity: 65,
+        dateAdded: "2023-06-10",
+        image: "/assets/images/course-gatsby.jpg",
+      },
+      {
+        id: 8,
+        title: "SCSS Masterclass",
+        price: "Paid",
+        skill: "Expert",
+        language: "English",
+        rating: 4.9,
+        duration: "Short (< 2h)",
+        topic: ["SCSS"],
+        popularity: 88,
+        dateAdded: "2023-02-20",
+        image: "/assets/images/course-scss.jpg",
+      },
+      {
+        id: 9,
+        title: "JavaScript Deep Dive",
+        price: "Paid",
+        skill: "Expert",
+        language: "English",
+        rating: 4.6,
+        duration: "Long (> 10h)",
+        topic: ["JavaScript"],
+        popularity: 92,
+        dateAdded: "2023-03-25",
+        image: "/assets/images/course-javascript.jpg",
+      },
+      {
+        id: 10,
+        title: "Angular JS Legacy Course",
+        price: "Free",
+        skill: "Beginner",
+        language: "Portuguese",
+        rating: 3.9,
+        duration: "Short (< 2h)",
+        topic: ["Angular JS"],
+        popularity: 60,
+        dateAdded: "2023-01-05",
+        image: "/assets/images/course-angular.jpg",
+      }
+    ];
+
+    const ITEMS_PER_PAGE = 5;
+    let currentPage = 1;
+    let filteredCourses = [...coursesData];
+
+    // --- Elements ---
+    const coursesContainer = document.getElementById("coursesContainer");
+    const coursesCount = document.getElementById("coursesCount");
+    const pagination = document.getElementById("pagination");
+    const prevPageBtn = document.getElementById("prevPage");
+    const nextPageBtn = document.getElementById("nextPage");
+    const sortSelect = document.getElementById("sortSelect");
+    const clearButton = document.getElementById("clearButton");
+
+    // --- Render course cards ---
+    function renderCourses(page = 1) {
+      coursesContainer.innerHTML = "";
+      const startIdx = (page - 1) * ITEMS_PER_PAGE;
+      const endIdx = startIdx + ITEMS_PER_PAGE;
+      const coursesToShow = filteredCourses.slice(startIdx, endIdx);
+
+      if (coursesToShow.length === 0) {
+        coursesContainer.innerHTML = `<p class="text-center">No courses found for selected filters.</p>`;
+      } else {
+        coursesToShow.forEach(course => {
+          const card = document.createElement("div");
+          card.classList.add("col-12", "col-md-6", "col-lg-4");
+          card.innerHTML = `
+            <div class="card course-card h-100 shadow-sm">
+              <img src="${course.image}" alt="${course.title}" />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${course.title}</h5>
+                <p class="mb-1"><strong>Price:</strong> ${course.price}</p>
+                <p class="mb-1"><strong>Skill Level:</strong> ${course.skill}</p>
+                <p class="mb-1"><strong>Language:</strong> ${course.language}</p>
+                <p class="mb-1"><strong>Rating:</strong> ⭐ ${course.rating}</p>
+                <p class="mb-1"><strong>Duration:</strong> ${course.duration}</p>
+                <p class="mb-1"><strong>Topics:</strong> ${course.topic.join(", ")}</p>
+              </div>
+            </div>
+          `;
+          coursesContainer.appendChild(card);
+        });
+      }
+
+      // Update showing count text
+      const showingFrom = filteredCourses.length === 0 ? 0 : startIdx + 1;
+      const showingTo = Math.min(endIdx, filteredCourses.length);
+      coursesCount.textContent = `Showing ${showingFrom}-${showingTo} of ${filteredCourses.length} results`;
+
+      updatePagination();
+    }
+
+    // --- Update pagination buttons ---
+    function updatePagination() {
+      // Total pages
+      const totalPages = Math.ceil(filteredCourses.length / ITEMS_PER_PAGE);
+
+      // Remove all page number buttons except prev and next
+      const pageNumButtons = pagination.querySelectorAll(".page-num");
+      pageNumButtons.forEach(btn => btn.remove());
+
+      // Generate page number buttons dynamically
+      // Show max 5 page buttons with current page centered if possible
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        const li = document.createElement("li");
+        li.classList.add("page-item");
+        if (i === currentPage) li.classList.add("active");
+        const btn = document.createElement("button");
+        btn.classList.add("page-link", "page-num");
+        btn.setAttribute("data-page", i);
+        btn.textContent = i;
+        li.appendChild(btn);
+        pagination.insertBefore(li, nextPageBtn.parentElement);
+      }
+
+      // Enable/disable prev and next buttons
+      prevPageBtn.disabled = currentPage === 1;
+      nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+
+      prevPageBtn.classList.toggle("disabled", currentPage === 1);
+      nextPageBtn.classList.toggle("disabled", currentPage === totalPages || totalPages === 0);
+    }
+
+    // --- Filter logic ---
+    function applyFilters() {
+      // Get all checked filters per group
+      const checkedCheckboxes = [...document.querySelectorAll(".filter-checkbox:checked")];
+
+      // Group filters by category (based on checkbox IDs or values)
+      // We'll collect values per filter type:
+      const filters = {
+        topic: [],
+        price: [],
+        skill: [],
+        language: [],
+        rating: [],
+        duration: [],
+      };
+
+      checkedCheckboxes.forEach(checkbox => {
+        const val = checkbox.value;
+        const id = checkbox.id;
+
+        // Detect category by checkbox id prefix or other heuristic
+        if (id.startsWith("topic")) filters.topic.push(val);
+        else if (id.startsWith("price")) filters.price.push(val);
+        else if (id.startsWith("skill")) filters.skill.push(val);
+        else if (id.startsWith("language")) filters.language.push(val);
+        else if (id.startsWith("rating")) filters.rating.push(parseFloat(val));
+        else if (id.startsWith("duration")) filters.duration.push(val);
+      });
+
+      // Filtering courses based on selected filters
+      filteredCourses = coursesData.filter(course => {
+        // Topic filter: course.topic array must have at least one topic in filters.topic (if filters.topic non-empty)
+        if (filters.topic.length > 0 && !filters.topic.some(t => course.topic.includes(t))) return false;
+
+        // Price filter: course.price must be in filters.price (if filters.price non-empty)
+        if (filters.price.length > 0 && !filters.price.includes(course.price)) return false;
+
+        // Skill filter
+        if (filters.skill.length > 0 && !filters.skill.includes(course.skill)) return false;
+
+        // Language filter
+        if (filters.language.length > 0 && !filters.language.includes(course.language)) return false;
+
+        // Rating filter: course.rating must be >= minimum rating selected (if rating filters selected)
+        if (filters.rating.length > 0) {
+          const minRating = Math.min(...filters.rating);
+          if (course.rating < minRating) return false;
+        }
+
+        // Duration filter
+        if (filters.duration.length > 0 && !filters.duration.includes(course.duration)) return false;
+
+        return true;
+      });
+
+      currentPage = 1; // Reset to first page after filter
+      applySort();
+      renderCourses(currentPage);
+    }
+
+    // --- Sort logic ---
+    function applySort() {
+      const sortVal = sortSelect.value;
+
+      switch (sortVal) {
+        case "free":
+          filteredCourses.sort((a, b) => {
+            if (a.price === "Free" && b.price !== "Free") return -1;
+            if (a.price !== "Free" && b.price === "Free") return 1;
+            return 0;
+          });
+          break;
+        case "highestRanked":
+          filteredCourses.sort((a, b) => b.rating - a.rating);
+          break;
+        case "mostPopular":
+          filteredCourses.sort((a, b) => b.popularity - a.popularity);
+          break;
+        case "newest":
+          filteredCourses.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+          break;
+        default:
+          break;
+      }
+    }
+
+    // --- Event Listeners ---
+    // Filter checkboxes change
+    document.querySelectorAll(".filter-checkbox").forEach(checkbox => {
+      checkbox.addEventListener("change", applyFilters);
+    });
+
+    // Sorting change
+    sortSelect.addEventListener("change", () => {
+      applySort();
+      renderCourses(currentPage);
+    });
+
+    // Pagination buttons
+    pagination.addEventListener("click", (e) => {
+      if (e.target.classList.contains("page-num")) {
+        const selectedPage = Number(e.target.getAttribute("data-page"));
+        if (selectedPage !== currentPage) {
+          currentPage = selectedPage;
+          renderCourses(currentPage);
+        }
+      } else if (e.target.id === "prevPage" && currentPage > 1) {
+        currentPage--;
+        renderCourses(currentPage);
+      } else if (e.target.id === "nextPage") {
+        const totalPages = Math.ceil(filteredCourses.length / ITEMS_PER_PAGE);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderCourses(currentPage);
+        }
+      }
+    });
+
+    // Clear filters button
+    if (clearButton) {
+      clearButton.addEventListener("click", () => {
+        document.querySelectorAll(".filter-checkbox").forEach(cb => cb.checked = false);
+        filteredCourses = [...coursesData];
+        currentPage = 1;
+        sortSelect.value = "free";
+        renderCourses(currentPage);
+      });
+    }
+
+    // --- Initial render ---
+    applySort();
+    renderCourses(currentPage);
+  </script>
+  <footer class="pt-lg-8 pt-5 footer bg-light">
+    <div class="container mt-lg-2">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-12">
+                <!-- about company -->
+                <div class="mb-4">
+                    <img src="/assets/images/computer_geeks.png" alt="Geeks" class="logo-inverse" width="100px" height="70px">
+                    <div class="mt-4">
+                        <p>Geek is feature-rich components and beautifully Bootstrap UIKit for developers, built with bootstrap responsive framework.</p>
+                        <!-- social media -->
+                        <div class="fs-4 mt-4">
+                            <!--Facebook-->
+                            <a href="#" class="me-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
+                                </svg>
+                            </a>
+                            <!--Twitter-->
+                            <a href="#" class="me-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
+                                </svg>
+                            </a>
+
+                            <!--GitHub-->
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="offset-lg-1 col-lg-2 col-md-3 col-6">
+                <div class="mb-4">
+                    <!-- list -->
+                    <h3 class="fw-bold mb-3 fs-5">Company</h3>
+                    <ul class="list-unstyled nav nav-footer flex-column nav-x-0">
+                        <li><a href="#" class="nav-link">About</a></li>
+                        <li><a href="#" class="nav-link">Pricing</a></li>
+                        <li><a href="#" class="nav-link">Blog</a></li>
+                        <li><a href="#" class="nav-link">Careers</a></li>
+                        <li><a href="#" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <div class="mb-4">
+                    <!-- list -->
+                    <h3 class="fw-bold mb-3 fs-5">Support</h3>
+                    <ul class="list-unstyled nav nav-footer flex-column nav-x-0">
+                        <li><a href="#" class="nav-link">Help and Support</a></li>
+                        <li><a href="#" class="nav-link">Become Instructor</a></li>
+                        <li><a href="#" class="nav-link">Get the app</a></li>
+                        <li><a href="#" class="nav-link">FAQ’s</a></li>
+                        <li><a href="#" class="nav-link">Tutorial</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <!-- contact info -->
+                <div class="mb-4">
+                    <h3 class="fw-bold mb-3 fs-5">Get in touch</h3>
+                    <p>339 McDermott Points Hettingerhaven, NV 15283</p>
+                    <p class="mb-1">
+                        Email:
+                        <a href="#">support@geekComputer.com</a>
+                    </p>
+                    <p>
+                        Phone:
+                        <span class="text-dark fw-semibold">(000) 123 456 789</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center g-0 border-top py-2 mt-6">
+            <!-- Desc -->
+            <div class="col-lg-4 col-md-5 col-12">
+                <span>
+                    ©
+                    <span id="copyright2">
+                        <script>
+                            document.getElementById("copyright2").appendChild(document.createTextNode(new Date().getFullYear()));
+                        </script>
+                    </span>
+                    Geeks-UI, Inc. All Rights Reserved
+                </span>
+            </div>
+
+            <!-- Links -->
+            <div class="col-12 col-md-7 col-lg-8 d-md-flex justify-content-end">
+                <nav class="nav nav-footer">
+                    <a class="nav-link ps-0" href="#">Privacy Policy</a>
+                    <a class="nav-link px-2 px-md-3" href="#">Cookie Notice</a>
+
+                    <a class="nav-link" href="#">Terms of Use</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+  </footer>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const languageLinks = document.querySelectorAll('#languageModal a');
+        const currentLangDisplay = document.getElementById('currentLanguage');
+        const langaugeModal = new bootstrap.Modal(document.getElementById('langaugeModal'));
+
+        languageLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // select language
+                const selectedLanguage = this.textContent.trim();
+
+                // update display language
+                currentLangDisplay.textContent = selectedLanguage;
+
+                // close modal
+                langaugeModal.hide();
+            });
+        });
+    });
+
+</script>
+
+
+</html>
