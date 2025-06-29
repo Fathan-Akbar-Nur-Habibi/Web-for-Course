@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign In | Geeks</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    /*  custom style for icon error red smiley in right side input */
+    .is-invalid+.invalid-feedback-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #dc3545;
+      /* merah bootstrap */
+      font-size: 1.25rem;
+      pointer-events: none;
+    }
+
+    .form-control.position-relative {
+      padding-right: 2.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="container d-flex flex-column vh-100 justify-content-center">
+      <div class="row justify-content-center g-0">
+        <div class="col-lg-5 col-md-8">
+          <div class="card shadow">
+            <div class="card-body p-5">
+              <!-- Logo -->
+              <div class="mb-4 text-center">
+                <a href="../index.html">
+                  <img src="../assets/images/brand/logo/logo-icon.svg" alt="logo-icon" />
+                </a>
+              </div>
+
+              <!-- Judul dan Link Sign Up -->
+              <div class="mb-4 text-center">
+                <h1 class="fw-bold mb-1">Sign in</h1>
+                <p class="mb-0">
+                  Don’t have an account?
+                  <a href="sign-up.html">Sign up</a>
+                </p>
+              </div>
+
+              <!-- Form -->
+              <form id="signInForm" novalidate>
+                <!-- Username or Email -->
+                <div class="mb-3 position-relative">
+                  <label for="signInEmail" class="form-label">Username or email</label>
+                  <input type="email" id="signInEmail" name="signInEmail" class="form-control"
+                    placeholder="Email address here" required />
+                  <span class="invalid-feedback-icon d-none"><i class="bi bi-exclamation-circle-fill"></i></span>
+                  <div class="invalid-feedback">Please enter valid username or email.</div>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3 position-relative">
+                  <label for="signInPassword" class="form-label">Password</label>
+                  <input type="password" id="signInPassword" name="signInPassword" class="form-control"
+                    placeholder="**************" required />
+                  <span class="invalid-feedback-icon d-none"><i class="bi bi-exclamation-circle-fill"></i></span>
+                  <div class="invalid-feedback">Please enter valid password.</div>
+                </div>
+
+                <!-- Remember me & Forgot password -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div class="form-check position-relative">
+                    <input type="checkbox" class="form-check-input" id="rememberme" name="rememberme" required />
+                    <label class="form-check-label" for="rememberme">Remember me</label>
+                    <div class="invalid-feedback">You must agree before submitting.</div>
+                  </div>
+                  <div>
+                    <a href="forget-password.html">Forgot your password?</a>
+                  </div>
+                </div>
+
+                <!-- Sign In Button -->
+                <div class="d-grid mb-4">
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+
+                <hr />
+
+                <!-- Social login -->
+                <div class="d-flex justify-content-center gap-3">
+                  <!-- Facebook -->
+                  <a href="#" class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-center"
+                    style="width: 40px; height: 40px;">
+                    <i class="bi bi-facebook"></i>
+                  </a>
+                  <!-- Twitter -->
+                  <a href="#" class="btn btn-outline-info btn-sm d-flex align-items-center justify-content-center"
+                    style="width: 40px; height: 40px;">
+                    <i class="bi bi-twitter"></i>
+                  </a>
+                  <!-- LinkedIn -->
+                  <a href="#" class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-center"
+                    style="width: 40px; height: 40px;">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <!-- GitHub -->
+                  <a href="#" class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
+                    style="width: 40px; height: 40px;">
+                    <i class="bi bi-github"></i>
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      (function () {
+        const form = document.getElementById('signInForm');
+        const emailInput = form.signInEmail;
+        const passwordInput = form.signInPassword;
+        const rememberCheckbox = form.rememberme;
+
+        function showError(input, message) {
+          input.classList.add('is-invalid');
+          const icon = input.nextElementSibling;
+          if (icon && icon.classList.contains('invalid-feedback-icon')) {
+            icon.classList.remove('d-none');
+          }
+        }
+
+        function clearError(input) {
+          input.classList.remove('is-invalid');
+          const icon = input.nextElementSibling;
+          if (icon && icon.classList.contains('invalid-feedback-icon')) {
+            icon.classList.add('d-none');
+          }
+        }
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          // clear error previously
+          clearError(emailInput);
+          clearError(passwordInput);
+          clearError(rememberCheckbox);
+
+          let valid = true;
+
+          // Validate Email / Username 
+          const emailValue = emailInput.value.trim();
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailValue || !emailPattern.test(emailValue)) {
+            showError(emailInput);
+            valid = false;
+          }
+
+          // Validate Password
+          if (!passwordInput.value.trim() || passwordInput.value.trim().length < 6) {
+            showError(passwordInput);
+            valid = false;
+          }
+
+          // Validate Remember Me 
+          if (!rememberCheckbox.checked) {
+            showError(rememberCheckbox);
+            valid = false;
+          }
+
+          if (valid) {
+            // form valid, can do submit
+            form.submit();
+          }
+        });
+
+        // erase error when input change
+        [emailInput, passwordInput, rememberCheckbox].forEach((el) => {
+          el.addEventListener('input', () => clearError(el));
+          if (el.type === 'checkbox') {
+            el.addEventListener('change', () => clearError(el));
+          }
+        });
+      })();
+    </script>
+  </main>
+</body>
+
+</html>
