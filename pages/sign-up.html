@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign In | Geeks</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    .is-invalid+.invalid-feedback-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #dc3545;
+      font-size: 1.25rem;
+      pointer-events: none;
+    }
+
+    .form-control.position-relative {
+      padding-right: 2.5rem;
+    }
+
+    a.terms-link {
+      text-decoration: underline;
+      color: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="container d-flex flex-column vh-100 justify-content-center">
+      <div class="row justify-content-center g-0">
+        <div class="col-lg-5 col-md-8">
+          <div class="card shadow">
+            <div class="card-body p-5">
+              <!-- Logo -->
+              <div class="mb-4 text-center">
+                <a href="/pages/homepage.html">
+                  <img src="/assets/images/computer_geeks.png" alt="logo-icon" width="100" height="70" />
+                </a>
+              </div>
+
+              <!-- Judul dan Link Sign Up -->
+              <div class="mb-4 text-center">
+                <h1 class="fw-bold mb-1">Sign Up</h1>
+                <p class="mb-0">
+                  Already have an account?
+                  <a href="/pages/sign-in.html">Sign in</a>
+                </p>
+              </div>
+
+              <!-- Form -->
+              <form id="signInForm" novalidate>
+                <!-- Username -->
+                <div class="mb-3 position-relative">
+                  <label for="signInName" class="form-label">Username</label>
+                  <input type="text" id="signInName" name="signInName" class="form-control" placeholder="User Name" required />
+                  <span class="invalid-feedback-icon d-none"><i class="bi bi-exclamation-circle-fill"></i></span>
+                  <div class="invalid-feedback">Please enter valid username</div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3 position-relative">
+                  <label for="signInEmail" class="form-label">Email</label>
+                  <input type="email" id="signInEmail" name="signInEmail" class="form-control" placeholder="Email address here" required />
+                  <span class="invalid-feedback-icon d-none"><i class="bi bi-exclamation-circle-fill"></i></span>
+                  <div class="invalid-feedback">Please enter valid email.</div>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3 position-relative">
+                  <label for="signInPassword" class="form-label">Password</label>
+                  <input type="password" id="signInPassword" name="signInPassword" class="form-control" placeholder="**************" required />
+                  <span class="invalid-feedback-icon d-none"><i class="bi bi-exclamation-circle-fill"></i></span>
+                  <div class="invalid-feedback">Please enter valid password.</div>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="mb-4">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberme" name="rememberme" required />
+                    <label class="form-check-label" for="rememberme">
+                      I agree to the
+                      <a href="/pages/terms-condition-page.html" class="terms-link" target="_blank">Terms of Service</a>
+                      and
+                      <a href="/pages/terms-condition-page.html" class="terms-link" target="_blank">Privacy Policy</a>.
+                    </label>
+                    <div class="invalid-feedback">You must agree before submitting.</div>
+                  </div>
+                </div>
+
+                <!-- Sign Up Button -->
+                <div class="d-grid mb-4">
+                  <button type="submit" class="btn btn-primary">Create Free Account</button>
+                </div>
+
+                <hr />
+
+                <!-- Social login -->
+                <div class="d-flex justify-content-center gap-3">
+                  <a href="#" class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="bi bi-facebook"></i>
+                  </a>
+                  <a href="#" class="btn btn-outline-info btn-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="bi bi-twitter"></i>
+                  </a>
+                  <a href="#" class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <a href="#" class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="bi bi-github"></i>
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Form Validation Script -->
+    <script>
+      (function () {
+        const form = document.getElementById('signInForm');
+        const usernameInput = document.querySelector('#signInName');
+        const emailInput = document.querySelector('#signInEmail');
+        const passwordInput = document.querySelector('#signInPassword');
+        const rememberCheckbox = document.querySelector('#rememberme');
+
+        function showError(input) {
+          input.classList.add('is-invalid');
+          const icon = input.nextElementSibling;
+          if (icon && icon.classList.contains('invalid-feedback-icon')) {
+            icon.classList.remove('d-none');
+          }
+        }
+
+        function clearError(input) {
+          input.classList.remove('is-invalid');
+          const icon = input.nextElementSibling;
+          if (icon && icon.classList.contains('invalid-feedback-icon')) {
+            icon.classList.add('d-none');
+          }
+        }
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          clearError(usernameInput);
+          clearError(emailInput);
+          clearError(passwordInput);
+          clearError(rememberCheckbox);
+
+          let valid = true;
+
+          // Username
+          if (!usernameInput.value.trim()) {
+            showError(usernameInput);
+            valid = false;
+          }
+
+          // Email
+          const emailValue = emailInput.value.trim();
+          const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+          if (!emailValue || !emailPattern.test(emailValue)) {
+            showError(emailInput);
+            valid = false;
+          }
+
+          // Password
+          if (!passwordInput.value.trim() || passwordInput.value.trim().length < 6) {
+            showError(passwordInput);
+            valid = false;
+          }
+
+          // Checkbox
+          if (!rememberCheckbox.checked) {
+            showError(rememberCheckbox);
+            valid = false;
+          }
+
+          if (valid) {
+            form.submit(); // proceed with submission
+          }
+        });
+
+        // Remove error on change/input
+        [usernameInput, emailInput, passwordInput].forEach((el) => {
+          el.addEventListener('input', () => clearError(el));
+        });
+        rememberCheckbox.addEventListener('change', () => clearError(rememberCheckbox));
+      })();
+    </script>
+  </main>
+</body>
+
+</html>
