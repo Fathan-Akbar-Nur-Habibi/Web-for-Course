@@ -17,29 +17,29 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container">
-            <!--logo-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+        <div class="container-fluid">
+            <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="/assets/images/computer_geeks.png" alt="logo" width="90" height="50" class="me-2" />
             </a>
 
-            <!--Toggler for mobile-->
+            <!-- Toggler for mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!--Navbar menu-->
+            <!-- Navbar menu -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!--left menu-->
+                <!-- Left menu -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!--Browse-->
+                    <!-- Browse Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="browserDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="browseDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Browse</a>
-
                         <ul class="dropdown-menu" aria-labelledby="browseDropdown">
                             <li><a href="./course-category/mostpopular.html" class="dropdown-item">Web Development</a>
                             </li>
@@ -54,7 +54,7 @@
                         </ul>
                     </li>
 
-                    <!--Landing-->
+                    <!-- Landings Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="landingsDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Landings</a>
@@ -67,10 +67,10 @@
                         </ul>
                     </li>
 
-                    <!--Pages-->
+                    <!-- Pages Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Pages </a>
+                            data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
                         <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <li><a href="/pages/course-path.html" class="dropdown-item">Courses</a></li>
                             <li><a href="/pages/course-single.html" class="dropdown-item">Paths</a></li>
@@ -85,7 +85,7 @@
                         </ul>
                     </li>
 
-                    <!--Accounts-->
+                    <!-- Accounts Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Accounts</a>
@@ -106,7 +106,7 @@
                         </ul>
                     </li>
 
-                    <!--...-->
+                    <!-- More Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">...</a>
@@ -114,18 +114,20 @@
                             <li>
                                 <a class="dropdown-item" href="#documentation">
                                     Documentations
-                                    <p>Browse the all documentations</p>
+                                    <p class="mb-0 small text-muted">Browse all documentations</p>
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="log">
                                     Changelog V1.04
-                                    <p>See what's new</p>
+                                    <p class="mb-0 small text-muted">See what's new</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                 </ul>
+
+                <!-- Search form -->
                 <form class="d-flex me-5" action="/search" method="GET">
                     <input class="form-control me-2 bg-light" type="search" placeholder="Search Something..."
                         aria-label="Search" name="query" />
@@ -139,7 +141,6 @@
                         <img src="/assets/images/profile.png" alt="profile" width="50" height="50"
                             class="rounded-circle" />
                     </a>
-
                     <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 280px;"
                         aria-labelledby="profileDropdown">
                         <li class="d-flex align-items-center mb-3">
@@ -151,9 +152,8 @@
                             </div>
                         </li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class="dropdown-divider" />
                         </li>
-
                         <li class="dropdown dropend">
                             <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -164,20 +164,18 @@
                                 <li><a href="#" class="dropdown-item"><i
                                             class="bi bi-circle-fill text-success me-2"></i>Online</a></li>
                                 <li><a href="#" class="dropdown-item"><i
-                                            class="bi bi-circle-fill text-secondary me-2"></i>Offline</a>
-                                </li>
+                                            class="bi bi-circle-fill text-secondary me-2"></i>Offline</a></li>
                                 <li><a href="#" class="dropdown-item"><i
                                             class="bi bi-circle-fill text-warning me-2"></i>Away</a></li>
                                 <li><a href="#" class="dropdown-item"><i
                                             class="bi bi-circle-fill text-danger me-2"></i>Busy</a></li>
                             </ul>
                         </li>
-
                         <li><a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a></li>
                         <li><a href="#" class="dropdown-item"><i class="bi bi-star me-2"></i>Subscription</a></li>
                         <li><a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a></li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class="dropdown-divider" />
                         </li>
                         <li><a href="#" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
                         </li>
@@ -187,8 +185,9 @@
         </div>
     </nav>
 
-    <!--sidebar-->
-    <div class="d-flex">
+    <!-- Sidebar and Main Content Wrapper -->
+    <div class="d-flex" style="padding-top: 70px;">
+        <!-- Sidebar -->
         <nav id="sidebarMenu" class="d-lg-block bg-light sidebar collapse border-end shadow-sm" style="width: 250px;">
             <div class="position-sticky">
                 <div class="list-group-flush mt-4 px-3">
@@ -287,264 +286,273 @@
             </div>
         </nav>
 
-<div class="container mb-4"> 
-<!--heading-->
-<div class="row mb-5 mt-5"> 
-    <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12"> 
-        <div> 
-            <h2 class="mb-0">Quiz -Sample Result</h2>
-            <p>These sample results represent what you'll see for each candidate when they submit their test.</p>
-        </div>
-    </div>
-</div>
-    <!--summary-->
-<div class="row mb-5"> 
-    <div class="cl-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12"> 
-        <div class="bg-white border rounded"> 
-            <div class="row"> 
-                <div class="col-md-4 col-12"> 
-                    <div class="d-flex flex-column border-end border-bottom border-bottom-md-0 gap-1 p-3">
-                        <h3 class="mb-0">4</h3>
-                        <span class="text-success">Correct Answer</span>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12"> 
-                    <div class="d-flex flex-column border-end border-bottom border-bottom-md-0 gap-1 p-3">
-                        <h3 class="mb-0">1</h3>
-                        <span class="text-danger">Incorrect Answer</span>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12"> 
-                    <div class="d-flex flex-column gap-1 p-3"> 
-                        <h3 class="mb-0 text-success">85%</h3>
-                        <span class="fw-medium">Total Score</span>
+        <div class="container mb-4">
+            <!--heading-->
+            <div class="row mb-5 mt-5">
+                <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12">
+                    <div>
+                        <h2 class="mb-0">Quiz -Sample Result</h2>
+                        <p>These sample results represent what you'll see for each candidate when they submit their
+                            test.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!--filter-->
-<div class="row"> 
-    <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12"> 
-        <div class="row align-items-center mb-4 g-2"> 
-            <div class="col-xl-2 col-6"> 
-                <span>Filter By Result</span>
-            </div>
-            <div class="col-xl-4 col-md-6 col-6"> 
-                <label class="form-label visually-hidden" for="selectResult">Result</label>
-                <select class="form-select" id="selectResult" name="selectResult"> 
-                    <option value="All">All</option>
-                    <option value="Correctly Answered">Correctly Answered</option>
-                    <option value="Not Yet Graded" selected>Not Yet Graded</option>
-                    <option value="Unattempted">Unattempted</option>
-                    <option value="Wrongly Answered">Wrongly Answered</option>
-                </select>
-            </div>
-        </div>
-        <!--quiz card-->
-        <!--reusable card format-->
-        <!--card correct-->
-        <div class="card mb-4 border-success"> 
-            <div class="card-body d-flex flex-column gap-5"> 
-                <div class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1"> 
-                    <span class="fw-bold text-success">Correct Answer</span>
-                    <div class="d-flex gap-2 align-items-center"> 
-                        <span class="fw-medium">
-                            <span class="text-secondary">Time Taken : </span>
-                            <span class="">00:00:05</span>
-                        </span>
-                        <span class="badge bg-white border text-secondary rounded-pill">3/3 Points</span>
-                    </div>
-                </div>
-
-                <div class="d-flex flex-column gap-4"> 
-                    <div class="d-flex flex-column gap-1"> 
-                        <span class="fw-bolder text-secondary"> Question 1</span>
-                        <h3 class="mb-0">React is mainly used for building ____</h3>
-                    </div>
-                    <div class="list-group"> 
-                        <div class="list-group-item"> 
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="correct1" disabled>
-                                <label class="form-check-label">Database</label>
+            <!--summary-->
+            <div class="row mb-5">
+                <div class="cl-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12">
+                    <div class="bg-white border rounded">
+                        <div class="row">
+                            <div class="col-md-4 col-12">
+                                <div class="d-flex flex-column border-end border-bottom border-bottom-md-0 gap-1 p-3">
+                                    <h3 class="mb-0">4</h3>
+                                    <span class="text-success">Correct Answer</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="list-group-item"> 
-                            <div class="form-check"> 
-                                <input type="radio" class="form-check-input" id="correct2"disabled>
-                                <label class="form-check-label">Connectivity</label>
+                            <div class="col-md-4 col-12">
+                                <div class="d-flex flex-column border-end border-bottom border-bottom-md-0 gap-1 p-3">
+                                    <h3 class="mb-0">1</h3>
+                                    <span class="text-danger">Incorrect Answer</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="list-group-item"> 
-                            <div class="form-check"> 
-                                <input type="radio" class="form-check-input" id="correct3" disabled>
-                                <label class="form-check-label" for="correct3">User interface</label>
-                            </div>
-                        </div>
-                        <div class="list-group-item"> 
-                            <div class="form-check"> 
-                                <input type="radio" class="form-check-input" id="correct4" disabled>
-                                <label class="form-check-label" for="correct4">Design Platform</label>
+                            <div class="col-md-4 col-12">
+                                <div class="d-flex flex-column gap-1 p-3">
+                                    <h3 class="mb-0 text-success">85%</h3>
+                                    <span class="fw-medium">Total Score</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--incorrect card-->
-        <div class="card mb-4 border-danger"> 
-            <div class="card-body d-flex flex-column gap-5"> 
-                <div class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1"> 
-                    <span class="fw-bold text-danger">Incorrect Answer</span>
-                    <div class="d-flex gap-2 align-items-center"> 
-                        <span>
-                        <span class="text-secondary">Time Taken: </span>
-                        <span>00:08</span>
-                        </span>
-                        <span class="badge bg-white border text-secondary rounded-pill">0/3 Points</span>
+            <!--filter-->
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12">
+                    <div class="row align-items-center mb-4 g-2">
+                        <div class="col-xl-2 col-6">
+                            <span>Filter By Result</span>
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-6">
+                            <label class="form-label visually-hidden" for="selectResult">Result</label>
+                            <select class="form-select" id="selectResult" name="selectResult">
+                                <option value="All">All</option>
+                                <option value="Correctly Answered">Correctly Answered</option>
+                                <option value="Not Yet Graded" selected>Not Yet Graded</option>
+                                <option value="Unattempted">Unattempted</option>
+                                <option value="Wrongly Answered">Wrongly Answered</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    <!--quiz card-->
+                    <!--reusable card format-->
+                    <!--card correct-->
+                    <div class="card mb-4 border-success">
+                        <div class="card-body d-flex flex-column gap-5">
+                            <div
+                                class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1">
+                                <span class="fw-bold text-success">Correct Answer</span>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <span class="fw-medium">
+                                        <span class="text-secondary">Time Taken : </span>
+                                        <span class="">00:00:05</span>
+                                    </span>
+                                    <span class="badge bg-white border text-secondary rounded-pill">3/3 Points</span>
+                                </div>
+                            </div>
 
-                <div class="d-flex flex-column gap-4"> 
-                    <div class="d-flex flex-column gap-1"> 
-                        <span class="fw-bolder text-secondary">Question 2</span>
-                        <h3 class="mb-0">React is mainly used for building____</h3>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-1">
+                                    <span class="fw-bolder text-secondary"> Question 1</span>
+                                    <h3 class="mb-0">React is mainly used for building ____</h3>
+                                </div>
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="correct1" disabled>
+                                            <label class="form-check-label">Database</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="correct2" disabled>
+                                            <label class="form-check-label">Connectivity</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="correct3" disabled>
+                                            <label class="form-check-label" for="correct3">User interface</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="correct4" disabled>
+                                            <label class="form-check-label" for="correct4">Design Platform</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="list-group"> 
-                        <div class="list-group-item"> 
-                            <div class="form-check"> 
-                                <input type="radio" class="form-check-input" id="incorrect1" disabled>
-                                <label class="form-check-label" for="incorrect1">Database</label>
+
+                    <!--incorrect card-->
+                    <div class="card mb-4 border-danger">
+                        <div class="card-body d-flex flex-column gap-5">
+                            <div
+                                class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1">
+                                <span class="fw-bold text-danger">Incorrect Answer</span>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <span>
+                                        <span class="text-secondary">Time Taken: </span>
+                                        <span>00:08</span>
+                                    </span>
+                                    <span class="badge bg-white border text-secondary rounded-pill">0/3 Points</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-1">
+                                    <span class="fw-bolder text-secondary">Question 2</span>
+                                    <h3 class="mb-0">React is mainly used for building____</h3>
+                                </div>
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="incorrect1" disabled>
+                                            <label class="form-check-label" for="incorrect1">Database</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="incorrect2" disabled>
+                                            <label class="form-check-label" for="incorrect2">Connectivity</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="incorrect3" disabled>
+                                            <label class="form-check-label" for="incorrect3">User interface</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="incorrect4" disabled>
+                                            <label class="form-check-label" for="incorrect4">Design Platform</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="list-group-item"> 
-                            <div class="form-check"> 
-                                <input type="radio" class="form-check-input" id="incorrect2" disabled>
-                                <label class="form-check-label" for="incorrect2">Connectivity</label>
-                            </div>  
-                        </div>
-                        <div class="list-group-item"> 
-                            <div class="form-check"> 
-                                <input type="radio" class="form-check-input" id="incorrect3" disabled>
-                                <label class="form-check-label" for="incorrect3">User interface</label>
+                    </div>
+
+                    <!--skipped card-->
+                    <div class="card mb-4 border">
+                        <div class="card-body d-flex flex-column gap-5">
+                            <div
+                                class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1">
+                                <span class="fw-bolder text-primary">Skipped</span>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <span>
+                                        <span class="text-secondary">Time Taken :</span>
+                                        <span>00:05</span>
+                                    </span>
+                                    <span
+                                        class="badge bg-white border text-secondary rounded-pill text-secondary rounded-pill">0/3
+                                        Points</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-1">
+                                    <span class="fw-bolder text-secondary">Question 3</span>
+                                    <h3 class="mb-0">React is mainly used for building ___</h3>
+                                </div>
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped1" disabled>
+                                            <label class="form-check-label" for="skipped1">Database</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped2" disabled>
+                                            <label class="form-check-label" for="skipped2">Connectivity</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped3" disabled>
+                                            <label class="form-check-label" for="skipped3">User interface</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped4" disabled>
+                                            <label class="form-check-label" for="skipped4">Design Platform</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="list-group-item"> 
-                            <div class="form-check"> 
-                                <input type="radio" class="form-check-input" id="incorrect4" disabled>
-                                <label class="form-check-label" for="incorrect4">Design Platform</label>
+
+                    </div>
+
+                    <!--half answer-->
+                    <div class="card mb-4 border-warning">
+                        <div class="card-body d-flex flex-column gap-5">
+                            <div
+                                class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1">
+                                <span class="fw-bolder text-warning">Half Answer</span>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <span>
+                                        <span class="text-secondary">Time Taken :</span>
+                                        <span>00:05</span>
+                                    </span>
+                                    <span
+                                        class="badge bg-white border text-secondary rounded-pill text-secondary rounded-pill">3/3
+                                        Points</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-1">
+                                    <span class="fw-bolder text-secondary">Question 4</span>
+                                    <h3 class="mb-0">React is mainly used for building ___</h3>
+                                </div>
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped1" disabled>
+                                            <label class="form-check-label" for="skipped1">Database</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped2" disabled>
+                                            <label class="form-check-label" for="skipped2">Connectivity</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped3" disabled>
+                                            <label class="form-check-label" for="skipped3">User interface</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="skipped4" disabled>
+                                            <label class="form-check-label" for="skipped4">Design Platform</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-
-               <!--skipped card-->
-                <div class="card mb-4 border"> 
-                    <div class="card-body d-flex flex-column gap-5"> 
-                        <div class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1">
-                            <span class="fw-bolder text-primary">Skipped</span>
-                            <div class="d-flex gap-2 align-items-center"> 
-                                <span> 
-                                    <span class="text-secondary">Time Taken :</span>
-                                    <span>00:05</span>
-                                </span>
-                                <span class="badge bg-white border text-secondary rounded-pill text-secondary rounded-pill">0/3 Points</span>
-                            </div>
-                        </div>
-
-                        <div class="d-flex flex-column gap-4"> 
-                            <div class="d-flex flex-column gap-1"> 
-                                <span class="fw-bolder text-secondary">Question 3</span>
-                                <h3 class="mb-0">React is mainly used for building ___</h3>
-                            </div>
-                            <div class="list-group"> 
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped1" disabled>
-                                        <label class="form-check-label" for="skipped1">Database</label>
-                                    </div>
-                                </div>
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped2" disabled>
-                                        <label class="form-check-label" for="skipped2">Connectivity</label>
-                                    </div>
-                                </div>
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped3" disabled>
-                                        <label class="form-check-label" for="skipped3">User interface</label>
-                                    </div>
-                                </div>
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped4" disabled>
-                                        <label class="form-check-label" for="skipped4">Design Platform</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!--half answer-->
-                <div class="card mb-4 border-warning"> 
-                    <div class="card-body d-flex flex-column gap-5"> 
-                        <div class="d-flex align-items-md-center flex-md-row flex-column justify-content-between gap-1">
-                            <span class="fw-bolder text-warning">Half Answer</span>
-                            <div class="d-flex gap-2 align-items-center"> 
-                                <span> 
-                                    <span class="text-secondary">Time Taken :</span>
-                                    <span>00:05</span>
-                                </span>
-                                <span class="badge bg-white border text-secondary rounded-pill text-secondary rounded-pill">3/3 Points</span>
-                            </div>
-                        </div>
-
-                        <div class="d-flex flex-column gap-4"> 
-                            <div class="d-flex flex-column gap-1"> 
-                                <span class="fw-bolder text-secondary">Question 4</span>
-                                <h3 class="mb-0">React is mainly used for building ___</h3>
-                            </div>
-                            <div class="list-group"> 
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped1" disabled>
-                                        <label class="form-check-label" for="skipped1">Database</label>
-                                    </div>
-                                </div>
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped2" disabled>
-                                        <label class="form-check-label" for="skipped2">Connectivity</label>
-                                    </div>
-                                </div>
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped3" disabled>
-                                        <label class="form-check-label" for="skipped3">User interface</label>
-                                    </div>
-                                </div>
-                                <div class="list-group-item"> 
-                                    <div class="form-check"> 
-                                        <input type="radio" class="form-check-input" id="skipped4" disabled>
-                                        <label class="form-check-label" for="skipped4">Design Platform</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-    </div>
-</div>
-</div>
 
     </div><!--div final-->
 </body>
