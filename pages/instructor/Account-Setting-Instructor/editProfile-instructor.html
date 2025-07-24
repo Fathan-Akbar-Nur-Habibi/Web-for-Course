@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile Instructors | Geeks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/cpurse-lead.css" />
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+   <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/assets/images/computer_geeks.png" alt="logo" width="90" height="50" class="me-2" />
+            </a>
+
+            <!-- Toggler for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar menu -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left menu -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Browse Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="browseDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Browse</a>
+                        <ul class="dropdown-menu" aria-labelledby="browseDropdown">
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Web Development</a>
+                            </li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Design</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Mobile App</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">IT Software</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Marketing</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Music</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Life Style</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Business</a></li>
+                            <li><a href="./course-category/mostpopular.html" class="dropdown-item">Photography</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Landings Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="landingsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Landings</a>
+                        <ul class="dropdown-menu" aria-labelledby="landingsDropdown">
+                            <li><a href="/pages/landings/landing-courses.html" class="dropdown-item">Courses</a></li>
+                            <li><a href="/pages/landings/course-lead.html" class="dropdown-item">Lead Course</a></li>
+                            <li><a href="/pages/landings/request-access.html" class="dropdown-item">Request Course</a>
+                            </li>
+                            <li><a href="/pages/landings/landing-sass.html" class="dropdown-item">Saas</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Pages Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                        <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                            <li><a href="/pages/course-path.html" class="dropdown-item">Courses</a></li>
+                            <li><a href="/pages/course-single.html" class="dropdown-item">Paths</a></li>
+                            <li><a href="#blog" class="dropdown-item">Blog</a></li>
+                            <li><a href="#career" class="dropdown-item">Career</a></li>
+                            <li><a href="#specialty" class="dropdown-item">Specialty</a></li>
+                            <li><a href="#about" class="dropdown-item">About</a></li>
+                            <li><a href="#help-center" class="dropdown-item">Help Center</a></li>
+                            <li><a href="#price" class="dropdown-item">Pricing</a></li>
+                            <li><a href="#compare" class="dropdown-item">Compare</a></li>
+                            <li><a href="/pages/contact.html" class="dropdown-item">Contact</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Accounts Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Accounts</a>
+                        <ul class="dropdown-menu" aria-labelledby="accountsDropdown">
+                            <li><a href="#instructor" class="dropdown-item">Instructors</a></li>
+                            <li><a href="#student" class="dropdown-item">Student</a></li>
+                            <li><a href="#admin" class="dropdown-item">Admin</a></li>
+                            <li><a href="#sign-in" class="dropdown-item">Sign In</a></li>
+                            <li><a href="#sign-out" class="dropdown-item">Sign Out</a></li>
+                            <li><a href="#forgot-password" class="dropdown-item">Forgot Password</a></li>
+                            <li><a href="#edit-profile" class="dropdown-item">Edit Profile</a></li>
+                            <li><a href="#security" class="dropdown-item">Security</a></li>
+                            <li><a href="#social-profile" class="dropdown-item">Social Profile</a></li>
+                            <li><a href="#notification" class="dropdown-item">Notification</a></li>
+                            <li><a href="#privacy-settings" class="dropdown-item">Privacy Settings</a></li>
+                            <li><a href="#delete-profile" class="dropdown-item">Delete Profile</a></li>
+                            <li><a href="#linked-accounts" class="dropdown-item">Linked Accounts</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- More Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">...</a>
+                        <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#documentation">
+                                    Documentations
+                                    <p class="mb-0 small text-muted">Browse all documentations</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="log">
+                                    Changelog V1.04
+                                    <p class="mb-0 small text-muted">See what's new</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Search form -->
+                <form class="d-flex me-5" action="/search" method="GET">
+                    <input class="form-control me-2 bg-light" type="search" placeholder="Search Something..."
+                        aria-label="Search" name="query" />
+                    <button class="btn btn-primary" type="submit"><i data-feather="search"></i></button>
+                </form>
+
+                <!-- Profile Dropdown -->
+                <div class="dropdown">
+                    <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                        aria-haspopup="true" role="button" class="d-flex align-items-center text-decoration-none">
+                        <img src="/assets/images/profile.png" alt="profile" width="50" height="50"
+                            class="rounded-circle" />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 280px;"
+                        aria-labelledby="profileDropdown">
+                        <li class="d-flex align-items-center mb-3">
+                            <img src="/assets/images/profile.png" alt="Anette Black" class="rounded-circle me-2"
+                                width="50" height="50" />
+                            <div>
+                                <strong>Anette Black</strong><br />
+                                <small class="text-muted">anette@mail.com</small>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li class="dropdown dropend">
+                            <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span><i class="bi bi-circle-fill text-success me-2"></i>Status</span>
+                                <i class="bi bi-caret-right-fill"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-success me-2"></i>Online</a></li>
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-secondary me-2"></i>Offline</a></li>
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-warning me-2"></i>Away</a></li>
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-danger me-2"></i>Busy</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-star me-2"></i>Subscription</a></li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--side bar-->
+    <div class="d-flex" style="padding-top: 70px;">
+        <nav id="sidebarMenu" class="d-lg-block bg-light sidebar collapse border-end shadow-sm" style="width: 250px;">
+            <div class="position-sticky">
+                <div class="list-group-flush mt-4 px-3">
+                    <!--main-->
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i  class="bi bi-speedometer2 me-2"></i> My Dashboard
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-book me-2"></i>My Courses
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-journal-code me-2"></i>Reviews
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i  class="bi bi-box me-2"></i>Orders
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-credit-card me-2"></i>Payouts
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-patch-question me-2"></i>Quiz
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-patch-question me-2"></i>Quiz Results
+                    </a>
+
+                    <!--account settings-->
+                    <div class="mt-4 fw-bold text-uppercase small text-muted">Account Settings</div>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person-circle me-2"></i> Edit Profile
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-shield-lock me-2"></i>Security
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-people me-2"></i>Social Profiles
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-shield me-2"></i>Profile Privacy
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i  class="bi bi-person-circle me-2"></i>Delete Profile
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-link-45deg me-2"></i>Linked Accounts
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+
+        <!--main content-->
+        <div class="container mb-4">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h1 class="h1 mb-0 mt-5">Account Instructors</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <!--card-->
+                    <div class="card">
+                        <!--card header-->
+                        <div class="card-header">
+                            <h3 class="mb-0"> Profile Details</h3>
+                            <p class="mb-0">You have full control to manage your own account setting</p>
+                        </div>
+                        <!--card body-->
+                        <div class="card-body">
+<div class="card-body">
+  <div class="d-lg-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center mb-4 mb-lg-0">
+      <img src="/assets/images/avatar-1.jpg" width="100" id="img-upload" class="rounded-circle" alt="photoprofile">
+      <div class="ms-3">
+        <h4 class="mb-0">Your avatar</h4>
+        <p class="mb-0">PNG or JPG no bigger than 800px wide and tall</p>
+      </div>
+    </div>
+    <div>
+      <label for="imgInput" class="btn btn-outline-primary btn-sm" style="cursor:pointer;">Update</label>
+      <input type="file" id="imgInput" accept="image/png, image/jpeg" style="display:none" />
+      <button type="button" id="deletePhotoBtn" class="btn btn-outline-danger btn-sm">Delete</button>
+    </div>
+  </div>
+
+                            <hr class="my-5">
+                            <div>
+                                <h4 class="mb-0">Personal Details</h4>
+                                <p class="mb-4">Edit your personal information and address</p>
+                            </div>
+                            <!--form-->
+                            <form class="row gx-3 needs-validation" novalidate>
+                                <!--first name-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label" for="profileEditFname">First Name</label>
+                                    <input type="text" id="profileEditFname" name="profileEditFname"
+                                        class="form-control" placeholder="First Name" required="">
+                                    <div class="invalid-feedback">Please enter first name</div>
+                                </div>
+                                <!--last name-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label" for="profileEditLname">Last Name</label>
+                                    <input type="text" id="profileEditLname" name="profileEditLname"
+                                        class="form-control" placeholder="Last Name" required="">
+                                    <div class="invalid-feedback">Please enter last name</div>
+                                </div>
+                                <!--Phone-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label" for="profileEditPhone">Phone</label>
+                                    <input type="text" id="profileEditPhone" name="profileEditPhone"
+                                        class="form-control" placeholder="Phone" required="">
+                                    <div class="invalid-feedback">Please enter phone number</div>
+                                </div>
+                                <!--birthday-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label" for="profileEditBirthday">Birthday</label>
+                                    <input class="form-control flatpickr" type="text" placeholder="Birth of Date"
+                                        id="profileEditBirth" name="profileEditBirth" autocomplete="off">
+                                    <div class="invalid valid-feedback">Please choose date</div>
+                                </div>
+                                <!--address 1-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label" for="profileEditAddress1">Address Line 1</label>
+                                    <input type="text" id="profileEditAddress1" name="profileEditAddress1"
+                                        class="form-control" placeholder="address" required="">
+                                    <div class="invalid-feedback">Please Enter your address</div>
+                                </div>
+                                <!--address 2-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label" for="profileEditAddress2">Address Line 2</label>
+                                    <input type="text" id="profileEditAddress2" name="profileEditAddress2"
+                                        class="form-control" placeholder="address" required="">
+                                    <div class="invalid-feedback">Please Enter Address</div>
+                                </div>
+                                <!--state-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label for="profileEditState" class="form-label">State</label>
+                                    <select id="profileEditState" name="profileEditState" class="form-select" required>
+                                        <option value="" selected disabled>Select State</option>
+                                        <option value="1">New York</option>
+                                        <option value="3">Chicago</option>
+                                        <option value="2">Jakarta</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please choose state.</div>
+                                </div>
+
+                                <!--country-->
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label for="profileEditCountry" class="form-label">Country</label>
+                                    <select id="profileEditCountry" name="profileEditCountry" class="form-select"
+                                        required>
+                                        <option value="" selected disabled>Select Country</option>
+                                        <option value="IN">India</option>
+                                        <option value="US">United States</option>
+                                        <option value="ID">Indonesia</option>
+                                        <option value="AU">Australia</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please choose country.</div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-success mt-3" type="submit">Update Profile</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script>
+    feather.replace(); 
+</script>
+<script>
+    flatpickr("#profileEditBirth", {
+        dateFormat: "d-m-Y",
+        allowInput: true,
+        maxDate: "today",
+        altInput: true,
+        altFormat: "F j, Y",
+    });
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new choices('#profileEditState', { searchEnabled: false, itemSelectText: '' });
+        new choices('#profileEditCountry', { searchEnabled: true, itemSelectText: '' });
+    });
+
+</script>
+<script>
+  // Validasi Bootstrap form
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          } else {
+            event.preventDefault() // prevent actual submit, we'll handle storage
+            saveProfileData();
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
+  const imgUpload = document.getElementById('img-upload');
+  const imgInput = document.getElementById('imgInput');
+  const deletePhotoBtn = document.getElementById('deletePhotoBtn');
+  const form = document.getElementById('profileForm');
+
+  // Fungsi simpan data ke localStorage
+  function saveProfileData() {
+    const data = {
+      fname: form.profileEditFname.value,
+      lname: form.profileEditLname.value,
+      phone: form.profileEditPhone.value,
+      birth: form.profileEditBirth.value,
+      address1: form.profileEditAddress1.value,
+      address2: form.profileEditAddress2.value,
+      state: form.profileEditState.value,
+      country: form.profileEditCountry.value,
+      photo: localStorage.getItem('profilePhoto') || '/assets/images/avatar-1.jpg'
+    };
+    localStorage.setItem('profileData', JSON.stringify(data));
+    alert('Profile updated and saved!');
+  }
+
+  // Fungsi load data dari localStorage ke form & photo
+  function loadProfileData() {
+    const data = JSON.parse(localStorage.getItem('profileData'));
+    if (data) {
+      form.profileEditFname.value = data.fname || '';
+      form.profileEditLname.value = data.lname || '';
+      form.profileEditPhone.value = data.phone || '';
+      form.profileEditBirth.value = data.birth || '';
+      form.profileEditAddress1.value = data.address1 || '';
+      form.profileEditAddress2.value = data.address2 || '';
+      form.profileEditState.value = data.state || '';
+      form.profileEditCountry.value = data.country || '';
+    }
+    const photo = localStorage.getItem('profilePhoto');
+    if (photo) {
+      imgUpload.src = photo;
+    } else {
+      imgUpload.src = '/assets/images/avatar-1.jpg';
+    }
+  }
+
+  // Handle upload photo
+  imgInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload a valid image file (PNG or JPG)');
+        return;
+      }
+      if (file.size > 800 * 800) { // approximate size check in bytes (not very accurate)
+        alert('File size should be no bigger than 800x800 px');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        imgUpload.src = e.target.result;
+        localStorage.setItem('profilePhoto', e.target.result); // save base64 image ke localStorage
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Handle delete photo
+  deletePhotoBtn.addEventListener('click', () => {
+    localStorage.removeItem('profilePhoto');
+    imgUpload.src = '/assets/images/avatar-1.jpg';
+    alert('Photo deleted!');
+  });
+
+  // Load data when fisrtly page openned
+  window.addEventListener('DOMContentLoaded', loadProfileData);
+
+
+</script>
+
+</html>
