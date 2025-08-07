@@ -77,17 +77,18 @@
       display: inline-block;
       margin-right: 8px;
     }
-/* MAIN CONTENT */
-#main-content {
-  margin-left: 250px;
-  transition: all 0.3s ease;
-  padding: 20px;
-  width: 100%;
-}
 
-#sidebar.collapsed + #main-content {
-  margin-left: 0;
-}
+    /* MAIN CONTENT */
+    #main-content {
+      margin-left: 250px;
+      transition: all 0.3s ease;
+      padding: 20px;
+      width: 100%;
+    }
+
+    #sidebar.collapsed+#main-content {
+      margin-left: 0;
+    }
   </style>
 
 </head>
@@ -330,7 +331,294 @@
     </div>
 
     <!-- Main page -->
+    <div id="main-content" class="flex-grow-1">
+      <!--header row: Dashboard title + select date + settings-->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Dashboard</h2>
+        <div class="d-flex align-items-center">
+          <div class="input-group me-3">
+            <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+            <input type="text" class="form-control" placeholder="Select Date">
+          </div>
+          <button class="btn btn-outline-secondary"><i class="bi bi-gear"></i></button>
+        </div>
+      </div>
 
+      <!--stats card-->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-cart3 fs-4 text-primary me-2"></i>
+                <h6 class="mb-0">SALES</h6>
+              </div>
+              <h4>$10,800</h4>
+              <div class="text-success">
+                <i class="bi bi-graph-up"></i> +20.9%
+              </div>
+              <small class="text-muted">Number of sales</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-book fs-4 text-info me-2"></i>
+                <h6 class="mb-0 text-uppercase">Courses</h6>
+              </div>
+              <h4>2,456</h4>
+              <div class="text-info fw-bold">
+                <i class="bi bi-hourglass-split"></i> 120+
+              </div>
+              <small class="text-muted">Number of pending</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-person fs-4 text-warning me-2"></i>
+                <h6 class="mb-0 text-uppercase">Students</h6>
+              </div>
+              <h4>1,22,456</h4>
+              <div class="text-success">
+                <i class="bi bi-graph-up"></i>+1200 <span class="text-muted ms-1">Students</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-person fs-4 text-danger me-2"></i>
+                <h6 class="mb-0 text-uppercase">Instructor</h6>
+              </div>
+              <h4>22,786</h4>
+              <div class="text-success">
+                <i class="bi bi-graph-up"></i>+200 <span class="text-muted ms-1">Instructor</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings and Traffic -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-8">
+          <div class="card shadow-sm h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">Earnings</h6>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light" data-bs-toggle="dropdown"><i
+                    class="bi bi-three-dots-vertical"></i></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Downloads</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Email</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-up-right me-2"></i>Export</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart Placeholder -->
+              <div id="earningChart" style="height: 250px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">Traffic</h6>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light" data-bs-toggle="dropdown"><i
+                    class="bi bi-three-dots-vertical"></i></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Downloads</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Email</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-up-right me-2"></i>Export</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Pie Chart Placeholder -->
+              <div id="trafficChart" style="height: 250px;"></div>
+              <div class="mt-3">
+                <span class="me-3"><i class="bi bi-circle-fill text-primary me-1"></i>Direct</span>
+                <span class="me-3"><i class="bi bi-circle-fill text-success me-1"></i>Referal</span>
+                <span><i class="bi bi-circle-fill text-warning me-1"></i>Organic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popular Instructor, Recent Courses, Activity -->
+      <div class="row g-3">
+        <!--popular instructor-->
+        <div class="col-md-5">
+          <div class="card shadow-sm h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">Popular Instructor</h6>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light" data-bs-toggle="dropdown"><i
+                    class="bi bi-three-dots-vertical"></i></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-2"></i>Edit</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-body">
+              <!--instructor item-->
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/avatar-1.jpg" class="rounded-circle me-3" width="50" alt="Rob percival">
+                <div>
+                  <h6 class="mb-0">Rob Percival</h6>
+                  <small>42 Courses · 1,10,124 Students · 32,000 Reviews</small>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/avatar-5.jpg" width="50" class="rounded-circle me-3" alt="Jose Portila">
+                <div>
+                  <h6 class="mb-0">Jose Portila</h6>
+                  <smal>12 Courses · 21,567 Students · 22,000 Reviews</smal>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/avatar-2.jpg" width="50" class="rounded-circle me-3">
+                <div>
+                  <h6 class="mb-0">March Delson</h6>
+                  <smal>23 Courses · 6,304 Students · 56,000 Reviews</smal>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/avatar-3.jpg" width="50" class="rounded-circle me-3">
+                <div>
+                  <h6 class="mb-0">Eleanor Pena</h6>
+                  <small>23 Courses · 9,304 Students · 16,000 Reviews</small>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/avatar-3.jpg" width="50" class="rounded-circle me-3">
+                <div>
+                  <h6 class="mb-0">Eleanor Pena</h6>
+                  <small>23 Courses · 9,304 Students · 16,000 Reviews</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!--Recent Course-->
+        <div class="col-md-5">
+          <div class="card shadow-sm h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">Recent Courses</h6>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light" data-bs-toggle="dropdown"><i
+                    class="bi bi-three-dots-vertical"></i></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-2"></i>Edit</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-body">
+              <!--course item-->
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/course-angular.jpg" alt="Course Thumbnail" class="rounded me-3"
+                  style="width: 100px; height: 70px; object-fit: cover;">
+                <div>
+                  <h6 class="mb-0">Revolutionize how you build the web</h6>
+                  <img src="/assets/images/avatar-1.jpg" width="40" class="mt-2  rounded-circle">
+                  <small>by <strong>Brooklyn Simmons</strong></small>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/course-gatsby.jpg" alt="Course Thumbnail" class="rounded me-3"
+                  style="width: 100px; height: 70px; object-fit: cover;">
+                <div>
+                  <h6 class="mb-0">Guide to Static Site Gatsby.js</h6>
+                  <img src="/assets/images/avatar-2.jpg" width="40" class="mt-2  rounded-circle">
+                  <small>by <strong>Jenny Wilson</strong></small>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/course-javascript.jpg" alt="Course Thumbnail" class="rounded me-3"
+                  style="width: 100px; height: 70px; object-fit: cover;">
+                <div>
+                  <h6 class="mb-0">The Modern JavaScript Course</h6>
+                  <img src="/assets/images/avatar-6.jpg" width="40" class="mt-2  rounded-circle">
+                  <small>by <strong>Guy Hawkins</strong></small>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center mb-3">
+                <img src="/assets/images/course-python.jpg" alt="Course Thumbnail" class="rounded me-3"
+                  style="width: 100px; height: 70px; object-fit: cover;">
+
+                <div>
+                  <h6 class="mb-0">Become Expert in Python</h6>
+                  <img src="/assets/images/avatar-5.jpg" width="40" class="mt-2  rounded-circle">
+                  <small>by <strong>Robert Fox</strong></small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- activity-->
+        <div class="col-md-2">
+          <div class="card shadow-sm h-100">
+            <div class="card-header">
+              <h6>Activity</h6>
+            </div>
+            <div class="card-body">
+              <div class="d-flex align-items-start mb-3">
+                <img src="/assets/images/avatar-1.jpg" class="rounded-circle me-3" width="40" alt="Rob Percival">
+                <div>
+                  <strong>Rob Percival</strong><br>
+                  <small class="text-muted">Just buy the courses”Build React Application Tutorial”</small><br>
+                  <small> 2m ago</small>
+                </div>
+              </div>
+              <div class="d-flex align-items-start mb-3">
+                <img src="/assets/images/avatar-2.jpg" class="rounded-circle me-3" width="40" alt="Irene Hargrove">
+                <div>
+                  <strong>Irene Hargrove</strong><br>
+                  <small class="text-muted">Comment on “Bootstrap Tutorial” Says “Hi,I m irene...</small><br>
+                  <small>1h ago</small>
+                </div>
+              </div>
+              <div class="d-flex align-items-start mb-3">
+                <img src="/assets/images/avatar-4.jpg" width="40" class="rounded-circle me-3" alt="Trevor Bradle">
+                <div>
+                  <strong>Trevor Bradle</strong><br>
+                  <small class="text-muted">Just share your article on Social Media..</small><br>
+                  <small>2 month ago</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!--final popula-->
+
+    </div>
   </div>
 
   <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
@@ -342,6 +630,48 @@
       const sidebar = document.getElementById('sidebar');
       sidebar.classList.toggle('collapsed');
     });
+  </script>
+
+  <!-- ApexCharts CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <script>
+    // Chart Earnings (Line)
+    var earningOptions = {
+      chart: {
+        type: 'line',
+        height: 250,
+        toolbar: { show: false }
+      },
+      series: [{
+        name: 'Earnings',
+        data: [0, 40, 30, 50, 20, 60, 30, 80, 20, 100, 30, 120]
+      }],
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      colors: ['#754FFE']
+    };
+
+    var earningChart = new ApexCharts(document.querySelector("#earningChart"), earningOptions);
+    earningChart.render();
+
+    // Chart Traffic (Pie)
+    var trafficOptions = {
+      chart: {
+        type: 'pie',
+        height: 250
+      },
+      series: [44, 33, 23],
+      labels: ['Direct', 'Referral', 'Organic'],
+      colors: ['#0d6efd', '#198754', '#ffc107'],
+      legend: {
+        show: false
+      }
+    };
+
+    var trafficChart = new ApexCharts(document.querySelector("#trafficChart"), trafficOptions);
+    trafficChart.render();
   </script>
 
 </body>
