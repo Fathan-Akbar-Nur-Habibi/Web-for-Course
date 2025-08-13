@@ -9,7 +9,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       overflow-x: hidden;
@@ -90,6 +93,14 @@
       margin-left: 0;
     }
   </style>
+<style>
+  ul.list-unstyled li {
+    font-size: 0.9rem;
+    padding: 4px 0;
+    border-bottom: 1px dashed #ddd;
+  }
+</style>
+
 
 </head>
 
@@ -331,6 +342,565 @@
     </div>
 
     <!-- Main page -->
+ <div id="main-content" class="flex-grow-1 bg-light"> 
+  <!--header Analytics-->
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4"> 
+    <h4 class="fw-bold">Analytics</h4>
+    <div class="d-flex align-items-center gap-2"> 
+      <input type="date" class="form-control" placeholder="Select Date">
+      <button class="btn btn-outline-secondary"> 
+        <i class="bi bi-gear"></i>
+      </button>
+    </div>
+  </div>
+
+  <!--statisic cards-->
+  <div class="row g-3"> 
+    <div class="col-md-3"> 
+      <div class="card shadow-sm"> 
+        <div class="card-body"> 
+          <h6 class="card-title text-uppercase">User</h6>
+          <h3>30.6k</h3>
+          <div class="d-flex justify-content-between"> 
+            <small class="text-success"><i class="bi bi-graph-up"></i> +20.9%</small>
+        <div class="chart-container" style="width: 1000px; height: 60px; overflow: hidden;">
+          <canvas id="chartUser" style="width: 1000%; height: 60px;"></canvas>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"> 
+      <div class="card shadow-sm"> 
+        <div class="card-body"> 
+          <h6 class="card-title text-uppercase">Unique Visitors</h6>
+          <h3>256k</h3>
+          <div class="d-flex justify-content-between"> 
+            <small class="text-danger"><i class="bi bi-graph-down"></i>-5%</small>
+        <div class="chart-container" style="width: 1000px; height: 60px; overflow: hidden;">
+          <canvas id="chartVisitor" style="width: 1000%; height: 60px;"></canvas>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"> 
+      <div class="card shadow-sm"> 
+        <div class="card-body"> 
+          <h6 class="card-title text-uppercase">Bounce Rate</h6>
+          <h3>51.46%</h3>
+          <div class="d-flex justify-content-between"> 
+            <small class="text-success"><i class="bi bi-graph-up"></i>+1200</small>
+        <div class="chart-container" style="width: 1000px; height: 60px; overflow: hidden;">
+          <canvas id="chartBounce" style="width: 1000%; height: 60px;"></canvas>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3"> 
+      <div class="card shadow-sm"> 
+        <div class="card-body"> 
+          <h6 class="card-title text-uppercase">Average Visit Time</h6>
+          <h3>1m:17s</h3>
+          <div class="d-flex justify-content-between"> 
+            <small class="text-success"><i class="bi bi-graph-up"></i>+12%</small>
+
+        <div class="chart-container" style="width: 1000px; height: 60px; overflow: hidden;">
+          <canvas id="chartVisitTime" style="width: 1000%; height: 60px;"></canvas>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+<script>
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { display: false },
+      y: { display: false }
+    },
+    elements: {
+      line: { tension: 0.4 },
+      point: { radius: 0 }
+    }
+  };
+
+  const userChart = new Chart(document.getElementById('chartUser'), {
+    type: 'line',
+    data: {
+      labels: [1, 2, 3, 4, 5, 6],
+      datasets: [{
+        data: [25, 26, 28, 29, 30, 30.6],
+        borderColor: '#28a745',
+        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+        fill: true
+      }]
+    },
+    options: chartOptions
+  });
+
+  const visitorChart = new Chart(document.getElementById('chartVisitor'), {
+    type: 'line',
+    data: {
+      labels: [1, 2, 3, 4, 5, 6],
+      datasets: [{
+        data: [260, 258, 257, 255, 256, 256],
+        borderColor: '#dc3545',
+        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+        fill: true
+      }]
+    },
+    options: chartOptions
+  });
+
+  const bounceChart = new Chart(document.getElementById('chartBounce'), {
+    type: 'line',
+    data: {
+      labels: [1, 2, 3, 4, 5, 6],
+      datasets: [{
+        data: [49, 50, 51, 52, 51.5, 51.46],
+        borderColor: '#28a745',
+        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+        fill: true
+      }]
+    },
+    options: chartOptions
+  });
+
+  const visitTimeChart = new Chart(document.getElementById('chartVisitTime'), {
+    type: 'line',
+    data: {
+      labels: [1, 2, 3, 4, 5, 6],
+      datasets: [{
+        data: [60, 65, 70, 72, 75, 77],
+        borderColor: '#28a745',
+        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+        fill: true
+      }]
+    },
+    options: chartOptions
+  });
+</script>
+
+
+<!--graphic sessions & active user-->
+<div class="row g-3 mt-3"> 
+  <div class="col-md-8"> 
+    <div class="card shadow-sm"> 
+      <div class="card-body"> 
+        <h6 class="card-title text-uppercase">Sessions</h6>
+        <canvas id="chartSessions" height="70"></canvas>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const ctx = document.getElementById('chartSessions').getContext('2d');
+  const chartSessions = new Chart(ctx, {
+    type: 'line', 
+    data: {
+      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], // Contoh label (x-axis)
+      datasets: [{
+        label: 'Number of Sessions',
+        data: [12, 19, 3, 5, 2, 3, 7], 
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderWidth: 2,
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<div class="col-md-4"> 
+  <div class="card shadow-sm"> 
+    <div class="card-body"> 
+      <h6 class="card-title text-uppercase">Active Users</h6>
+      
+      <div class="d-flex justify-content-around mb-3 mt-3"> 
+        <div class="text-center"> 
+          <h5>30 Day</h5>
+          <p>12,698 <i class="bi bi-graph-up text-success"></i></p>
+        </div>
+        <div class="text-center"> 
+          <h5>7 Day</h5>
+          <p>2,65K <i class="bi bi-graph-down text-danger"></i></p>
+        </div>
+        <div class="text-center"> 
+          <h5>1 Day</h5>
+          <p>1.34K <i class="bi bi-graph-up text-success"></i></p>
+        </div>
+      </div>
+
+      <!-- Graphics -->
+      <div style="height: 200px;">
+        <canvas id="chartActiveUsers" style="width: 100%; height: 100%;"></canvas>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Script Chart.js -->
+
+<script>
+  const ct = document.getElementById('chartActiveUsers').getContext('2d');
+  new Chart(ct, {
+    type: 'bar',
+    data: {
+      labels: ['30 Day', '7 Day', '1 Day'],
+      datasets: [{
+        label: 'Active Users',
+        data: [12698, 2650, 1340],
+        backgroundColor: [
+          'rgba(40, 167, 69, 0.6)',
+          'rgba(220, 53, 69, 0.6)',
+          'rgba(40, 167, 69, 0.6)'
+        ],
+        borderColor: [
+          'rgba(40, 167, 69, 1)',
+          'rgba(220, 53, 69, 1)',
+          'rgba(40, 167, 69, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return context.raw.toLocaleString() + ' users';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function(value) {
+              return value >= 1000 ? (value / 1000) + 'K' : value;
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</div>
+
+  <!-- Map, Traffic, OS -->
+  <div class="row g-3 mt-3"> 
+    <div class="col-md-4"> 
+      <div class="card shadow-sm"> 
+        <div class="card-body"> 
+          <h6 class="card-title text-uppercase">Users by Country</h6>
+           <div id="mapCountries" style="height: 200px; width: 100%; border-radius: 10px;"></div>
+         <ul class="mt-3 list-unstyled">
+  <li class="d-flex justify-content-between">
+    <span>🇺🇸 United States</span>
+    <span>22,120 (34.54%)</span>
+  </li>
+  <li class="d-flex justify-content-between">
+    <span>🇮🇳 India</span>
+    <span>12,756 (22.43%)</span>
+  </li>
+  <li class="d-flex justify-content-between">
+    <span>🇬🇧 United Kingdom</span>
+    <span>8,864 (13.78%)</span>
+  </li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const map = L.map('mapCountries', {
+      zoomControl: true, // activate control zoom
+      dragging: true, // activate drag
+      scrollWheelZoom: true, // activation scroll
+      doubleClickZoom: true, // activate double click zoom
+      boxZoom: false,
+      keyboard: false
+    }).setView([20, 0], 2); // central map global
+
+    // Tile layer ringan
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 5,
+      attribution: ''
+    }).addTo(map);
+
+    const countries = [
+      {
+        name: "United States",
+        lat: 37.0902,
+        lng: -95.7129,
+        users: "22,120 (34.5%)"
+      },
+      {
+        name: "India",
+        lat: 20.5937,
+        lng: 78.9629,
+        users: "12,756 (22.4%)"
+      },
+      {
+        name: "United Kingdom",
+        lat: 55.3781,
+        lng: -3.4360,
+        users: "8,864 (13.7%)"
+      }
+    ];
+
+    countries.forEach(country => {
+      L.circleMarker([country.lat, country.lng], {
+        radius: 6,
+        fillColor: "#007bff",
+        color: "#0056b3",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      })
+      .addTo(map)
+      .bindTooltip(`<strong>${country.name}</strong><br>${country.users}`, {
+        permanent: false,
+        direction: 'top'
+      });
+    });
+  });
+</script>
+
+<div class="col-md-4"> 
+  <div class="card shadow-sm"> 
+    <div class="card-body"> 
+      <h6 class="card-title text-uppercase">Traffic Channel</h6>
+      <!-- Pie Chart -->
+      <div style="height: 200px;">
+        <canvas id="chartTraffic" style="width: 100%; height: 100%;"></canvas>
+      </div>
+<ul class="mt-3 list-unstyled small">
+  <li class="d-flex justify-content-between align-items-center">
+    <span><span class="badge bg-primary me-2">&nbsp;</span>Organic Search</span>
+    <span>2,120 (4.54%)</span>
+  </li>
+  <li class="d-flex justify-content-between align-items-center">
+    <span><span class="badge bg-success me-2">&nbsp;</span>Direct</span>
+    <span>639 (4.37%)</span>
+  </li>
+  <li class="d-flex justify-content-between align-items-center">
+    <span><span class="badge bg-danger me-2">&nbsp;</span>Referrals</span>
+    <span>520 (45.14%)</span>
+  </li>
+  <li class="d-flex justify-content-between align-items-center">
+    <span><span class="badge bg-secondary me-2">&nbsp;</span>Social Media</span>
+    <span>116 (12.24%)</span>
+  </li>
+</ul>
+
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('chartTraffic').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Organic Search', 'Direct', 'Referrals', 'Social Media'],
+        datasets: [{
+          data: [2120, 639, 520, 116],
+          backgroundColor: ['#0d6efd', '#198754', '#dc3545', '#6c757d'], // Bootstrap colors
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }, // Legend in bottom
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                return `${label}: ${value.toLocaleString()} users`;
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
+
+
+<div class="col-md-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h6 class="card-title text-uppercase">Operating System</h6>
+
+      <!-- Pie chart container -->
+      <div style="height: 200px;">
+        <canvas id="chartOS" style="width: 100%; height: 100%;"></canvas>
+      </div>
+
+
+      <ul class="mt-3 list-unstyled small">
+        <li><span class="text-danger">●</span> Windows</li>
+        <li><span class="text-success">●</span> macOS</li>
+        <li><span class="text-primary">●</span> Linux</li>
+        <li><span class="text-muted">●</span> Android</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('chartOS').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Windows', 'macOS', 'Linux', 'Android'],
+        datasets: [{
+          data: [45, 25, 20, 10], // Contoh data, bisa disesuaikan
+          backgroundColor: [
+            '#dc3545', // text-danger
+            '#198754', // text-success
+            '#0d6efd', // text-primary
+            '#6c757d'  // text-muted
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false // Hide default legend, use custom list
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                return `${label}: ${value}%`;
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
+
+
+  </div>
+
+  <!-- Browser & Social Media -->
+<div class="row g-3 mt-3">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title text-uppercase">Browsers</h6>
+        <ul class="list-unstyled small mt-3">
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="fab fa-chrome  me-2 text-primary"></i>Google Chrome</span>
+            <span>21.54%</span>
+          </li>
+
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="fab fa-firefox-browser  me-2 text-warning"></i>Mozilla Firefox</span>
+            <span>14.43%</span>
+          </li>
+        
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-shield-shaded me-2 text-danger"></i>Brave</span>
+            <span>14.43%</span>
+          </li>
+
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-compass me-2 text-primary"></i>Apple Safari</span>
+            <span>8.54%</span>
+          </li>
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="fab fa-internet-explorer me-2 text-primary"></i>Internet Explorer</span>
+            <span>6.21%</span>
+          </li>
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="fab fa-opera me-2 text-danger "></i>Opera Mini</span>
+            <span>8%</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title text-uppercase">Social Media Traffic</h6>
+        <ul class="list-unstyled small mt-3">
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-facebook me-2 text-primary"></i>Facebook</span>
+            <span>3,454 (24%)</span>
+          </li>
+
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-instagram me-2 text-danger"></i>Instagram</span>
+            <span>2,351 (18.5%)</span>
+          </li>
+
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-twitter me-2 text-primary"></i>Twitter</span>
+            <span>2,243 (6.5%)</span>
+          </li>
+
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-linkedin me-2 text-primary"></i>LinkedIn</span>
+            <span>812 (5.1%)</span>
+          </li>
+
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-github me-2"></i>GitHub</span>
+            <span>621 (0.3%)</span>
+          </li>
+    
+          <li class="d-flex justify-content-between fs-6">
+            <span><i class="bi bi-youtube me-2 text-danger"></i>YouTube</span>
+            <span>450 (0.12%)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
 
   </div>
 
