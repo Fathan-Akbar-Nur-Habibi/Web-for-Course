@@ -1,197 +1,372 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMS Post | Geeks</title>
-    <!-- Bootstrap 5.0.2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <title>CMS Post</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        /* Prevent horizontal scroll */
+        body {
+            overflow-x: hidden;
+        }
 
-  <style>
-    body {
-      overflow-x: hidden;
-    }
+        /* Sidebar Styles */
+        #sidebar {
+            min-width: 280px;
+            max-width: 280px;
+            background: #343a40;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
 
-    #sidebar {
-      min-width: 250px;
-      max-width: 250px;
-      background: #343a40;
-      color: #fff;
-      transition: all 0.3s;
-    }
+        #sidebar.collapsed {
+            margin-left: -280px;
+        }
 
-    #sidebar.collapsed {
-      margin-left: -250px;
-    }
+        #sidebar .nav-link {
+            color: #adb5bd;
+        }
 
-    #sidebar .nav-link {
-      color: #adb5bd;
-    }
+        #sidebar .nav-link:hover {
+            color: #fff;
+        }
 
-    #sidebar .nav-link:hover {
-      color: #fff;
-    }
+        #sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    #main-content {
-      transition: all 0.3s;
-    }
+        /* Main Content Styles */
+        #main-content {
+            margin-left: 280px;
+            transition: all 0.3s ease;
+            width: calc(100% - 280px);
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
+        #sidebar.collapsed + #main-content {
+            margin-left: 0;
+            width: 100%;
+        }
 
-    #main-content {
-      margin-left: 250px;
-    }
+        /* Sidebar Heading */
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            font-weight: bold;
+        }
 
-    .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
-      text-transform: uppercase;
-    }
+        /* Profile Image */
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-  </style>
-  <style>
-    .dropdown-menu {
-      min-width: 250px;
-    }
+        /* Dropdown Menu */
+        .dropdown-menu {
+            min-width: 250px;
+        }
 
-    .status-option {
-      cursor: pointer;
-      padding-left: 1.5rem;
-    }
+        .status-option {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
 
-    .status-circle {
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-    }
+        .status-option:hover {
+            background-color: #f8f9fa;
+        }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
-      transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
-    }
+        .status-circle {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
-  </style>
+        /* Navbar Styles */
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            height: 70px;
+            background-color: #fff !important;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        /* Toggle button style */
+        #toggleSidebar {
+            border: none;
+            background: none;
+            color: #495057;
+        }
+
+        #toggleSidebar:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Search input styling */
+        .search-container {
+            max-width: 400px;
+        }
+
+        /* Notification badge */
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Tab Navigation */
+        .nav-lb-tab .nav-link {
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #6c757d;
+            font-weight: 500;
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-lb-tab .nav-link.active {
+            color: #0d6efd;
+            border-bottom-color: #0d6efd;
+            background-color: transparent;
+        }
+
+        .nav-lb-tab .nav-link:hover {
+            color: #0d6efd;
+            border-bottom-color: rgba(13, 110, 253, 0.3);
+        }
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            #sidebar {
+                min-width: 100%;
+                max-width: 100%;
+                margin-left: -100%;
+                z-index: 1050;
+            }
+            
+            #sidebar.show {
+                margin-left: 0;
+            }
+            
+            #main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 1040;
+            }
+
+            .search-container {
+                max-width: 200px;
+            }
+        }
+
+        /* Additional Mobile Fixes */
+        @media (max-width: 576px) {
+            #main-content {
+                padding: 10px;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .navbar .d-flex {
+                gap: 0.5rem;
+            }
+        }
+
+        /* Additional custom styles for badges */
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1) !important;
+        }
+        .bg-success-soft {
+            background-color: rgba(25, 135, 84, 0.1) !important;
+        }
+        .bg-info-soft {
+            background-color: rgba(13, 202, 240, 0.1) !important;
+        }
+        .bg-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1) !important;
+        }
+        .bg-secondary-soft {
+            background-color: rgba(108, 117, 125, 0.1) !important;
+        }
+        
+        /* Hover effects */
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+            transition: all 0.3s ease;
+        }
+        
+        .table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.025);
+        }
+    </style>
 </head>
-
 <body>
-    <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-        <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-        <form class="d-flex ms-3 flex-grow-1">
-            <div class="input-group w-50">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-            </div>
-        </form>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+        <div class="container-fluid px-3">
+            <!-- Sidebar Toggle Button -->
+            <button class="btn" id="toggleSidebar" type="button">
+                <i class="bi bi-list fs-3"></i>
+            </button>
 
-        <div class="d-flex align-items-center ms-auto">
-            <!--notification dropdown-->
-            <div class="dropdown me-3">
-                <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bell text-dark fs-4"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown"
-                    style="width: 300px;">
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                        <strong>Notification</strong>
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <hr>
-                    <div class="px-2 mb-2">
-                        <div class="d-flex mb-2">
-                            <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Kristin Watson</strong> : <br>
-                                liked your comment on course JavaScript Introduction! <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>2 hours ago, 2:19
-                                    PM</small>
+            <!-- Search Form -->
+            <form class="d-flex ms-3 flex-grow-1">
+                <div class="input-group search-container">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
+                </div>
+            </form>
+
+            <!-- Right Navigation -->
+            <div class="d-flex align-items-center ms-auto">
+                <!-- Notification Dropdown -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bell text-dark fs-4"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown" style="width: 320px;">
+                        <!-- Notification Header -->
+                        <div class="px-3 py-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold">Notifications</h6>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-gear"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Brooklyn Simons</strong> : <br>
-                                Just launched a new course Recat for Beginners <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>17 June 2025, 2:19
-                                    PM</small>
+                        
+                        <!-- Notification Items -->
+                        <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+                            <div class="d-flex mb-3">
+                                <img src="/assets/images/avatar-3.jpg" width="40" height="40" class="rounded-circle me-3" alt="">
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course JavaScript Introduction!</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>2 hours ago
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <img src="/assets/images/avatar-5.jpg" width="40" height="40" class="rounded-circle me-3" alt="">
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React for Beginners</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center border-top pt-2">
-                        <a href="#" class="text-decoration-none text-dark fw-bold">See All Notification</a>
+                        
+                        <!-- Notification Footer -->
+                        <div class="text-center border-top py-2">
+                            <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--profile Dropdown-->
-            <div class="dropdown">
-                <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-                    <div class="d-flex align-items-center px-3 py-2">
-                        <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-                        <div>
-                            <div><strong>Your Name</strong></div>
-                            <div class="text-muted small">your@email.com</div>
-                        </div>
-                    </div>
-                    <hr class="my-1">
-
-                    <!--status sub-dropdown-->
-                    <div class="dropdown">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#statusMenu" role="button">
-                            <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                        <div class="collapse" id="statusMenu">
-                            <div class="px-3 py-2">
-                                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
+                <!-- Profile Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+                        <!-- Profile Info -->
+                        <div class="d-flex align-items-center px-3 py-3 border-bottom">
+                            <img src="/assets/images/avatar-1.jpg" width="50" height="50" class="rounded-circle me-3" alt="user">
+                            <div>
+                                <div class="fw-bold">Your Name</div>
+                                <div class="text-muted small">your@email.com</div>
                             </div>
                         </div>
+
+                        <!-- Status Sub-dropdown -->
+                        <div class="px-3 py-2">
+                            <div class="dropdown-item-text fw-bold mb-2">
+                                <i class="bi bi-circle-fill text-success me-2"></i>Status
+                            </div>
+                            <div class="ms-3">
+                                <div class="status-option">
+                                    <span class="status-circle bg-success"></span>Online
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-secondary"></span>Offline
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-warning"></span>Away
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-danger"></span>Busy
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- Menu Items -->
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-person me-2"></i>Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-credit-card me-2"></i>Subscription
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-gear me-2"></i>Settings
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        
+                        <a class="dropdown-item text-danger" href="#">
+                            <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                        </a>
                     </div>
-
-                    <a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-credit-card me-2"></i>Subscription</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a>
-
-                    <hr class="my-1">
-                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!--Sidebar-->
-    <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
+    <!-- Overlay untuk mobile -->
+    <div class="overlay d-md-none" id="overlay" style="display: none;"></div>
+
+    <div class="d-flex" style="margin-top: 70px;">
+        <!-- Sidebar -->
         <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
             <ul class="nav flex-column px-2 mt-4">
-                <!--Dashboar-->
+                <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
                         <i class="bi bi-speedometer2 me-2"></i>Dashboard
@@ -204,7 +379,7 @@
                     </div>
                 </li>
 
-                <!--courses-->
+                <!-- Courses -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
                         <i class="bi bi-book me-2"></i>Courses
@@ -218,61 +393,62 @@
                     </div>
                 </li>
 
-                <!--user-->
+                <!-- User -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
                         <i class="bi bi-people me-2"></i>User
                     </a>
-                    <div class="collapse" id="userMenu">
+                    <div class="collapse show" id="userMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link " href="#">Instructor</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--cms-->
+                <!-- CMS -->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
+                    <a class="nav-link active" data-bs-toggle="collapse" href="#cmsMenu">
                         <i class="bi bi-columns me-2"></i>CMS
                     </a>
                     <div class="collapse" id="cmsMenu">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#">All Post</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--Project-->
+                <!-- Project -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-                        <i class="bi bi-kanban"></i>Project
+                        <i class="bi bi-kanban me-2"></i>Project
                     </a>
                     <div class="collapse" id="projectMenu">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" id="#projectSingleMenu">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">
                                     Single
                                 </a>
-                                <ul class="nav flex-column ms-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Task</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                                </ul>
+                                <div class="collapse" id="projectSingleMenu">
+                                    <ul class="nav flex-column ms-4">
+                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Task</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!--authentication-->
+                <!-- Authentication -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
                         <i class="bi bi-lock me-2"></i>Authentication
@@ -288,7 +464,7 @@
                     </div>
                 </li>
 
-                <!--APPS-->
+                <!-- APPS -->
                 <li class="sidebar-heading">Apps</li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
@@ -299,7 +475,7 @@
                 <li class="sidebar-heading">Components</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-                        <i class="bi bi-table me-2"></i> Tables
+                        <i class="bi bi-table me-2"></i>Tables
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
@@ -310,13 +486,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
+                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
                 </li>
 
                 <!-- Site Settings -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-                        <i class="bi bi-gear me-2"></i> Site Settings
+                        <i class="bi bi-gear me-2"></i>Site Settings
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
@@ -329,21 +505,684 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
         </div>
 
-        <!-- Main page -->
+        <!-- Main Content -->
+        <main id="main-content">
+            <section class="container-fluid p-4">
+                <div class="row">
+                    <!-- Page Header -->
+                    <div class="col-12">
+                        <div class="border-bottom pb-3 mb-4 d-flex align-items-center justify-content-between">
+                            <div class="d-flex flex-column gap-1">
+                                <h1 class="mb-0 h2 fw-bold">All Posts</h1>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item">
+                                            <a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item"><a href="#">CMS</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">All Post</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="bi bi-plus-lg me-1"></i>New Post
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Card -->
+                        <div class="card rounded-3">
+                            <!-- Card Header -->
+                            <div class="card-header bg-white p-0 border-bottom">
+                                <ul class="nav nav-lb-tab" id="tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="all-post-tab" data-bs-toggle="pill" data-bs-target="#all-post" type="button" role="tab" aria-controls="all-post" aria-selected="true">
+                                            All
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="published-tab" data-bs-toggle="pill" data-bs-target="#published" type="button" role="tab" aria-controls="published" aria-selected="false">
+                                            Published
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="scheduled-tab" data-bs-toggle="pill" data-bs-target="#scheduled" type="button" role="tab" aria-controls="scheduled" aria-selected="false">
+                                            Scheduled
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="draft-tab" data-bs-toggle="pill" data-bs-target="#draft" type="button" role="tab" aria-controls="draft" aria-selected="false">
+                                            Draft
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="deleted-tab" data-bs-toggle="pill" data-bs-target="#deleted" type="button" role="tab" aria-controls="deleted" aria-selected="false">
+                                            Deleted
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Search Form -->
+                            <div class="p-4 border-bottom">
+                                <form class="d-flex align-items-center col-12 col-md-8 col-lg-4" role="search">
+                                    <div class="position-relative w-100">
+                                        <span class="position-absolute search-icon">
+                                            <i class="bi bi-search"></i>
+                                        </span>
+                                        <input type="search" class="form-control ps-6" placeholder="Search Post">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="tab-content" id="tabContent">
+                                <!-- All Posts Tab -->
+                                <div class="tab-pane fade show active" id="all-post" role="tabpanel" aria-labelledby="all-post-tab">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 text-nowrap table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="checkAll">
+                                                            <label class="form-check-label" for="checkAll"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Post</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Author</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col" style="width: 50px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="postOne">
+                                                            <label class="form-check-label" for="postOne"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-0">
+                                                            <a href="#" class="text-inherit text-decoration-none">Revolutionize how you build the web...</a>
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-image text-primary fs-4"></i>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="text-inherit text-decoration-none">Courses</a>
+                                                    </td>
+                                                    <td><small class="text-muted">7 July, 2021 1:42pm</small></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center avatar-xs me-2">
+                                                                 <img src="/assets/images/avatar-3.jpg" class="rounded-circle" width="40">
+                                                            </div>
+                                                            <span>Reva Yokk</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-warning text-dark">
+                                                            <span class="badge-dot bg-warning me-1"></span>Draft
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><h6 class="dropdown-header">Settings</h6></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-up-right me-2"></i>Move</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-files me-2"></i>Copy</a></li>
+                                                                <li><hr class="dropdown-divider"></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Publish</a></li>
+                                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- Additional sample rows -->
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="postTwo">
+                                                            <label class="form-check-label" for="postTwo"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-0">
+                                                            <a href="#" class="text-inherit text-decoration-none">Guide to Static Sites with Gatsby.js</a>
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-play-circle text-primary fs-4"></i>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="text-inherit text-decoration-none">Marketing</a>
+                                                    </td>
+                                                    <td><small class="text-muted">6 July, 2021 2:42pm</small></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center avatar-xs me-2">
+                                                                 <img src="/assets/images/avatar-5.jpg" class="rounded-circle" width="40">
+                                                            </div>
+                                                            <span>March Menon</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-success">
+                                                            <span class="badge-dot bg-success me-1"></span>Published
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><h6 class="dropdown-header">Settings</h6></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-up-right me-2"></i>Move</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-files me-2"></i>Copy</a></li>
+                                                                <li><hr class="dropdown-divider"></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle me-2"></i>Unpublish</a></li>
+                                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="postThree">
+                                                            <label class="form-check-label" for="postThree"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-0">
+                                                            <a href="#" class="text-inherit text-decoration-none">The Modern JavaScript Courses</a>
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-link-45deg text-primary fs-4"></i>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="text-inherit text-decoration-none">Workshop</a>
+                                                    </td>
+                                                    <td><small class="text-muted">5 July, 2021 5:42pm</small></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-info rounded-circle d-flex align-items-center justify-content-center avatar-xs me-2">
+                                                                <img src="/assets/images/avatar-6.jpg" class="rounded-circle" width="40">
+                                                            </div>
+                                                            <span>Lisa Menon</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-info">
+                                                            <span class="badge-dot bg-info me-1"></span>Scheduled
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><h6 class="dropdown-header">Settings</h6></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-up-right me-2"></i>Move</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-files me-2"></i>Copy</a></li>
+                                                                <li><hr class="dropdown-divider"></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Publish</a></li>
+                                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
+                                <!-- Published Tab -->
+                                <div class="tab-pane fade" id="published" role="tabpanel" aria-labelledby="published-tab">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 text-nowrap table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="checkPublished">
+                                                            <label class="form-check-label" for="checkPublished"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Post</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Author</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col" style="width: 50px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="postPublished1">
+                                                            <label class="form-check-label" for="postPublished1"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-0">
+                                                            <a href="#" class="text-inherit text-decoration-none">The Modern JavaScript Courses</a>
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-link-45deg text-primary fs-4"></i>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="text-inherit text-decoration-none">Workshop</a>
+                                                    </td>
+                                                    <td><small class="text-muted">5 July, 2021 5:42pm</small></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-info rounded-circle d-flex align-items-center justify-content-center avatar-xs me-2">
+                                                                 <img src="/assets/images/avatar-6.jpg" class="rounded-circle" width="40">
+                                                            </div>
+                                                            <span>Lisa Menon</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-success">
+                                                            <span class="badge-dot bg-success me-1"></span>Published
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><h6 class="dropdown-header">Settings</h6></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle me-2"></i>Unpublish</a></li>
+                                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Scheduled Tab -->
+                                <div class="tab-pane fade" id="scheduled" role="tabpanel" aria-labelledby="scheduled-tab">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 text-nowrap table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="checkScheduled">
+                                                            <label class="form-check-label" for="checkScheduled"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Post</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Author</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col" style="width: 50px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="postScheduled1">
+                                                            <label class="form-check-label" for="postScheduled1"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-0">
+                                                            <a href="#" class="text-inherit text-decoration-none">The Javascript Learning</a>
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-play-circle text-primary fs-4"></i>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="text-inherit text-decoration-none">Marketing</a>
+                                                    </td>
+                                                    <td><small class="text-muted">3 July, 2021 12:42pm</small></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center avatar-xs me-2">
+                                                                <img src="/assets/images/avatar-3.jpg" class="rounded-circle" width="40">
+                                                            </div>
+                                                            <span>Misty Smaln</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-info">
+                                                            <span class="badge-dot bg-info me-1"></span>Scheduled
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><h6 class="dropdown-header">Settings</h6></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Publish Now</a></li>
+                                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Draft Tab -->
+                                <div class="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 text-nowrap table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="checkDraft">
+                                                            <label class="form-check-label" for="checkDraft"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Post</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Author</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col" style="width: 50px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="postDraft1">
+                                                            <label class="form-check-label" for="postDraft1"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-0">
+                                                            <a href="#" class="text-inherit text-decoration-none">Revolutionize how you build the web...</a>
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-image text-primary fs-4"></i>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="text-inherit text-decoration-none">Courses</a>
+                                                    </td>
+                                                    <td><small class="text-muted">7 July, 2021 1:42pm</small></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center avatar-xs me-2">
+                                                               <img src="/assets/images/avatar-3.jpg" class="rounded-circle" width="40">
+                                                            </div>
+                                                            <span>Reva Yokk</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-warning text-dark">
+                                                            <span class="badge-dot bg-warning me-1"></span>Draft
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><h6 class="dropdown-header">Settings</h6></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Publish</a></li>
+                                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Deleted Tab -->
+                                <div class="tab-pane fade" id="deleted" role="tabpanel" aria-labelledby="deleted-tab">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 text-nowrap table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="checkDeleted">
+                                                            <label class="form-check-label" for="checkDeleted"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Post</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Author</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col" style="width: 50px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="postDeleted1">
+                                                            <label class="form-check-label" for="postDeleted1"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-0">
+                                                            <a href="#" class="text-inherit text-decoration-none">How to become Full Stack Developer</a>
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-link-45deg text-primary fs-4"></i>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="text-inherit text-decoration-none">Workshop</a>
+                                                    </td>
+                                                    <td><small class="text-muted">2 July, 2021 12:42pm</small></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-danger rounded-circle d-flex align-items-center justify-content-center avatar-xs me-2">
+                                                                <img src="/assets/images/avatar-5.jpg" class="rounded-circle" width="40">
+                                                            </div>
+                                                            <span>Sina Ray</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-danger">
+                                                            <span class="badge-dot bg-danger me-1"></span>Deleted
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bi bi-three-dots-vertical"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><h6 class="dropdown-header">Settings</h6></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-clockwise me-2"></i>Restore</a></li>
+                                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3 me-2"></i>Delete Permanently</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card Footer with Pagination -->
+                            <div class="card-footer bg-white">
+                                <nav aria-label="Posts pagination">
+                                    <ul class="pagination justify-content-center mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                                <i class="bi bi-chevron-left"></i>
+                                                <span class="visually-hidden">Previous</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active" aria-current="page">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">
+                                                <i class="bi bi-chevron-right"></i>
+                                                <span class="visually-hidden">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
-    <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script> 
-        document.getElementById('toggleSidebar').addEventListener('click', function() { 
-            const sidebar = document.getElementById('sidebar'); 
-            sidebar.classList.toggle('collapsed');
-    });
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const overlay = document.getElementById('overlay');
+            
+            // Toggle sidebar functionality
+            toggleSidebar.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    // Mobile behavior
+                    sidebar.classList.toggle('show');
+                    if (sidebar.classList.contains('show')) {
+                        overlay.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                } else {
+                    // Desktop behavior
+                    sidebar.classList.toggle('collapsed');
+                }
+            });
+            
+            // Close sidebar when clicking overlay (mobile)
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('show');
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('show');
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Status selection functionality
+            const statusOptions = document.querySelectorAll('.status-option');
+            statusOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    statusOptions.forEach(opt => opt.classList.remove('active'));
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update status display (you can customize this)
+                    const statusText = this.textContent.trim();
+                    console.log('Status changed to:', statusText);
+                });
+            });
+
+            // Search functionality (basic)
+            const searchInputs = document.querySelectorAll('input[type="search"]');
+            searchInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    console.log('Searching for:', searchTerm);
+                    // Add your search logic here
+                });
+            });
+
+            // View Toggle Functionality - THIS IS THE FIX
+            const gridViewRadio = document.getElementById('gridView');
+            const listViewRadio = document.getElementById('listView');
+            const gridViewPane = document.getElementById('tabPaneGrid');
+            const listViewPane = document.getElementById('tabPaneList');
+            
+            // Function to switch views
+            function switchView(showGrid) {
+                if (showGrid) {
+                    gridViewPane.classList.add('active', 'show');
+                    listViewPane.classList.remove('active', 'show');
+                } else {
+                    gridViewPane.classList.remove('active', 'show');
+                    listViewPane.classList.add('active', 'show');
+                }
+            }
+            
+            // Event listeners for view toggle
+            gridViewRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    switchView(true);
+                }
+            });
+            
+            listViewRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    switchView(false);
+                }
+            });
+        });
     </script>
 </body>
-
 </html>
