@@ -1,197 +1,399 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMS Category | Geeks</title>
-    <!-- Bootstrap 5.0.2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <title>CMS Category</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        /* Prevent horizontal scroll */
+        body {
+            overflow-x: hidden;
+        }
 
-  <style>
-    body {
-      overflow-x: hidden;
-    }
+        /* Sidebar Styles */
+        #sidebar {
+            min-width: 280px;
+            max-width: 280px;
+            background: #343a40;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
 
-    #sidebar {
-      min-width: 250px;
-      max-width: 250px;
-      background: #343a40;
-      color: #fff;
-      transition: all 0.3s;
-    }
+        #sidebar.collapsed {
+            margin-left: -280px;
+        }
 
-    #sidebar.collapsed {
-      margin-left: -250px;
-    }
+        #sidebar .nav-link {
+            color: #adb5bd;
+        }
 
-    #sidebar .nav-link {
-      color: #adb5bd;
-    }
+        #sidebar .nav-link:hover {
+            color: #fff;
+        }
 
-    #sidebar .nav-link:hover {
-      color: #fff;
-    }
+        #sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    #main-content {
-      transition: all 0.3s;
-    }
+        /* Main Content Styles */
+        #main-content {
+            margin-left: 280px;
+            transition: all 0.3s ease;
+            width: calc(100% - 280px);
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
+        #sidebar.collapsed + #main-content {
+            margin-left: 0;
+            width: 100%;
+        }
 
-    #main-content {
-      margin-left: 250px;
-    }
+        /* Sidebar Heading */
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            font-weight: bold;
+        }
 
-    .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
-      text-transform: uppercase;
-    }
+        /* Profile Image */
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-  </style>
-  <style>
-    .dropdown-menu {
-      min-width: 250px;
-    }
+        /* Dropdown Menu */
+        .dropdown-menu {
+            min-width: 250px;
+        }
 
-    .status-option {
-      cursor: pointer;
-      padding-left: 1.5rem;
-    }
+        .status-option {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
 
-    .status-circle {
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-    }
+        .status-option:hover {
+            background-color: #f8f9fa;
+        }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
-      transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
-    }
+        .status-circle {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
-  </style>
+        /* Navbar Styles */
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            height: 70px;
+            background-color: #fff !important;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        /* Toggle button style */
+        #toggleSidebar {
+            border: none;
+            background: none;
+            color: #495057;
+        }
+
+        #toggleSidebar:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Search input styling */
+        .search-container {
+            max-width: 400px;
+        }
+
+        /* Notification badge */
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Search icon positioning */
+        .position-relative .search-icon {
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .ps-6 {
+            padding-left: 2.5rem !important;
+        }
+
+        /* Table hover and accordion styles */
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.025);
+        }
+
+        .accordion-toggle {
+            cursor: pointer;
+        }
+
+        .accordion-toggle h5 {
+            position: relative;
+        }
+
+        .accordion-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-toggle[aria-expanded="true"] i {
+            transform: rotate(90deg);
+        }
+
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            #sidebar {
+                min-width: 100%;
+                max-width: 100%;
+                margin-left: -100%;
+                z-index: 1050;
+            }
+            
+            #sidebar.show {
+                margin-left: 0;
+            }
+            
+            #main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 1040;
+            }
+
+            .search-container {
+                max-width: 200px;
+            }
+        }
+
+        /* Additional Mobile Fixes */
+        @media (max-width: 576px) {
+            #main-content {
+                padding: 10px;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .navbar .d-flex {
+                gap: 0.5rem;
+            }
+        }
+
+        /* Additional custom styles for badges */
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1) !important;
+        }
+        .bg-success-soft {
+            background-color: rgba(25, 135, 84, 0.1) !important;
+        }
+        .bg-info-soft {
+            background-color: rgba(13, 202, 240, 0.1) !important;
+        }
+        .bg-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1) !important;
+        }
+        .bg-secondary-soft {
+            background-color: rgba(108, 117, 125, 0.1) !important;
+        }
+        
+        /* Hover effects */
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+            transition: all 0.3s ease;
+        }
+        
+        .table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.025);
+        }
+
+        /* Text primary hover effect */
+        .text-primary-hover:hover {
+            color: #0d6efd !important;
+        }
+    </style>
 </head>
-
 <body>
-    <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-        <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-        <form class="d-flex ms-3 flex-grow-1">
-            <div class="input-group w-50">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-            </div>
-        </form>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+        <div class="container-fluid px-3">
+            <!-- Sidebar Toggle Button -->
+            <button class="btn" id="toggleSidebar" type="button">
+                <i class="bi bi-list fs-3"></i>
+            </button>
 
-        <div class="d-flex align-items-center ms-auto">
-            <!--notification dropdown-->
-            <div class="dropdown me-3">
-                <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bell text-dark fs-4"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown"
-                    style="width: 300px;">
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                        <strong>Notification</strong>
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <hr>
-                    <div class="px-2 mb-2">
-                        <div class="d-flex mb-2">
-                            <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Kristin Watson</strong> : <br>
-                                liked your comment on course JavaScript Introduction! <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>2 hours ago, 2:19
-                                    PM</small>
+            <!-- Search Form -->
+            <form class="d-flex ms-3 flex-grow-1">
+                <div class="input-group search-container">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
+                </div>
+            </form>
+
+            <!-- Right Navigation -->
+            <div class="d-flex align-items-center ms-auto">
+                <!-- Notification Dropdown -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bell text-dark fs-4"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown" style="width: 320px;">
+                        <!-- Notification Header -->
+                        <div class="px-3 py-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold">Notifications</h6>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-gear"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Brooklyn Simons</strong> : <br>
-                                Just launched a new course Recat for Beginners <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>17 June 2025, 2:19
-                                    PM</small>
+                        
+                        <!-- Notification Items -->
+                        <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+                            <div class="d-flex mb-3">
+                                <div class="bg-secondary rounded-circle me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <img src="/assets/images/avatar-3.jpg" width="40" class="rounded-circle">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course JavaScript Introduction!</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>2 hours ago
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="bg-primary rounded-circle me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <img src="/assets/images/avatar-5.jpg" width="40" class="rounded-circle">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React for Beginners</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center border-top pt-2">
-                        <a href="#" class="text-decoration-none text-dark fw-bold">See All Notification</a>
+                        
+                        <!-- Notification Footer -->
+                        <div class="text-center border-top py-2">
+                            <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--profile Dropdown-->
-            <div class="dropdown">
-                <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-                    <div class="d-flex align-items-center px-3 py-2">
-                        <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-                        <div>
-                            <div><strong>Your Name</strong></div>
-                            <div class="text-muted small">your@email.com</div>
+                <!-- Profile Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="bg-success rounded-circle" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
                         </div>
-                    </div>
-                    <hr class="my-1">
-
-                    <!--status sub-dropdown-->
-                    <div class="dropdown">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#statusMenu" role="button">
-                            <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                        <div class="collapse" id="statusMenu">
-                            <div class="px-3 py-2">
-                                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+                        <!-- Profile Info -->
+                        <div class="d-flex align-items-center px-3 py-3 border-bottom">
+                            <div class="rounded-circle me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                               <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle">
+                            </div>
+                            <div>
+                                <div class="fw-bold">Your Name</div>
+                                <div class="text-muted small">your@email.com</div>
                             </div>
                         </div>
+
+                        <!-- Status Sub-dropdown -->
+                        <div class="px-3 py-2">
+                            <div class="dropdown-item-text fw-bold mb-2">
+                                <i class="bi bi-circle-fill text-success me-2"></i>Status
+                            </div>
+                            <div class="ms-3">
+                                <div class="status-option">
+                                    <span class="status-circle bg-success"></span>Online
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-secondary"></span>Offline
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-warning"></span>Away
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-danger"></span>Busy
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <!-- Menu Items -->
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-person me-2"></i>Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-credit-card me-2"></i>Subscription
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-gear me-2"></i>Settings
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        
+                        <a class="dropdown-item text-danger" href="#">
+                            <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                        </a>
                     </div>
-
-                    <a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-credit-card me-2"></i>Subscription</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a>
-
-                    <hr class="my-1">
-                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!--Sidebar-->
-    <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
+    <!-- Overlay untuk mobile -->
+    <div class="overlay d-md-none" id="overlay" style="display: none;"></div>
+
+    <div class="d-flex" style="margin-top: 70px;">
+        <!-- Sidebar -->
         <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
             <ul class="nav flex-column px-2 mt-4">
-                <!--Dashboar-->
+                <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
                         <i class="bi bi-speedometer2 me-2"></i>Dashboard
@@ -204,7 +406,7 @@
                     </div>
                 </li>
 
-                <!--courses-->
+                <!-- Courses -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
                         <i class="bi bi-book me-2"></i>Courses
@@ -218,20 +420,20 @@
                     </div>
                 </li>
 
-                <!--user-->
+                <!-- User -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
                         <i class="bi bi-people me-2"></i>User
                     </a>
                     <div class="collapse" id="userMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#">Instructor</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--cms-->
+                <!-- CMS -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
                         <i class="bi bi-columns me-2"></i>CMS
@@ -246,33 +448,34 @@
                     </div>
                 </li>
 
-                <!--Project-->
+                <!-- Project -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-                        <i class="bi bi-kanban"></i>Project
+                        <i class="bi bi-kanban me-2"></i>Project
                     </a>
                     <div class="collapse" id="projectMenu">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" id="#projectSingleMenu">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">
                                     Single
                                 </a>
-                                <ul class="nav flex-column ms-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Task</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                                </ul>
+                                <div class="collapse" id="projectSingleMenu">
+                                    <ul class="nav flex-column ms-4">
+                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Task</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!--authentication-->
+                <!-- Authentication -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
                         <i class="bi bi-lock me-2"></i>Authentication
@@ -288,7 +491,7 @@
                     </div>
                 </li>
 
-                <!--APPS-->
+                <!-- APPS -->
                 <li class="sidebar-heading">Apps</li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
@@ -299,7 +502,7 @@
                 <li class="sidebar-heading">Components</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-                        <i class="bi bi-table me-2"></i> Tables
+                        <i class="bi bi-table me-2"></i>Tables
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
@@ -310,13 +513,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
+                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
                 </li>
 
                 <!-- Site Settings -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-                        <i class="bi bi-gear me-2"></i> Site Settings
+                        <i class="bi bi-gear me-2"></i>Site Settings
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
@@ -329,21 +532,508 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
         </div>
 
-        <!-- Main page -->
+        <!-- Main Content -->
+        <div id="main-content">
+            <section class="container-fluid p-4"> 
+                <div class="row"> 
+                    <!--page header-->
+                    <div class="col-lg-12 col-md-12 col-12"> 
+                        <div class="border-bottom pb-3 mb-3 d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between">
+                          <div class="d-flex flex-column gap-1"> 
+                            <h2 class="mb-0 fw-bold">Category</h2>
+                            <!--breadcrumb-->
+                            <nav aria-label="breadcrumb"> 
+                                <ol class="breadcrumb"> 
+                                    <li class="breadcrumb-item">
+                                        <a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#">CMS</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Category</li>
+                                </ol>
+                            </nav>
+                          </div>  
+                          <div> 
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCategory">Add New Category</a>
+                         </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row"> 
+                    <div class="col-lg-12 col-md-12 col-12"> 
+                        <!--card-->
+                        <div class="card mb-4"> 
+                            <!--card header-->
+                            <div class="card-header border-bottom-0"> 
+                                <!--form-->
+                                <form class="d-flex align-items-center"> 
+                                    <div class="position-relative flex-grow-1"> 
+                                        <span class="position-absolute search-icon"> 
+                                            <i class="bi bi-search"></i>
+                                        </span>
+                                        <input type="search" class="form-control ps-6" placeholder="Search Category">
+                                    </div>
+                                </form>
+                            </div>
+                            <!--table-->
+                            <div class="table-responsive border-0 overflow-y-hidden"> 
+                                <table class="table mb-0 text-nowrap table-hover"> 
+                                    <thead class="table-light"> 
+                                        <tr> 
+                                            <th> 
+                                                <div class="form-check"> 
+                                                    <input type="checkbox" class="form-check-input" id="checkAll">
+                                                    <label class="form-check-label" for="checkAll"></label>
+                                                </div>
+                                            </th>
+                                            <th>Category</th>
+                                            <th>Slug</th>
+                                            <th>Posts</th>
+                                            <th>Date Category</th>
+                                            <th>Date Update</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"> 
+                                            <td> 
+                                                <div class="form-check"> 
+                                                    <input type="checkbox" class="form-check-input" id="categoryCheck1">
+                                                    <label class="form-check-label" for="categoryCheck1"></label>
+                                                </div>
+                                            </td>
+                                            <td> 
+                                                <a href="#" class="text-inherit position-relative text-decoration-none"> 
+                                                    <h5 class="mb-0 text-primary-hover text-dark"> 
+                                                        <i class="bi bi-chevron-right fs-6 me-2"></i>
+                                                        Courses
+                                                    </h5>
+                                                </a>
+                                            </td>
+                                            <td>desgincourse</td>
+                                            <td>1</td>
+                                            <td>16 Oct, 2020</td>
+                                            <td>16 Nov, 2020</td>
+                                            <td>
+                                                <span class="badge bg-success">Live</span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown dropstart">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-send me-2"></i>Publish
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                        </a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#">
+                                                            <i class="bi bi-trash me-2"></i>Delete
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr id="collapseOne" class="collapse">
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="categoryCheck2">
+                                                    <label class="form-check-label" for="categoryCheck2"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-inherit text-decoration-none text-dark">
+                                                    <h5 class="mb-0 text-primary-hover ms-4">Child Category</h5>
+                                                </a>
+                                            </td>
+                                            <td class="text-dark">childcategory</td>
+                                            <td>4</td>
+                                            <td>16 Oct, 2020</td>
+                                            <td>16 Nov, 2020</td>
+                                            <td>
+                                                <span class="badge bg-warning">Draft</span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown dropstart">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="courseDropdown2">
+                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-send me-2"></i>Publish
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                        </a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#">
+                                                            <i class="bi bi-trash me-2"></i>Delete
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- Additional rows with similar fixes -->
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="categoryCheck3">
+                                                    <label class="form-check-label" for="categoryCheck3"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-inherit text-decoration-none text-dark">
+                                                    <h5 class="mb-0 text-primary-hover">Workshop</h5>
+                                                </a>
+                                            </td>
+                                            <td>Workshop</td>
+                                            <td>6</td>
+                                            <td>16 Oct, 2020</td>
+                                            <td>16 Nov, 2020</td>
+                                            <td>
+                                                <span class="badge bg-success">Live</span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown dropstart">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="courseDropdown3">
+                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-send me-2"></i>Publish
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                        </a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#">
+                                                            <i class="bi bi-trash me-2"></i>Delete
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="categoryCheck4">
+                                                    <label class="form-check-label" for="categoryCheck4"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-inherit text-decoration-none text-dark">
+                                                    <h5 class="mb-0 text-primary-hover">Tutorial</h5>
+                                                </a>
+                                            </td>
+                                            <td>tutorial</td>
+                                            <td>3</td>
+                                            <td>16 Oct, 2020</td>
+                                            <td>16 Nov, 2020</td>
+                                            <td>
+                                                <span class="badge bg-success">Live</span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown dropstart">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown4" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="courseDropdown4">
+                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-send me-2"></i>Publish
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                        </a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#">
+                                                            <i class="bi bi-trash me-2"></i>Delete
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="categoryCheck5">
+                                                    <label class="form-check-label" for="categoryCheck5"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-inherit text-decoration-none text-dark">
+                                                    <h5 class="mb-0 text-primary-hover">Company</h5>
+                                                </a>
+                                            </td>
+                                            <td>company</td>
+                                            <td>4</td>
+                                            <td>16 Oct, 2020</td>
+                                            <td>16 Nov, 2020</td>
+                                            <td>
+                                                <span class="badge bg-success">Live</span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown dropstart">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown5" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="courseDropdown5">
+                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-send me-2"></i>Publish
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                        </a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#">
+                                                            <i class="bi bi-trash me-2"></i>Delete
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="categoryCheck6">
+                                                    <label class="form-check-label" for="categoryCheck6"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-inherit text-decoration-none text-dark">
+                                                    <h5 class="mb-0 text-primary-hover">Technology</h5>
+                                                </a>
+                                            </td>
+                                            <td>technology</td>
+                                            <td>6</td>
+                                            <td>16 Oct, 2020</td>
+                                            <td>16 Nov, 2020</td>
+                                            <td>
+                                                <span class="badge bg-success">Live</span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown dropstart">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown6" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="courseDropdown6">
+                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-send me-2"></i>Publish
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                        </a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#">
+                                                            <i class="bi bi-trash me-2"></i>Delete
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="categoryCheck7">
+                                                    <label class="form-check-label" for="categoryCheck7"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-inherit text-decoration-none text-dark">
+                                                    <h5 class="mb-0 text-primary-hover">Business</h5>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">business</td>
+                                            <td class="align-middle">2</td>
+                                            <td class="align-middle">16 Oct, 2020</td>
+                                            <td>16 Nov, 2020</td>
+                                            <td>
+                                                <span class="badge bg-warning">Draft</span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown dropstart">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown7" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="courseDropdown7">
+                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-send me-2"></i>Publish
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#">
+                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                        </a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#">
+                                                            <i class="bi bi-trash me-2"></i>Delete
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-    <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script> 
-        document.getElementById('toggleSidebar').addEventListener('click', function() { 
-            const sidebar = document.getElementById('sidebar'); 
-            sidebar.classList.toggle('collapsed');
-    });
+
+    <!-- Add New Category Modal -->
+    <div class="modal fade" id="newCatgory" tabindex="-1" aria-labelledby="newCatgoryLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCatgoryLabel">Add New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Category Name</label>
+                            <input type="text" class="form-control" id="categoryName" placeholder="Enter category name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categorySlug" class="form-label">Slug</label>
+                            <input type="text" class="form-control" id="categorySlug" placeholder="category-slug">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="categoryDescription" rows="3" placeholder="Enter category description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryStatus" class="form-label">Status</label>
+                            <select class="form-select" id="categoryStatus">
+                                <option value="live">Live</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const overlay = document.getElementById('overlay');
+            
+            // Toggle sidebar functionality
+            toggleSidebar.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    // Mobile behavior
+                    sidebar.classList.toggle('show');
+                    if (sidebar.classList.contains('show')) {
+                        overlay.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                } else {
+                    // Desktop behavior
+                    sidebar.classList.toggle('collapsed');
+                }
+            });
+            
+            // Close sidebar when clicking overlay (mobile)
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('show');
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('show');
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Status selection functionality
+            const statusOptions = document.querySelectorAll('.status-option');
+            statusOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    statusOptions.forEach(opt => opt.classList.remove('active'));
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update status display (you can customize this)
+                    const statusText = this.textContent.trim();
+                    console.log('Status changed to:', statusText);
+                });
+            });
+
+            // Search functionality (basic)
+            const searchInputs = document.querySelectorAll('input[type="search"]');
+            searchInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    console.log('Searching for:', searchTerm);
+                    // Add your search logic here
+                });
+            });
+
+            // Accordion toggle for categories
+            const accordionToggles = document.querySelectorAll('.accordion-toggle');
+            accordionToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const target = this.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(target);
+                    const chevron = this.querySelector('i.bi-chevron-right');
+                    
+                    if (targetElement) {
+                        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                        
+                        if (chevron) {
+                            if (isExpanded) {
+                                chevron.style.transform = 'rotate(0deg)';
+                            } else {
+                                chevron.style.transform = 'rotate(90deg)';
+                            }
+                        }
+                    }
+                });
+            });
+
+            // Check all functionality
+            const checkAll = document.getElementById('checkAll');
+            const categoryChecks = document.querySelectorAll('[id^="categoryCheck"]');
+            
+            checkAll.addEventListener('change', function() {
+                categoryChecks.forEach(check => {
+                    check.checked = this.checked;
+                });
+            });
+
+            // Individual checkbox change
+            categoryChecks.forEach(check => {
+                check.addEventListener('change', function() {
+                    const checkedBoxes = document.querySelectorAll('[id^="categoryCheck"]:checked');
+                    checkAll.checked = checkedBoxes.length === categoryChecks.length;
+                    checkAll.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < categoryChecks.length;
+                });
+            });
+        });
     </script>
 </body>
-
 </html>
