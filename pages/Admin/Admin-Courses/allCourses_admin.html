@@ -69,6 +69,20 @@
       width: 100%;
     }
 
+    .form-control-with-icon {
+      padding-left: 2.5rem;
+      /* Menyesuaikan agar teks tidak tertimpa ikon */
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #6c757d;
+    }
+
     /* Sidebar Heading */
     .sidebar-heading {
       font-size: 0.75rem;
@@ -611,12 +625,13 @@
                 </div>
               </div>
               <div class="p-4 row">
-                <!--form-->
-                <form class="d-flex align-items-center col-12 col-md-12 col-lg-12">
-                  <span class="position-absolute ps-3 search-icon"><i data-feather="search"></i></span>
-                  <input type="search" class="form-control ps-6" placeholder="Search Course">
+                <!-- Form -->
+                <form class="col-12 position-relative">
+                  <i data-feather="search" class="search-icon"></i>
+                  <input type="search" class="form-control form-control-with-icon" placeholder="Search Course">
                 </form>
               </div>
+
 
               <div>
                 <!--table-->
@@ -826,10 +841,10 @@
                     </div>
                   </div>
                   <!--tab pane approved-->
-                  <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab"> 
-                    <div class="table-responsive border-0 overflow-y-hidden"> 
-                      <table class="table mb-0 text-nowrap table-centered table-hover"> 
-                        <thead class="table-light"> 
+                  <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
+                    <div class="table-responsive border-0 overflow-y-hidden">
+                      <table class="table mb-0 text-nowrap table-centered table-hover">
+                        <thead class="table-light">
                           <tr>
                             <th>Courses</th>
                             <th>Instructors</th>
@@ -838,32 +853,34 @@
                             <th></th>
                           </tr>
                         </thead>
-                        <tbody> 
-                          <tr> 
-                            <td> 
-                              <a href="#" class="text-inherit text-decoration-none text-dark"> 
-                                <div class="d-flex align-items-center flex-row gap-3"> 
-                                  <div> 
-                                    <img src="/assets/images/course-javascript.jpg" alt="" class="img-4by3-lg rounded-2" width="100">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <a href="#" class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center flex-row gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-javascript.jpg" alt="" class="img-4by3-lg rounded-2"
+                                      width="100">
                                   </div>
-                                  <div class="d-flex flex-column gap-1"> 
+                                  <div class="d-flex flex-column gap-1">
                                     <h4 class="mb-0 text-primary-hover fs-6">Courses JavaScript Heading Title</h4>
                                     <span>Added on 5 July, 2023</span>
                                   </div>
                                 </div>
                               </a>
                             </td>
-                            <td> 
-                              <div class="d-flex align-items-center flex-row gap-2"> 
-                                <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar-xs" width="40">
+                            <td>
+                              <div class="d-flex align-items-center flex-row gap-2">
+                                <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
                                 <h5 class="mb-0 fs-6">Guy Hawkins</h5>
                               </div>
                             </td>
-                            <td> 
+                            <td>
                               <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>
                               Live
                             </td>
-                            <td> 
+                            <td>
                               <a href="#" class="btn btn-secondary btn-sm">Change Status</a>
                             </td>
                             <td>
@@ -888,10 +905,10 @@
                     </div>
                   </div>
                   <!--tab pane  Pending-->
-                  <div class="tab-pane fade" id="pending" role="tab-panel" aria-labelledby="pending-tab"> 
-                    <div class="table-responsive border-0 overflow-y-hidden"> 
-                      <table class="table mb-0 text-nowrap table-centered table-hover"> 
-                        <thead class="table-light"> 
+                  <div class="tab-pane fade" id="pending" role="tab-panel" aria-labelledby="pending-tab">
+                    <div class="table-responsive border-0 overflow-y-hidden">
+                      <table class="table mb-0 text-nowrap table-centered table-hover">
+                        <thead class="table-light">
                           <tr>
                             <th>Courses</th>
                             <th>Instructor</th>
@@ -900,8 +917,8 @@
                             <th></th>
                           </tr>
                         </thead>
-                        <tbody> 
-                                                  <tr>
+                        <tbody>
+                          <tr>
                             <td>
                               <a class="text-inherit text-decoration-none text-dark">
                                 <div class="d-flex align-items-center gap-3">
@@ -1048,30 +1065,36 @@
                   </div>
                 </div>
               </div>
-                <!-- Card Footer -->
-                <div class="card-footer">
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center mb-0">
-                      <li class="page-item">
-                        <a class="page-link disabled" href="#">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
-                          </svg>
-                        </a>
-                      </li>
-                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
-                          </svg>
-                        </a>
-                      </li>
-                    </ul>
-                 </nav>
-                </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item">
+                      <a class="page-link disabled" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                          class="bi bi-chevron-left" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd"
+                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z">
+                          </path>
+                        </svg>
+                      </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                          class="bi bi-chevron-right" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                          </path>
+                        </svg>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
             </div>
           </div>
 
