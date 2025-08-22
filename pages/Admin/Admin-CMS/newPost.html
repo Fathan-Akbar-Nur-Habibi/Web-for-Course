@@ -1,197 +1,427 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMS New Post | Geeks</title>
-    <!-- Bootstrap 5.0.2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <title>CMS New Posts</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css" rel="stylesheet">
+    <style>
+        /* Prevent horizontal scroll */
+        body {
+            overflow-x: hidden;
+        }
 
-  <style>
-    body {
-      overflow-x: hidden;
-    }
+        /* Sidebar Styles */
+        #sidebar {
+            min-width: 280px;
+            max-width: 280px;
+            background: #343a40;
+            color: #fff;
+            transition: margin-left 0.3s ease;
+            /* Hanya transisi margin-left */
+            position: fixed;
+            /* Membuat sidebar tetap di tempatnya */
+            height: calc(100vh - 70px);
+            /* Mengisi sisa tinggi layar */
+            top: 70px;
+            /* Menyesuaikan dengan tinggi navbar */
+        }
 
-    #sidebar {
-      min-width: 250px;
-      max-width: 250px;
-      background: #343a40;
-      color: #fff;
-      transition: all 0.3s;
-    }
+        #sidebar.collapsed {
+            margin-left: -280px;
+        }
 
-    #sidebar.collapsed {
-      margin-left: -250px;
-    }
+        #sidebar .nav-link {
+            color: #adb5bd;
+        }
 
-    #sidebar .nav-link {
-      color: #adb5bd;
-    }
+        #sidebar .nav-link:hover {
+            color: #fff;
+        }
 
-    #sidebar .nav-link:hover {
-      color: #fff;
-    }
+        #sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    #main-content {
-      transition: all 0.3s;
-    }
+        /* Main Content Styles */
+        #main-content-wrapper {
+            transition: margin-left 0.3s ease;
+            /* Transisi untuk main content */
+            margin-left: 280px;
+            padding-top: 70px;
+            /* Menambahkan padding agar tidak tertutup navbar */
+            width: calc(100% - 280px);
+            /* Lebar menyesuaikan sidebar */
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
+        body.sidebar-collapsed #main-content-wrapper {
+            margin-left: 0;
+            width: 100%;
+        }
 
-    #main-content {
-      margin-left: 250px;
-    }
+        /* Sidebar Heading */
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            font-weight: bold;
+        }
 
-    .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
-      text-transform: uppercase;
-    }
+        /* Profile Image */
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-  </style>
-  <style>
-    .dropdown-menu {
-      min-width: 250px;
-    }
+        /* Dropdown Menu */
+        .dropdown-menu {
+            min-width: 250px;
+        }
 
-    .status-option {
-      cursor: pointer;
-      padding-left: 1.5rem;
-    }
+        .status-option {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
 
-    .status-circle {
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-    }
+        .status-option:hover {
+            background-color: #f8f9fa;
+        }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
-      transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
-    }
+        .status-circle {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
-  </style>
+        /* Navbar Styles */
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            height: 70px;
+            background-color: #fff !important;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        /* Toggle button style */
+        #toggleSidebar {
+            border: none;
+            background: none;
+            color: #495057;
+        }
+
+        #toggleSidebar:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Search input styling */
+        .search-container {
+            max-width: 400px;
+        }
+
+        /* Notification badge */
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            #sidebar {
+                min-width: 100%;
+                max-width: 100%;
+                margin-left: -100%;
+                z-index: 1050;
+                position: fixed;
+                top: 0;
+                height: 100vh;
+            }
+
+            #sidebar.collapsed {
+                margin-left: -100%;
+            }
+
+            body.sidebar-collapsed #main-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+            }
+
+            .search-container {
+                max-width: 200px;
+            }
+        }
+
+        /* Additional Mobile Fixes */
+        @media (max-width: 576px) {
+            #main-content {
+                padding: 10px;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .navbar .d-flex {
+                gap: 0.5rem;
+            }
+        }
+
+        /* Additional custom styles for badges */
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1) !important;
+        }
+
+        .bg-success-soft {
+            background-color: rgba(25, 135, 84, 0.1) !important;
+        }
+
+        .bg-info-soft {
+            background-color: rgba(13, 202, 240, 0.1) !important;
+        }
+
+        .bg-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1) !important;
+        }
+
+        .bg-secondary-soft {
+            background-color: rgba(108, 117, 125, 0.1) !important;
+        }
+
+        /* Hover effects */
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.025);
+        }
+
+        /* Text primary hover effect */
+        .text-primary-hover:hover {
+            color: #0d6efd !important;
+        }
+
+        /* Badge dot styles */
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Avatar styles */
+        .avatar-sm {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* File upload area */
+        .dropzone {
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropzone:hover {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+
+        /* Post type buttons */
+        .btn-check:checked+.btn-outline-secondary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: white;
+        }
+
+        /* Editor container */
+        .editor-container {
+            min-height: 300px;
+        }
+    </style>
 </head>
 
 <body>
-    <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-        <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-        <form class="d-flex ms-3 flex-grow-1">
-            <div class="input-group w-50">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-            </div>
-        </form>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+        <div class="container-fluid px-3">
+            <button class="btn" id="toggleSidebar" type="button">
+                <i class="bi bi-list fs-3"></i>
+            </button>
 
-        <div class="d-flex align-items-center ms-auto">
-            <!--notification dropdown-->
-            <div class="dropdown me-3">
-                <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bell text-dark fs-4"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown"
-                    style="width: 300px;">
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                        <strong>Notification</strong>
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <hr>
-                    <div class="px-2 mb-2">
-                        <div class="d-flex mb-2">
-                            <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Kristin Watson</strong> : <br>
-                                liked your comment on course JavaScript Introduction! <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>2 hours ago, 2:19
-                                    PM</small>
+            <form class="d-flex ms-3 flex-grow-1">
+                <div class="input-group search-container">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+                        aria-label="Search">
+                </div>
+            </form>
+
+            <div class="d-flex align-items-center ms-auto">
+                <div class="dropdown me-3">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button"
+                        id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bell text-dark fs-4"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+                        style="width: 320px;">
+                        <div class="px-3 py-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold">Notifications</h6>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-gear"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Brooklyn Simons</strong> : <br>
-                                Just launched a new course Recat for Beginners <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>17 June 2025, 2:19
-                                    PM</small>
+
+                        <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+                            <div class="d-flex mb-3">
+                                <div class="bg-secondary rounded-circle me-3"
+                                    style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <img src="/assets/images/avatar-3.jpg" width="40" class="rounded-circle">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                                        JavaScript Introduction!</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>2 hours ago
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="bg-primary rounded-circle me-3"
+                                    style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <img src="/assets/images/avatar-5.jpg" width="40" class="rounded-circle">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                                        for Beginners</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center border-top pt-2">
-                        <a href="#" class="text-decoration-none text-dark fw-bold">See All Notification</a>
+
+                        <div class="text-center border-top py-2">
+                            <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--profile Dropdown-->
-            <div class="dropdown">
-                <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-                    <div class="d-flex align-items-center px-3 py-2">
-                        <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-                        <div>
-                            <div><strong>Your Name</strong></div>
-                            <div class="text-muted small">your@email.com</div>
+                <div class="dropdown">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="bg-success rounded-circle"
+                            style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
                         </div>
-                    </div>
-                    <hr class="my-1">
-
-                    <!--status sub-dropdown-->
-                    <div class="dropdown">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#statusMenu" role="button">
-                            <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                        <div class="collapse" id="statusMenu">
-                            <div class="px-3 py-2">
-                                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+                        <div class="d-flex align-items-center px-3 py-3 border-bottom">
+                            <div class="rounded-circle me-3"
+                                style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
+                            </div>
+                            <div>
+                                <div class="fw-bold">Your Name</div>
+                                <div class="text-muted small">your@email.com</div>
                             </div>
                         </div>
+
+                        <div class="px-3 py-2">
+                            <div class="dropdown-item-text fw-bold mb-2">
+                                <i class="bi bi-circle-fill text-success me-2"></i>Status
+                            </div>
+                            <div class="ms-3">
+                                <div class="status-option">
+                                    <span class="status-circle bg-success"></span>Online
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-secondary"></span>Offline
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-warning"></span>Away
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-danger"></span>Busy
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-person me-2"></i>Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-credit-card me-2"></i>Subscription
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-gear me-2"></i>Settings
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item text-danger" href="#">
+                            <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                        </a>
                     </div>
-
-                    <a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-credit-card me-2"></i>Subscription</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a>
-
-                    <hr class="my-1">
-                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!--Sidebar-->
-    <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
-        <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
+    <div class="overlay d-md-none" id="overlay" style="display: none;"></div>
+
+    <div class="d-flex flex-grow-1" id="page-wrapper">
+        <div id="sidebar" class="bg-dark vh-100 overflow-auto">
             <ul class="nav flex-column px-2 mt-4">
-                <!--Dashboar-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
                         <i class="bi bi-speedometer2 me-2"></i>Dashboard
@@ -204,7 +434,6 @@
                     </div>
                 </li>
 
-                <!--courses-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
                         <i class="bi bi-book me-2"></i>Courses
@@ -218,61 +447,58 @@
                     </div>
                 </li>
 
-                <!--user-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
                         <i class="bi bi-people me-2"></i>User
                     </a>
                     <div class="collapse" id="userMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link " href="#">Instructor</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--cms-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
                         <i class="bi bi-columns me-2"></i>CMS
                     </a>
-                    <div class="collapse" id="cmsMenu">
+                    <div class="collapse show" id="cmsMenu">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#">New Post</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--Project-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-                        <i class="bi bi-kanban"></i>Project
+                        <i class="bi bi-kanban me-2"></i>Project
                     </a>
                     <div class="collapse" id="projectMenu">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" id="#projectSingleMenu">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">
                                     Single
                                 </a>
-                                <ul class="nav flex-column ms-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Task</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                                </ul>
+                                <div class="collapse" id="projectSingleMenu">
+                                    <ul class="nav flex-column ms-4">
+                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Task</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!--authentication-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
                         <i class="bi bi-lock me-2"></i>Authentication
@@ -288,18 +514,16 @@
                     </div>
                 </li>
 
-                <!--APPS-->
                 <li class="sidebar-heading">Apps</li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
 
-                <!-- Components -->
                 <li class="sidebar-heading">Components</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-                        <i class="bi bi-table me-2"></i> Tables
+                        <i class="bi bi-table me-2"></i>Tables
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
@@ -310,13 +534,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
+                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
                 </li>
 
-                <!-- Site Settings -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-                        <i class="bi bi-gear me-2"></i> Site Settings
+                        <i class="bi bi-gear me-2"></i>Site Settings
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
@@ -329,20 +552,310 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
         </div>
 
-        <!-- Main page -->
+        <main id="main-content-wrapper" class="flex-grow-1">
+            <section class="container-fluid p-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div
+                            class="border-bottom pb-3 mb-3 d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between">
+                            <div class="d-flex flex-column gap-1">
+                                <h1 class="mb-0 h2 fw-bold">Add New Post</h1>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="admin-dashboard.html">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item"><a href="#">CMS</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add New Post</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-outline-secondary">Back to All Post</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row gy-4">
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+                        <div class="card border-0">
+                            <div class="card-header">
+                                <h4 class="mb-0">Create Post</h4>
+                            </div>
+                            <form class="needs-validation" novalidate id="postForm">
+                                <div class="card-body">
+                                    <div class="mb-4">
+                                        <input type="radio" class="btn-check" name="postType" id="photoType"
+                                            value="photo" autocomplete="off" checked>
+                                        <label class="btn btn-outline-secondary me-2" for="photoType">
+                                            <i class="bi bi-image me-1"></i>
+                                            Photo
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="postType" id="videoType"
+                                            value="video" autocomplete="off">
+                                        <label class="btn btn-outline-secondary me-2" for="videoType">
+                                            <i class="bi bi-play-circle me-1"></i>
+                                            Video
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="postType" id="quoteType"
+                                            value="quote" autocomplete="off">
+                                        <label class="btn btn-outline-secondary me-2" for="quoteType">
+                                            <i class="bi bi-chat-quote me-1"></i>
+                                            Quote
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="postType" id="linkType" value="link"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-secondary" for="linkType">
+                                            <i class="bi bi-link me-1"></i>
+                                            Link
+                                        </label>
+                                    </div>
+
+                                    <div class="dropzone mb-4" id="fileDropzone">
+                                        <i class="bi bi-cloud-upload fs-1 text-muted mb-3"></i>
+                                        <p class="mb-0">Drop files here to upload</p>
+                                        <small class="text-muted">or click to browse files</small>
+                                        <input type="file" class="d-none" id="fileInput" multiple
+                                            accept="image/*,video/*">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="mb-3 col-md-4">
+                                            <label for="selectDate" class="form-label">Date</label>
+                                            <input type="text" id="selectDate" class="form-control"
+                                                placeholder="Select Date" required>
+                                            <div class="invalid-feedback">Please enter valid date.</div>
+                                        </div>
+
+                                        <div class="mb-3 col-md-8">
+                                            <label for="postTitle" class="form-label">Title</label>
+                                            <input type="text" id="postTitle" class="form-control"
+                                                placeholder="Post Title" required>
+                                            <small class="form-text text-muted">Keep your post titles under 60
+                                                characters. Write heading that describe the topic content.</small>
+                                            <div class="invalid-feedback">Please enter title.</div>
+                                        </div>
+
+                                        <div class="mb-3 col-md-12">
+                                            <label for="postSlug" class="form-label">Slug</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">https://example.com/</span>
+                                                <input type="text" class="form-control" id="postSlug"
+                                                    placeholder="post-slug">
+                                            </div>
+                                            <small class="form-text text-muted">Field must contain a unique
+                                                value</small>
+                                        </div>
+
+                                        <div class="mb-3 col-md-12">
+                                            <label for="postExcerpt" class="form-label">Excerpt</label>
+                                            <textarea rows="3" id="postExcerpt" class="form-control"
+                                                placeholder="A short extract from writing..."></textarea>
+                                            <small class="form-text text-muted">A short extract from writing.</small>
+                                        </div>
+
+                                        <div class="mb-3 col-md-12">
+                                            <label for="postCategory" class="form-label">Category</label>
+                                            <select class="form-select" id="postCategory" required>
+                                                <option value="">Choose category...</option>
+                                                <option value="course">Course</option>
+                                                <option value="marketing">Marketing</option>
+                                                <option value="post-category">Post Category</option>
+                                                <option value="workshop">Workshop</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please choose category.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 mb-4">
+                                        <label class="form-label">Content</label>
+                                        <div id="editor" class="editor-container bg-white"></div>
+                                    </div>
+
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary">Publish</button>
+                                        <button type="button" class="btn btn-outline-secondary" id="saveDraft">Save to
+                                            Draft</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+                        <div class="d-flex flex-column gap-4">
+                            <!-- Post Info -->
+                            <div class="card">
+                                <!-- Card Header -->
+                                <div class="card-header">
+                                    <h4 class="mb-0">Post Info</h4>
+                                </div>
+                                <!-- List Group -->
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <span class="text-body">Post ID</span>
+                                        <h5 class="mb-0">8693637308</h5>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="text-body">Status</span>
+                                        <h5 class="mb-0">
+                                            <span class="badge-dot bg-warning d-inline-block me-1"></span>
+                                            Draft
+                                        </h5>
+                                    </li>
+                                    <li class="list-group-item d-flex flex-column gap-2">
+                                        <span class="text-body">Created by</span>
+                                        <div class="d-flex flex-row gap-2">
+                                            <div
+                                                class="avatar-sm rounded-circle bg-primary d-flex align-items-center justify-content-center">
+                                                <img src="/assets/images/avatar-6.jpg" width="40" class="rounded-circle">
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">Geeks Courses</h6>
+                                                <small class="text-muted">Admin</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="text-body">Created at</span>
+                                        <h6 class="mb-0" id="createdAt">-</h6>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="text-body">Last update</span>
+                                        <h6 class="mb-0" id="lastUpdate">-</h6>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="card">
+                                <!-- Card Header -->
+                                <div class="card-header">
+                                    <h4 class="mb-0">Actions</h4>
+                                </div>
+                                <!-- List group -->
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="text-body">Preview</span>
+                                        <button class="btn btn-link text-primary p-0" id="previewPost">
+                                            <i class="bi bi-eye fs-4"></i>
+                                        </button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="text-body">Duplicate</span>
+                                        <button class="btn btn-link text-primary p-0" id="duplicatePost">
+                                            <i class="bi bi-files fs-4"></i>
+                                        </button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="text-body">Delete</span>
+                                        <button class="btn btn-link text-danger p-0" id="deletePost">
+                                            <i class="bi bi-trash fs-4"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- SEO Preview -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">SEO Preview</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="border rounded p-3">
+                                        <h6 class="text-primary mb-1" id="seoTitle">Your Post Title</h6>
+                                        <small class="text-success d-block mb-2"
+                                            id="seoUrl">https://example.com/your-post-slug</small>
+                                        <p class="text-muted small mb-0" id="seoDescription">Your post excerpt will
+                                            appear here...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
     </div>
-    <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script> 
-        document.getElementById('toggleSidebar').addEventListener('click', function() { 
-            const sidebar = document.getElementById('sidebar'); 
-            sidebar.classList.toggle('collapsed');
-    });
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sidebar toggle logic
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const body = document.body;
+            const overlay = document.getElementById('overlay');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
+
+            function toggleSidebarState() {
+                sidebar.classList.toggle('collapsed');
+                body.classList.toggle('sidebar-collapsed');
+                mainContentWrapper.classList.toggle('collapsed'); // Tambahkan/hapus class pada main-content-wrapper
+            }
+
+            toggleSidebar.addEventListener('click', function () {
+                toggleSidebarState();
+                if (window.innerWidth <= 768) {
+                    overlay.style.display = sidebar.classList.contains('collapsed') ? 'none' : 'block';
+                }
+            });
+
+            // Hide sidebar on overlay click for mobile
+            if (window.innerWidth <= 768) {
+                overlay.addEventListener('click', function () {
+                    toggleSidebarState();
+                    overlay.style.display = 'none';
+                });
+            }
+
+            // Collapse other sub-menus when one is opened
+            document.querySelectorAll('.nav-link[data-bs-toggle="collapse"]').forEach(link => {
+                link.addEventListener('click', (event) => {
+                    const targetId = event.currentTarget.getAttribute('href');
+                    document.querySelectorAll('.collapse.show').forEach(openCollapse => {
+                        if ('#' + openCollapse.id !== targetId) {
+                            new bootstrap.Collapse(openCollapse, { toggle: false }).hide();
+                        }
+                    });
+                });
+            });
+
+            // Initialize Quill editor
+            if (document.getElementById('editor')) {
+                var quill = new Quill('#editor', {
+                    theme: 'snow'
+                });
+            }
+
+            // Initialize Flatpickr
+            if (document.getElementById('selectDate')) {
+                flatpickr("#selectDate", {
+                    dateFormat: "Y-m-d",
+                });
+            }
+        });
+        // Click to open file input
+        const dropzone = document.getElementById('fileDropzone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropzone.addEventListener('click', function () {
+            fileInput.click();
+        });
+
     </script>
 </body>
 
