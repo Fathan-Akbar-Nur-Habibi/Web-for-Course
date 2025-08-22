@@ -1,30 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Courses | Geeks</title>
-  <!-- Bootstrap 5.0.2 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css" rel="stylesheet">
+  <!-- Feather Icons via CDN (Font-based style) -->
+  <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
 
   <style>
+    /* Prevent horizontal scroll */
     body {
       overflow-x: hidden;
     }
 
+    /* Sidebar Styles */
     #sidebar {
-      min-width: 250px;
-      max-width: 250px;
+      min-width: 280px;
+      max-width: 280px;
       background: #343a40;
       color: #fff;
-      transition: all 0.3s;
+      transition: margin-left 0.3s ease;
+      /* Hanya transisi margin-left */
+      position: fixed;
+      /* Membuat sidebar tetap di tempatnya */
+      height: calc(100vh - 70px);
+      /* Mengisi sisa tinggi layar */
+      top: 70px;
+      /* Menyesuaikan dengan tinggi navbar */
     }
 
     #sidebar.collapsed {
-      margin-left: -250px;
+      margin-left: -280px;
     }
 
     #sidebar .nav-link {
@@ -35,39 +48,58 @@
       color: #fff;
     }
 
-    #main-content {
-      transition: all 0.3s;
+    #sidebar .nav-link.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
-    #sidebar.collapsed+#main-content {
+    /* Main Content Styles */
+    #main-content-wrapper {
+      transition: margin-left 0.3s ease;
+      /* Transisi untuk main content */
+      margin-left: 280px;
+      padding-top: 70px;
+      /* Menambahkan padding agar tidak tertutup navbar */
+      width: calc(100% - 280px);
+      /* Lebar menyesuaikan sidebar */
+    }
+
+    body.sidebar-collapsed #main-content-wrapper {
       margin-left: 0;
+      width: 100%;
     }
 
-    #main-content {
-      margin-left: 250px;
-    }
-
+    /* Sidebar Heading */
     .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
+      font-size: 0.75rem;
       text-transform: uppercase;
+      color: #6c757d;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      font-weight: bold;
     }
 
+    /* Profile Image */
     .profile-img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
     }
-  </style>
-  <style>
+
+    /* Dropdown Menu */
     .dropdown-menu {
       min-width: 250px;
     }
 
     .status-option {
       cursor: pointer;
-      padding-left: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+    }
+
+    .status-option:hover {
+      background-color: #f8f9fa;
     }
 
     .status-circle {
@@ -78,120 +110,324 @@
       margin-right: 8px;
     }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
-      transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
+    /* Navbar Styles */
+    .navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      height: 70px;
+      background-color: #fff !important;
+      border-bottom: 1px solid #dee2e6;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
+    /* Toggle button style */
+    #toggleSidebar {
+      border: none;
+      background: none;
+      color: #495057;
+    }
+
+    #toggleSidebar:hover {
+      background-color: #f8f9fa;
+    }
+
+    /* Search input styling */
+    .search-container {
+      max-width: 400px;
+    }
+
+    /* Notification badge */
+    .notification-badge {
+      position: relative;
+    }
+
+    .notification-badge::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background-color: #dc3545;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    /* Responsive untuk mobile */
+    @media (max-width: 768px) {
+      #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        margin-left: -100%;
+        z-index: 1050;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+      }
+
+      #sidebar.collapsed {
+        margin-left: -100%;
+      }
+
+      body.sidebar-collapsed #main-content-wrapper {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+      }
+
+      .search-container {
+        max-width: 200px;
+      }
+    }
+
+    /* Additional Mobile Fixes */
+    @media (max-width: 576px) {
+      #main-content {
+        padding: 10px;
+      }
+
+      .search-container {
+        display: none;
+      }
+
+      .navbar .d-flex {
+        gap: 0.5rem;
+      }
+    }
+
+    /* Additional custom styles for badges */
+    .bg-primary-soft {
+      background-color: rgba(13, 110, 253, 0.1) !important;
+    }
+
+    .bg-success-soft {
+      background-color: rgba(25, 135, 84, 0.1) !important;
+    }
+
+    .bg-info-soft {
+      background-color: rgba(13, 202, 240, 0.1) !important;
+    }
+
+    .bg-warning-soft {
+      background-color: rgba(255, 193, 7, 0.1) !important;
+    }
+
+    .bg-secondary-soft {
+      background-color: rgba(108, 117, 125, 0.1) !important;
+    }
+
+    /* Hover effects */
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+      transition: all 0.3s ease;
+    }
+
+    .table tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0.025);
+    }
+
+    /* Text primary hover effect */
+    .text-primary-hover:hover {
+      color: #0d6efd !important;
+    }
+
+    /* Badge dot styles */
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Avatar styles */
+    .avatar-sm {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* File upload area */
+    .dropzone {
+      border: 2px dashed #dee2e6;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      background-color: #f8f9fa;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dropzone:hover {
+      border-color: #0d6efd;
+      background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    /* Post type buttons */
+    .btn-check:checked+.btn-outline-secondary {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+      color: white;
+    }
+
+    /* Editor container */
+    .editor-container {
+      min-height: 300px;
     }
   </style>
-
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-    <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-    <form class="d-flex ms-3 flex-grow-1">
-      <div class="input-group w-50">
-        <span class="input-group-text"><i class="bi bi-search"></i></span>
-        <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-      </div>
-    </form>
+  <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+    <div class="container-fluid px-3">
+      <button class="btn" id="toggleSidebar" type="button">
+        <i class="bi bi-list fs-3"></i>
+      </button>
 
-    <div class="d-flex align-items-center ms-auto">
+      <form class="d-flex ms-3 flex-grow-1">
+        <div class="input-group search-container">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search text-muted"></i>
+          </span>
+          <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+            aria-label="Search">
+        </div>
+      </form>
 
-      <!-- NOTIFICATION DROPDOWN -->
-      <div class="dropdown me-3">
-        <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-bell text-dark fs-4"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown" style="width: 300px;">
-          <div class="d-flex justify-content-between align-items-center px-2">
-            <strong>Notification</strong>
-            <i class="bi bi-gear"></i>
-          </div>
-          <hr>
-          <div class="px-2 mb-2">
-            <div class="d-flex mb-2">
-              <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2" alt="">
-              <div>
-                <strong>Kristin Watson</strong>:<br>
-                liked your comment on course JavaScript Introduction!<br>
-                <small class="text-success"><i class="bi bi-hand-thumbs-up"></i> 2 hours ago, 2:19 PM</small>
+      <div class="d-flex align-items-center ms-auto">
+        <div class="dropdown me-3">
+          <button class="btn btn-link text-decoration-none notification-badge" type="button" id="notifDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bell text-dark fs-4"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+            style="width: 320px;">
+            <div class="px-3 py-3 border-bottom">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="mb-0 fw-bold">Notifications</h6>
+                <button class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-gear"></i>
+                </button>
               </div>
             </div>
-            <div class="d-flex">
-              <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2" alt="">
-              <div>
-                <strong>Brooklyn Simons</strong>:<br>
-                Just launched a new course React for Beginners<br>
-                <small class="text-success"><i class="bi bi-hand-thumbs-up"></i> 17 June 2025, 2:19 PM</small>
-              </div>    
+
+            <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+              <div class="d-flex mb-3">
+                <div class="bg-secondary rounded-circle me-3"
+                  style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                  <img src="/assets/images/avatar-3.jpg" width="40" class="rounded-circle">
+                </div>
+                <div class="flex-grow-1">
+                  <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                    JavaScript Introduction!</p>
+                  <small class="text-muted">
+                    <i class="bi bi-clock me-1"></i>2 hours ago
+                  </small>
+                </div>
+              </div>
+              <div class="d-flex mb-3">
+                <div class="bg-primary rounded-circle me-3"
+                  style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                  <img src="/assets/images/avatar-5.jpg" width="40" class="rounded-circle">
+                </div>
+                <div class="flex-grow-1">
+                  <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                    for Beginners</p>
+                  <small class="text-muted">
+                    <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                  </small>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="text-center border-top pt-2">
-            <a href="#" class="text-decoration-none text-dark fw-bold">See All Notifications</a>
+
+            <div class="text-center border-top py-2">
+              <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- PROFILE DROPDOWN -->
-      <div class="dropdown">
-        <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-        </a>
-        <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-          <div class="d-flex align-items-center px-3 py-2">
-            <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-            <div>
-              <div><strong>Your Name</strong></div>
-              <div class="text-muted small">your@email.com</div>
+        <div class="dropdown">
+          <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="bg-success rounded-circle"
+              style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+              <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
             </div>
-          </div>
-          <hr class="my-1">
-
-          <!-- Status Sub-dropdown -->
-          <div class="dropdown">
-            <a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-              href="#statusMenu" role="button">
-              <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-              <i class="bi bi-chevron-right"></i>
-            </a>
-            <div class="collapse" id="statusMenu">
-              <div class="px-3 py-2">
-                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+            <div class="d-flex align-items-center px-3 py-3 border-bottom">
+              <div class="rounded-circle me-3"
+                style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
+              </div>
+              <div>
+                <div class="fw-bold">Your Name</div>
+                <div class="text-muted small">your@email.com</div>
               </div>
             </div>
+
+            <div class="px-3 py-2">
+              <div class="dropdown-item-text fw-bold mb-2">
+                <i class="bi bi-circle-fill text-success me-2"></i>Status
+              </div>
+              <div class="ms-3">
+                <div class="status-option">
+                  <span class="status-circle bg-success"></span>Online
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-secondary"></span>Offline
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-warning"></span>Away
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-danger"></span>Busy
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-person me-2"></i>Profile
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-credit-card me-2"></i>Subscription
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-gear me-2"></i>Settings
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item text-danger" href="#">
+              <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+            </a>
           </div>
-
-          <a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Profile</a>
-          <a class="dropdown-item" href="#"><i class="bi bi-credit-card me-2"></i> Subscription</a>
-          <a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> Settings</a>
-
-          <hr class="my-1">
-          <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Sidebar -->
-  <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
-    <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
+  <div class="overlay d-md-none" id="overlay" style="display: none;"></div>
+
+  <div class="d-flex flex-grow-1" id="page-wrapper">
+    <div id="sidebar" class="bg-dark vh-100 overflow-auto">
       <ul class="nav flex-column px-2 mt-4">
-        <!-- Dashboard -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
-            <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            <i class="bi bi-speedometer2 me-2"></i>Dashboard
           </a>
           <div class="collapse" id="dashboardMenu">
             <ul class="nav flex-column ms-4">
@@ -201,59 +437,57 @@
           </div>
         </li>
 
-        <!-- Courses -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
-            <i class="bi bi-book me-2"></i> Courses
+            <i class="bi bi-book me-2"></i>Courses
           </a>
           <div class="collapse" id="coursesMenu">
             <ul class="nav flex-column ms-4">
-              <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
+              <li class="nav-item"><a class="nav-link active" href="#">All Courses</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
             </ul>
           </div>
         </li>
 
-        <!-- User -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
-            <i class="bi bi-people me-2"></i> User
+            <i class="bi bi-people me-2"></i>User
           </a>
           <div class="collapse" id="userMenu">
             <ul class="nav flex-column ms-4">
-              <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+              <li class="nav-item"><a class="nav-link " href="#">Instructor</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
             </ul>
           </div>
         </li>
 
-        <!-- CMS -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
-            <i class="bi bi-columns me-2"></i> CMS
+            <i class="bi bi-columns me-2"></i>CMS
           </a>
           <div class="collapse" id="cmsMenu">
             <ul class="nav flex-column ms-4">
               <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
               <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
+              <li class="nav-item"><a class="nav-link " href="#">New Post</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
             </ul>
           </div>
         </li>
 
-        <!-- Project -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-            <i class="bi bi-kanban me-2"></i> Project
+            <i class="bi bi-kanban me-2"></i>Project
           </a>
           <div class="collapse" id="projectMenu">
             <ul class="nav flex-column ms-4">
               <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
               <li class="nav-item"><a class="nav-link" href="#">List</a></li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">Single</a>
+                <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">
+                  Single
+                </a>
                 <div class="collapse" id="projectSingleMenu">
                   <ul class="nav flex-column ms-4">
                     <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
@@ -261,43 +495,38 @@
                     <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Summary</a></li>
                   </ul>
                 </div>
               </li>
-              <li class="nav-iem"><a class="nav-link" href="#">Create Project</a></li>
             </ul>
           </div>
         </li>
 
-        <!-- Authentication -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
-            <i class="bi bi-lock me-2"></i> Authentication
+            <i class="bi bi-lock me-2"></i>Authentication
           </a>
           <div class="collapse" id="authMenu">
             <ul class="nav flex-column ms-4">
               <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Notifications</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
               <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
             </ul>
           </div>
         </li>
 
-        <!-- Apps -->
         <li class="sidebar-heading">Apps</li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i> Chats</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i> Task</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i> Mail</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i> Calendar</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
 
-        <!-- Components -->
         <li class="sidebar-heading">Components</li>
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-            <i class="bi bi-table me-2"></i> Tables
+            <i class="bi bi-table me-2"></i>Tables
           </a>
           <div class="collapse" id="tablesMenu">
             <ul class="nav flex-column ms-4">
@@ -308,13 +537,12 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
+          <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
         </li>
 
-        <!-- Site Settings -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-            <i class="bi bi-gear me-2"></i> Site Settings
+            <i class="bi bi-gear me-2"></i>Site Settings
           </a>
           <div class="collapse" id="siteSettingsMenu">
             <ul class="nav flex-column ms-4">
@@ -329,23 +557,585 @@
         </li>
       </ul>
     </div>
+    <!--main content-->
+    <main id="main-content-wrapper" class="flex-grow-1">
+      <section class="container-fluid p-4">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-12">
+            <!--page header-->
+            <div
+              class="border-bottom pb-3 mb-3 d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between">
+              <div class="d-flex flex-column gap-1">
+                <h2 class="mb-0 fw-bold">Courses</h2>
+                <!--breadcrumb-->
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                      <a href="#">Courses</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">All</li>
+                  </ol>
+                </nav>
+              </div>
+              <div>
+                <a href="#" class="btn btn-primary">Add New Courses</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-12">
+            <!--card-->
+            <div class="card rounded-3">
+              <!--card header-->
+              <div class="card-header p-0">
+                <div>
+                  <!--nav-->
+                  <ul class="nav nav-lb-tab border-bottom-0" id="tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link " id="courses-tab" data-bs-toggle="pill" href="#courses" role="tab"
+                        aria-controls="courses" aria-selected="true">All</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="approved-tab" data-bs-toggle="pill" href="#approved" role="tab"
+                        aria-controls="approved" aria-selected="false" tabindex="-1">Approved</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="pending-tab" data-bs-toggle="pill" href="#pending" role="tab"
+                        aria-controls="pending" aria-selected="false" tabindex="-1">Pending</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="p-4 row">
+                <!--form-->
+                <form class="d-flex align-items-center col-12 col-md-12 col-lg-12">
+                  <span class="position-absolute ps-3 search-icon"><i data-feather="search"></i></span>
+                  <input type="search" class="form-control ps-6" placeholder="Search Course">
+                </form>
+              </div>
 
-    <!-- Main page -->
+              <div>
+                <!--table-->
+                <div class="tab-content" id="tabContent">
+                  <!--tab pane-->
+                  <div class="tab-pane fade active show" id="courses" role="tabpanel" aria-labelledby="courses-tab">
+                    <div class="table-responsive border-0 overflow-y-hidden">
+                      <table class="table mb-0 text-nowrap table-centered table-hover">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Courses</th>
+                            <th>Instructor</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <a class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-gatsby.jpg" alt="" class="img-4by3-lg rounded-2"
+                                      width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1">
+                                    <h4 class="mb-0 text-primary-hover fs-6">Revolutionize how you build the web...</h4>
+                                    <span>Added on 7 July, 2023</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center flex-row gap-2">
+                                <img src="/assets/images/avatar-3.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
+                                <h5 class="mb-0 fs-6">Reva Yokk</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
+                              Pending
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-outline-secondary btn-sm">Reject</a>
+                              <a href="#" class="btn btn-success btn-sm">Approved</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="#" class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center flex-row gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-graphql.jpg" alt="" class="img-4by3-lg rounded-2"
+                                      width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1">
+                                    <h4 class="mb-0 text-primary-hover fs-6">Guide to Static Sites with Gatsby....</h4>
+                                    <span>Added on 6 July, 2023</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center flex-row gap-2">
+                                <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
+                                <h5 class="mb-0 fs-6">Brooklyn Simmons</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
+                              Pending
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-outline-secondary btn-sm">Reject</a>
+                              <a href="#" class="btn btn-success btn-sm">Approved</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="#" class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center flex-row gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-css.jpg" alt="" class="img-4by3-lg rounded-2"
+                                      width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1">
+                                    <h4 class="mb-0 text-primary-hover fs-6">The Modern CSS Courses...</h4>
+                                    <span>Added on 5 July, 2024</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center gap-2 flex-row">
+                                <img src="/assets/images/avatar-5.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
+                                <h5 class="mb-0 fs-6">Miston Wilson</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
+                              Pending
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-outline-secondary btn-sm">Reject</a>
+                              <a href="#" class="btn btn-success btn-sm">Approved</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="#" class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center flex-row gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-javascript.jpg" alt="" class="rounded-2 img-4by3-lg"
+                                      width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1">
+                                    <h4 class="mb-0 text-primary-hover fs-6">Courses JavaScript Heading Title....</h4>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center flex-row gap-2">
+                                <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
+                                <h5 class="mb-0 fs-6">Guy Hawkins</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>
+                              Live
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-secondary btn-sm">Change Status</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!--tab pane approved-->
+                  <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab"> 
+                    <div class="table-responsive border-0 overflow-y-hidden"> 
+                      <table class="table mb-0 text-nowrap table-centered table-hover"> 
+                        <thead class="table-light"> 
+                          <tr>
+                            <th>Courses</th>
+                            <th>Instructors</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody> 
+                          <tr> 
+                            <td> 
+                              <a href="#" class="text-inherit text-decoration-none text-dark"> 
+                                <div class="d-flex align-items-center flex-row gap-3"> 
+                                  <div> 
+                                    <img src="/assets/images/course-javascript.jpg" alt="" class="img-4by3-lg rounded-2" width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1"> 
+                                    <h4 class="mb-0 text-primary-hover fs-6">Courses JavaScript Heading Title</h4>
+                                    <span>Added on 5 July, 2023</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td> 
+                              <div class="d-flex align-items-center flex-row gap-2"> 
+                                <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar-xs" width="40">
+                                <h5 class="mb-0 fs-6">Guy Hawkins</h5>
+                              </div>
+                            </td>
+                            <td> 
+                              <span class="badge-dot bg-success me-1 d-inline-block align-middle"></span>
+                              Live
+                            </td>
+                            <td> 
+                              <a href="#" class="btn btn-secondary btn-sm">Change Status</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!--tab pane  Pending-->
+                  <div class="tab-pane fade" id="pending" role="tab-panel" aria-labelledby="pending-tab"> 
+                    <div class="table-responsive border-0 overflow-y-hidden"> 
+                      <table class="table mb-0 text-nowrap table-centered table-hover"> 
+                        <thead class="table-light"> 
+                          <tr>
+                            <th>Courses</th>
+                            <th>Instructor</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody> 
+                                                  <tr>
+                            <td>
+                              <a class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-gatsby.jpg" alt="" class="img-4by3-lg rounded-2"
+                                      width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1">
+                                    <h4 class="mb-0 text-primary-hover fs-6">Revolutionize how you build the web...</h4>
+                                    <span>Added on 7 July, 2023</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center flex-row gap-2">
+                                <img src="/assets/images/avatar-3.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
+                                <h5 class="mb-0 fs-6">Reva Yokk</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
+                              Pending
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-outline-secondary btn-sm">Reject</a>
+                              <a href="#" class="btn btn-success btn-sm">Approved</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="#" class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center flex-row gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-graphql.jpg" alt="" class="img-4by3-lg rounded-2"
+                                      width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1">
+                                    <h4 class="mb-0 text-primary-hover fs-6">Guide to Static Sites with Gatsby....</h4>
+                                    <span>Added on 6 July, 2023</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center flex-row gap-2">
+                                <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
+                                <h5 class="mb-0 fs-6">Brooklyn Simmons</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
+                              Pending
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-outline-secondary btn-sm">Reject</a>
+                              <a href="#" class="btn btn-success btn-sm">Approved</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="#" class="text-inherit text-decoration-none text-dark">
+                                <div class="d-flex align-items-center flex-row gap-3">
+                                  <div>
+                                    <img src="/assets/images/course-css.jpg" alt="" class="img-4by3-lg rounded-2"
+                                      width="100">
+                                  </div>
+                                  <div class="d-flex flex-column gap-1">
+                                    <h4 class="mb-0 text-primary-hover fs-6">The Modern CSS Courses...</h4>
+                                    <span>Added on 5 July, 2024</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center gap-2 flex-row">
+                                <img src="/assets/images/avatar-5.jpg" alt="" class="rounded-circle avatar-xs"
+                                  width="40">
+                                <h5 class="mb-0 fs-6">Miston Wilson</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-dot bg-warning me-1 d-inline-block align-middle"></span>
+                              Pending
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-outline-secondary btn-sm">Reject</a>
+                              <a href="#" class="btn btn-success btn-sm">Approved</a>
+                            </td>
+                            <td>
+                              <div class="dropdown dropstart">
+                                <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                                  id="courseDropdown1" data-bs-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i data-feather="more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="courseDropdown1">
+                                  <h6 class="dropdown-header">Settings</h6>
+                                  <a class="dropdown-item" href="#">
+                                    <i data-feather="x-circle" class="dropdown-item-icon me-2"></i>
+                                    Reject with Feedback
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <!-- Card Footer -->
+                <div class="card-footer">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center mb-0">
+                      <li class="page-item">
+                        <a class="page-link disabled" href="#">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+                          </svg>
+                        </a>
+                      </li>
+                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+                          </svg>
+                        </a>
+                      </li>
+                    </ul>
+                 </nav>
+                </div>
+            </div>
+          </div>
 
+        </div>
+
+      </section>
+    </main>
   </div>
 
-  <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
-  <!-- Toggle Sidebar Script -->
   <script>
-    document.getElementById('toggleSidebar').addEventListener('click', function () {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('collapsed');
-    });
+    feather.replace()
   </script>
 
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Sidebar toggle logic
+      const toggleSidebar = document.getElementById('toggleSidebar');
+      const sidebar = document.getElementById('sidebar');
+      const body = document.body;
+      const overlay = document.getElementById('overlay');
+      const mainContentWrapper = document.getElementById('main-content-wrapper');
+
+      function toggleSidebarState() {
+        sidebar.classList.toggle('collapsed');
+        body.classList.toggle('sidebar-collapsed');
+        mainContentWrapper.classList.toggle('collapsed'); // Tambahkan/hapus class pada main-content-wrapper
+      }
+
+      toggleSidebar.addEventListener('click', function () {
+        toggleSidebarState();
+        if (window.innerWidth <= 768) {
+          overlay.style.display = sidebar.classList.contains('collapsed') ? 'none' : 'block';
+        }
+      });
+
+      // Hide sidebar on overlay click for mobile
+      if (window.innerWidth <= 768) {
+        overlay.addEventListener('click', function () {
+          toggleSidebarState();
+          overlay.style.display = 'none';
+        });
+      }
+
+      // Collapse other sub-menus when one is opened
+      document.querySelectorAll('.nav-link[data-bs-toggle="collapse"]').forEach(link => {
+        link.addEventListener('click', (event) => {
+          const targetId = event.currentTarget.getAttribute('href');
+          document.querySelectorAll('.collapse.show').forEach(openCollapse => {
+            if ('#' + openCollapse.id !== targetId) {
+              new bootstrap.Collapse(openCollapse, { toggle: false }).hide();
+            }
+          });
+        });
+      });
+    });
+
+  </script>
 </body>
 
-</html
+</html>
