@@ -170,6 +170,16 @@
       border: 2px solid #fff;
     }
 
+    /* Nested collapse styling */
+    .nested-collapse {
+      padding-left: 2rem;
+    }
+
+    .nested-collapse .nav-link {
+      padding-left: 1rem;
+      font-size: 0.9rem;
+    }
+
     /* Responsive untuk mobile */
     @media (max-width: 768px) {
       #sidebar {
@@ -299,8 +309,7 @@
     .editor-container {
       min-height: 300px;
     }
-  </style>
-  <style>
+    
     .avatar-group {
       display: flex;
       align-items: center;
@@ -531,11 +540,11 @@
               <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
               <li class="nav-item"><a class="nav-link" href="#">List</a></li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">
+                <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu" aria-expanded="false" aria-controls="projectSingleMenu">
                   Single
                 </a>
-                <div class="collapse" id="projectSingleMenu">
-                  <ul class="nav flex-column ms-4">
+                <div class="collapse nested-collapse" id="projectSingleMenu">
+                  <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Task</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
@@ -1306,8 +1315,6 @@
                         </div>
                       </td>
                     </tr>
-
-
                   </tbody>
                 </table>
               </div>
@@ -1412,7 +1419,7 @@
 
           <!-- Project Logo -->
           <div class="mb-3 col-md-3 col-sm-6">
-            <label class="form-label">Project </label>
+            <label class="form-label">Project Logo</label>
             <div class="border rounded d-flex align-items-center justify-content-center"
               style="width: 350px; position: relative; overflow: hidden;">
               <input type="file" class="form-control position-absolute w-100 h-100 opacity-0" style="cursor: pointer;">
@@ -1422,7 +1429,6 @@
               </div>
             </div>
           </div>
-
 
           <!-- Cover Image -->
           <div class="col-12 mb-4">
@@ -1444,7 +1450,6 @@
 
   </div>
 
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
@@ -1454,7 +1459,6 @@
   <script>
     feather.replace()
   </script>
-
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1486,21 +1490,42 @@
         });
       }
 
-      // Collapse other sub-menus when one is opened
-      document.querySelectorAll('.nav-link[data-bs-toggle="collapse"]').forEach(link => {
-        link.addEventListener('click', (event) => {
-          const targetId = event.currentTarget.getAttribute('href');
-          document.querySelectorAll('.collapse.show').forEach(openCollapse => {
-            if ('#' + openCollapse.id !== targetId) {
-              new bootstrap.Collapse(openCollapse, { toggle: false }).hide();
+      // FIXED: Better collapse menu handling for nested menus
+      document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function(element) {
+        element.addEventListener('click', function(e) {
+          const target = this.getAttribute('href') || this.getAttribute('data-bs-target');
+          const targetElement = document.querySelector(target);
+          
+          if (targetElement) {
+            // Don't prevent default for proper Bootstrap collapse behavior
+            
+            // Optional: Close other main level collapses (excluding nested ones)
+            const isMainLevel = !this.closest('.collapse');
+            if (isMainLevel) {
+              document.querySelectorAll('.collapse.show').forEach(function(openCollapse) {
+                // Only close if it's not the current target and not a parent/child relationship
+                if (openCollapse.id !== target.substring(1) && 
+                    !openCollapse.contains(targetElement) && 
+                    !targetElement.contains(openCollapse)) {
+                  const bsCollapse = bootstrap.Collapse.getInstance(openCollapse);
+                  if (bsCollapse) {
+                    bsCollapse.hide();
+                  }
+                }
+              });
             }
-          });
+          }
+        });
+      });
+
+      // Initialize Bootstrap collapse instances for nested menus
+      document.querySelectorAll('.collapse').forEach(function(collapseElement) {
+        new bootstrap.Collapse(collapseElement, {
+          toggle: false
         });
       });
     });
-
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
   <script>
     // Inisialisasi flatpickr
@@ -1511,6 +1536,8 @@
     flatpickr("#endDate", {
       dateFormat: "Y-m-d",
     });
+
+    // Form validation
     (function () {
       'use strict';
       var forms = document.querySelectorAll('.needs-validation');
