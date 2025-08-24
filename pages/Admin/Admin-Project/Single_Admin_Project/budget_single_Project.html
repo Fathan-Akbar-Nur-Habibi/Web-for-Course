@@ -1,197 +1,491 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Budget | Geeks</title>
-    <!-- Bootstrap 5.0.2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Project Budget</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css" rel="stylesheet">
+    <!-- Feather Icons via CDN (Font-based style) -->
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
 
-  <style>
-    body {
-      overflow-x: hidden;
-    }
+    <style>
+        /* Prevent horizontal scroll */
+        body {
+            overflow-x: hidden;
+        }
 
-    #sidebar {
-      min-width: 250px;
-      max-width: 250px;
-      background: #343a40;
-      color: #fff;
-      transition: all 0.3s;
-    }
+        /* Sidebar Styles */
+        #sidebar {
+            min-width: 280px;
+            max-width: 280px;
+            background: #343a40;
+            color: #fff;
+            transition: margin-left 0.3s ease;
+            /* Hanya transisi margin-left */
+            position: fixed;
+            /* Membuat sidebar tetap di tempatnya */
+            height: calc(100vh - 70px);
+            /* Mengisi sisa tinggi layar */
+            top: 70px;
+            /* Menyesuaikan dengan tinggi navbar */
+        }
 
-    #sidebar.collapsed {
-      margin-left: -250px;
-    }
+        #sidebar.collapsed {
+            margin-left: -280px;
+        }
 
-    #sidebar .nav-link {
-      color: #adb5bd;
-    }
+        #sidebar .nav-link {
+            color: #adb5bd;
+        }
 
-    #sidebar .nav-link:hover {
-      color: #fff;
-    }
+        #sidebar .nav-link:hover {
+            color: #fff;
+        }
 
-    #main-content {
-      transition: all 0.3s;
-    }
+        #sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
+        /* Main Content Styles */
+        #main-content-wrapper {
+            transition: margin-left 0.3s ease;
+            /* Transisi untuk main content */
+            margin-left: 280px;
+            padding-top: 70px;
+            /* Menambahkan padding agar tidak tertutup navbar */
+            width: calc(100% - 280px);
+            /* Lebar menyesuaikan sidebar */
+        }
 
-    #main-content {
-      margin-left: 250px;
-    }
+        body.sidebar-collapsed #main-content-wrapper {
+            margin-left: 0;
+            width: 100%;
+        }
 
-    .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
-      text-transform: uppercase;
-    }
+        .form-control-with-icon {
+            padding-left: 2.5rem;
+            /* Menyesuaikan agar teks tidak tertimpa ikon */
+        }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-  </style>
-  <style>
-    .dropdown-menu {
-      min-width: 250px;
-    }
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #6c757d;
+        }
 
-    .status-option {
-      cursor: pointer;
-      padding-left: 1.5rem;
-    }
+        /* Sidebar Heading */
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            font-weight: bold;
+        }
 
-    .status-circle {
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-    }
+        /* Profile Image */
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
-      transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
-    }
+        /* Dropdown Menu */
+        .dropdown-menu {
+            min-width: 250px;
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
-  </style>
+        .status-option {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .status-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-circle {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        /* Navbar Styles */
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            height: 70px;
+            background-color: #fff !important;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        /* Toggle button style */
+        #toggleSidebar {
+            border: none;
+            background: none;
+            color: #495057;
+        }
+
+        #toggleSidebar:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Search input styling */
+        .search-container {
+            max-width: 400px;
+        }
+
+        /* Notification badge */
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Nested collapse styling */
+        .nested-collapse {
+            padding-left: 2rem;
+        }
+
+        .nested-collapse .nav-link {
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            #sidebar {
+                min-width: 100%;
+                max-width: 100%;
+                margin-left: -100%;
+                z-index: 1050;
+                position: fixed;
+                top: 0;
+                height: 100vh;
+            }
+
+            #sidebar.collapsed {
+                margin-left: -100%;
+            }
+
+            body.sidebar-collapsed #main-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+            }
+
+            .search-container {
+                max-width: 200px;
+            }
+        }
+
+        /* Additional Mobile Fixes */
+        @media (max-width: 576px) {
+            #main-content {
+                padding: 10px;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .navbar .d-flex {
+                gap: 0.5rem;
+            }
+        }
+
+        /* Additional custom styles for badges */
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1) !important;
+        }
+
+        .bg-success-soft {
+            background-color: rgba(25, 135, 84, 0.1) !important;
+        }
+
+        .bg-info-soft {
+            background-color: rgba(13, 202, 240, 0.1) !important;
+        }
+
+        .bg-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1) !important;
+        }
+
+        .bg-secondary-soft {
+            background-color: rgba(108, 117, 125, 0.1) !important;
+        }
+
+        /* Hover effects */
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.025);
+        }
+
+        /* Text primary hover effect */
+        .text-primary-hover:hover {
+            color: #0d6efd !important;
+        }
+
+        /* Badge dot styles */
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Avatar styles */
+        .avatar-sm {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* File upload area */
+        .dropzone {
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropzone:hover {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+
+        /* Post type buttons */
+        .btn-check:checked+.btn-outline-secondary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: white;
+        }
+
+        /* Editor container */
+        .editor-container {
+            min-height: 300px;
+        }
+
+        .avatar-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar-group .avatar {
+            margin-left: -10px;
+            position: relative;
+            z-index: 1;
+            transition: z-index 0.2s;
+        }
+
+        .avatar-group .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-group .avatar:hover {
+            z-index: 10;
+            /* Supaya avatar yang di-hover muncul di atas */
+        }
+
+        .avatar-group img,
+        .avatar-group .avatar-initials {
+            width: 40px;
+            /* Sesuaikan ukuran */
+            height: 40px;
+            object-fit: cover;
+            border: 2px solid #fff;
+            /* Supaya tumpukan terlihat rapi */
+        }
+
+        .nav-lb-tab .nav-link.active {
+            border-bottom: 2px solid #0d6efd;
+            /* Bootstrap primary color */
+            color: #0d6efd;
+        }
+    </style>
 </head>
 
 <body>
-    <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-        <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-        <form class="d-flex ms-3 flex-grow-1">
-            <div class="input-group w-50">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-            </div>
-        </form>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+        <div class="container-fluid px-3">
+            <button class="btn" id="toggleSidebar" type="button">
+                <i class="bi bi-list fs-3"></i>
+            </button>
 
-        <div class="d-flex align-items-center ms-auto">
-            <!--notification dropdown-->
-            <div class="dropdown me-3">
-                <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bell text-dark fs-4"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown"
-                    style="width: 300px;">
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                        <strong>Notification</strong>
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <hr>
-                    <div class="px-2 mb-2">
-                        <div class="d-flex mb-2">
-                            <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Kristin Watson</strong> : <br>
-                                liked your comment on course JavaScript Introduction! <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>2 hours ago, 2:19
-                                    PM</small>
+            <form class="d-flex ms-3 flex-grow-1">
+                <div class="input-group search-container">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+                        aria-label="Search">
+                </div>
+            </form>
+
+            <div class="d-flex align-items-center ms-auto">
+                <div class="dropdown me-3">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button"
+                        id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bell text-dark fs-4"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+                        style="width: 320px;">
+                        <div class="px-3 py-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold">Notifications</h6>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-gear"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Brooklyn Simons</strong> : <br>
-                                Just launched a new course Recat for Beginners <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>17 June 2025, 2:19
-                                    PM</small>
+
+                        <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+                            <div class="d-flex mb-3">
+                                <div class="bg-secondary rounded-circle me-3"
+                                    style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <img src="/assets/images/avatar-3.jpg" width="40" class="rounded-circle">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                                        JavaScript Introduction!</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>2 hours ago
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="bg-primary rounded-circle me-3"
+                                    style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <img src="/assets/images/avatar-5.jpg" width="40" class="rounded-circle">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                                        for Beginners</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center border-top pt-2">
-                        <a href="#" class="text-decoration-none text-dark fw-bold">See All Notification</a>
+
+                        <div class="text-center border-top py-2">
+                            <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--profile Dropdown-->
-            <div class="dropdown">
-                <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-                    <div class="d-flex align-items-center px-3 py-2">
-                        <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-                        <div>
-                            <div><strong>Your Name</strong></div>
-                            <div class="text-muted small">your@email.com</div>
+                <div class="dropdown">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="bg-success rounded-circle"
+                            style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
                         </div>
-                    </div>
-                    <hr class="my-1">
-
-                    <!--status sub-dropdown-->
-                    <div class="dropdown">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#statusMenu" role="button">
-                            <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                        <div class="collapse" id="statusMenu">
-                            <div class="px-3 py-2">
-                                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+                        <div class="d-flex align-items-center px-3 py-3 border-bottom">
+                            <div class="rounded-circle me-3"
+                                style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
+                            </div>
+                            <div>
+                                <div class="fw-bold">Your Name</div>
+                                <div class="text-muted small">your@email.com</div>
                             </div>
                         </div>
+
+                        <div class="px-3 py-2">
+                            <div class="dropdown-item-text fw-bold mb-2">
+                                <i class="bi bi-circle-fill text-success me-2"></i>Status
+                            </div>
+                            <div class="ms-3">
+                                <div class="status-option">
+                                    <span class="status-circle bg-success"></span>Online
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-secondary"></span>Offline
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-warning"></span>Away
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-danger"></span>Busy
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-person me-2"></i>Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-credit-card me-2"></i>Subscription
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-gear me-2"></i>Settings
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item text-danger" href="#">
+                            <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                        </a>
                     </div>
-
-                    <a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-credit-card me-2"></i>Subscription</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a>
-
-                    <hr class="my-1">
-                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!--Sidebar-->
-    <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
-        <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
+    <div class="overlay d-md-none" id="overlay" style="display: none;"></div>
+
+    <div class="d-flex flex-grow-1" id="page-wrapper">
+        <div id="sidebar" class="bg-dark vh-100 overflow-auto">
             <ul class="nav flex-column px-2 mt-4">
-                <!--Dashboar-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
                         <i class="bi bi-speedometer2 me-2"></i>Dashboard
@@ -204,34 +498,31 @@
                     </div>
                 </li>
 
-                <!--courses-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
                         <i class="bi bi-book me-2"></i>Courses
                     </a>
                     <div class="collapse" id="coursesMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
+                            <li class="nav-item"><a class="nav-link " href="#">All Courses</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--user-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
                         <i class="bi bi-people me-2"></i>User
                     </a>
                     <div class="collapse" id="userMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link " href="#">Instructor</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--cms-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
                         <i class="bi bi-columns me-2"></i>CMS
@@ -240,39 +531,39 @@
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
+                            <li class="nav-item"><a class="nav-link " href="#">New Post</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!--Project-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-                        <i class="bi bi-kanban"></i>Project
+                        <i class="bi bi-kanban me-2"></i>Project
                     </a>
                     <div class="collapse" id="projectMenu">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" id="#projectSingleMenu">
+                                <a class="nav-link active" data-bs-toggle="collapse" href="#projectSingleMenu"
+                                    aria-expanded="false" aria-controls="projectSingleMenu">
                                     Single
                                 </a>
-                                <ul class="nav flex-column ms-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Task</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                                </ul>
+                                <div class="collapse nested-collapse" id="projectSingleMenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Task</a></li>
+                                        <li class="nav-item"><a class="nav-link active" href="#">Budget</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!--authentication-->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
                         <i class="bi bi-lock me-2"></i>Authentication
@@ -288,18 +579,16 @@
                     </div>
                 </li>
 
-                <!--APPS-->
                 <li class="sidebar-heading">Apps</li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
 
-                <!-- Components -->
                 <li class="sidebar-heading">Components</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-                        <i class="bi bi-table me-2"></i> Tables
+                        <i class="bi bi-table me-2"></i>Tables
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
@@ -310,13 +599,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
+                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
                 </li>
 
-                <!-- Site Settings -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-                        <i class="bi bi-gear me-2"></i> Site Settings
+                        <i class="bi bi-gear me-2"></i>Site Settings
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
@@ -329,21 +617,627 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
         </div>
+        <!--main content-->
+        <main id="main-content-wrapper" class="flex-grow-1 bg-light">
+            <section class="container-fluid p-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <!--page header-->
+                        <div
+                            class="d-flex flex-column flex-lg-row gap-2 align-items-lg-center justify-content-between mb-2">
+                            <div>
+                                <h2 class="mb-0 fw-bold">Geeks UI - Design &amp; Development</h2>
+                            </div>
+                            <!-- avatar group -->
+                            <div class="avatar-group">
+                                <!-- avatar -->
+                                <span class="avatar avatar-md">
+                                    <img alt="avatar" src="/assets/images/avatar-1.jpg"
+                                        class="rounded-circle imgtooltip" data-template="one">
+                                    <span id="one" class="d-none">
+                                        <small class="fw-semibold">Paul Haney</small>
+                                    </span>
+                                </span>
+                                <!-- avatar -->
+                                <span class="avatar avatar-md">
+                                    <img alt="avatar" src="/assets/images/avatar-2.jpg"
+                                        class="rounded-circle imgtooltip" data-template="two">
+                                    <span id="two" class="d-none">
+                                        <small class="fw-semibold">Gali Linear</small>
+                                    </span>
+                                </span>
+                                <!-- avatar -->
+                                <span class="avatar avatar-md">
+                                    <img alt="avatar" src="/assets/images/avatar-3.jpg"
+                                        class="rounded-circle imgtooltip" data-template="mary">
+                                    <span id="mary" class="d-none">
+                                        <small class="fw-semibold">Mary Holler</small>
+                                    </span>
+                                </span>
+                                <!-- avatar -->
+                                <span class="avatar avatar-md">
+                                    <img alt="avatar" src="/assets/images/avatar-4.jpg"
+                                        class="rounded-circle imgtooltip" data-template="nordal">
+                                    <span id="nordal" class="d-none">
+                                        <small class="fw-semibold">Lio Nordal</small>
+                                    </span>
+                                </span>
+                                <!-- avatar with initials -->
+                                <span class="avatar avatar-md">
+                                    <span class="avatar-initials rounded-circle bg-light text-dark">5+</span>
+                                </span>
+                                <a href="#"
+                                    class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2">+</a>
+                            </div>
 
-        <!-- Main page -->
+                        </div>
+                    </div>
+                </div>
+                <!--row-->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <ul class="nav nav-lb-tab">
+                            <!--nav link-->
+                            <li class="nav-item ms-0 me-3">
+                                <a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/Single_Admin_Project/overview_single_Project.html">Overview</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/Single_Admin_Project/task_single_Project.html">Task</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/Single_Admin_Project/budget_single_Project.html">Budget</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/Single_Admin_Project/file_single_Project.html">Files</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/Single_Admin_Project/team_single_Project.html">Team</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--search section-->
+                <div class="row mb-4">
+                    <!--search-->
+                    <div class="col-xxl-2 col-lg-3 col-md-12 col-12">
+                        <form>
+                            <input type="search" class="form-control" placeholder="Search Member">
+                        </form>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <!-- card -->
+                        <div class="card">
+                            <!-- card body -->
+                            <div>
+                                <!-- row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="border-bottom p-4 d-flex flex-column gap-3">
+                                            <div class="d-flex flex-column gap-4">
+                                                <h3 class="mb-0 card-title">Budget</h3>
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <span>
+                                                            <span class="text-dark fw-bold">$52,000</span>
+                                                            (Total)
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span>
+                                                            <span class="text-dark fw-bold">$8,770</span>
+                                                            Remaining
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="progress" style="height: 8px">
+                                                <div class="progress-bar" role="progressbar" style="width: 15%"
+                                                    aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                    style="width: 18%" aria-valuenow="18" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-danger" role="progressbar"
+                                                    style="width: 10%" aria-valuenow="10" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                    style="width: 16%" aria-valuenow="16" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 22%"
+                                                    aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- col -->
+                                    <div class="col-lg-4 col-md-12 col-12">
+                                        <div class="d-flex align-items-center justify-content-between p-4">
+                                            <div class="">
+                                                <h2 class="h1 fw-bold mb-0">$52,000</h2>
+                                                <p class="mb-0">Total Budget</p>
+                                            </div>
+                                            <div class="">
+                                                <div
+                                                    class="icon-shape icon-lg bg-light-primary text-primary rounded-circle">
+                                                    <i data-feather="dollar-sign" class="fs-3"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- col -->
+                                    <div class="col-lg-4 col-md-12 col-12 border-start">
+                                        <div class="d-flex align-items-center justify-content-between p-4">
+                                            <div class="">
+                                                <h2 class="h1 fw-bold mb-0">$43,230</h2>
+                                                <p class="">Total Spent</p>
+                                            </div>
+                                            <div class="ms-3">
+                                                <div
+                                                    class="icon-shape icon-lg bg-light-danger text-danger rounded-circle">
+                                                    <i data-feather="shopping-cart" class=" fs-3"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- col -->
+                                    <div class="col-lg-4 col-md-12 col-12 border-start">
+                                        <div class="d-flex align-items-center justify-content-between p-4">
+                                            <div class="">
+                                                <h2 class="h1 fw-bold mb-0">$8,770</h2>
+                                                <p class="mb-0">Remaining</p>
+                                            </div>
+                                            <div class="">
+                                                <div
+                                                    class="icon-shape icon-lg bg-light-success text-success rounded-circle">
+                                                    <i data-feather="pie-chart" class="fs-3"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gy-4 mb-4">
+                    <!-- col -->
+                    <div class="col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="mb-3">Expenses</h4>
+                                <div id="budgetExpenseChart" style="min-height: 365px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- col -->
+                    <div class="col-lg-6">
+                        <!-- card -->
+                        <div class="card h-100">
+                            <!-- card body -->
+                            <!-- card header -->
+                            <div class="card-header bg-white">
+                                <h4 class="mb-0 fs-5">Budget Category</h4>
+                            </div>
+                            <!-- row -->
+
+                            <!-- table -->
+                            <div class="table-responsive">
+                                <table class="table text-nowrap mb-0 table-centered table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Total</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-warning me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Design
+                                            </td>
+                                            <td>$9000.00</td>
+                                            <td>23%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-info me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Saas Services
+                                            </td>
+                                            <td>$4500.00</td>
+                                            <td>10%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-danger me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Development
+                                            </td>
+                                            <td>$9030.00</td>
+                                            <td>23.5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-primary me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                SEO
+                                            </td>
+                                            <td>$6800.00</td>
+                                            <td>18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-info me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Entertainment
+                                            </td>
+                                            <td>$2400.00</td>
+                                            <td>4%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-success me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Marketing
+                                            </td>
+                                            <td>$8320.00</td>
+                                            <td>19%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-info me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Extra
+                                            </td>
+                                            <td>$2000.00</td>
+                                            <td>3.5%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- col -->
+                    <div class="col-12">
+                        <!-- card -->
+                        <div class="card">
+                            <!-- card header -->
+                            <div class="card-header bg-white">
+                                <h4 class="mb-0 fs-5">Budget Details</h4>
+                            </div>
+                            <!-- table -->
+                            <div class="table-responsive">
+                                <table class="table text-nowrap mb-0 table-hover table-centered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Total Budget</th>
+                                            <th>Expenses (USD)</th>
+                                            <th>Expenses(%)</th>
+                                            <th>Remaining(USD)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-success me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Concept
+                                            </td>
+                                            <td>$12,000</td>
+                                            <td>$6,500</td>
+                                            <td>
+                                                52%
+                                                <i class="bi bi-arrow-up text-danger"></i>
+                                            </td>
+                                            <td>$5500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-warning me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Design
+                                            </td>
+                                            <td>$18,000</td>
+                                            <td>$8,000</td>
+                                            <td>
+                                                45%
+                                                <i class="bi bi-arrow-down text-success"></i>
+                                            </td>
+                                            <td>$10,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-danger me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Development
+                                            </td>
+                                            <td>$64,000</td>
+                                            <td>$38,000</td>
+                                            <td>
+                                                54%
+                                                <i class="bi bi-arrow-down text-success"></i>
+                                            </td>
+                                            <td>$34,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-primary me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                SEO
+                                            </td>
+                                            <td>$8,000</td>
+                                            <td>$3,000</td>
+                                            <td>
+                                                65%
+                                                <i class="bi bi-arrow-down text-success"></i>
+                                            </td>
+                                            <td>$5,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-info me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Extra
+                                            </td>
+                                            <td>$2,000</td>
+                                            <td>$1,500</td>
+                                            <td>
+                                                85%
+                                                <i class="bi bi-arrow-up text-danger"></i>
+                                            </td>
+                                            <td>$500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                                                    fill="currentColor" class="bi bi-square-fill text-success me-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z">
+                                                    </path>
+                                                </svg>
+                                                Marketing
+                                            </td>
+                                            <td>$34,500</td>
+                                            <td>$24,500</td>
+                                            <td>
+                                                88%
+                                                <i class="bi bi-arrow-up text-danger"></i>
+                                            </td>
+                                            <td>$10,000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
     </div>
-    <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script> 
-        document.getElementById('toggleSidebar').addEventListener('click', function() { 
-            const sidebar = document.getElementById('sidebar'); 
-            sidebar.classList.toggle('collapsed');
-    });
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <script>
+        feather.replace()
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sidebar toggle logic
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const body = document.body;
+            const overlay = document.getElementById('overlay');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
+
+            function toggleSidebarState() {
+                sidebar.classList.toggle('collapsed');
+                body.classList.toggle('sidebar-collapsed');
+                mainContentWrapper.classList.toggle('collapsed'); // Tambahkan/hapus class pada main-content-wrapper
+            }
+
+            toggleSidebar.addEventListener('click', function () {
+                toggleSidebarState();
+                if (window.innerWidth <= 768) {
+                    overlay.style.display = sidebar.classList.contains('collapsed') ? 'none' : 'block';
+                }
+            });
+
+            // Hide sidebar on overlay click for mobile
+            if (window.innerWidth <= 768) {
+                overlay.addEventListener('click', function () {
+                    toggleSidebarState();
+                    overlay.style.display = 'none';
+                });
+            }
+
+            // FIXED: Better collapse menu handling for nested menus
+            document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function (element) {
+                element.addEventListener('click', function (e) {
+                    const target = this.getAttribute('href') || this.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(target);
+
+                    if (targetElement) {
+                        // Don't prevent default for proper Bootstrap collapse behavior
+
+                        // Optional: Close other main level collapses (excluding nested ones)
+                        const isMainLevel = !this.closest('.collapse');
+                        if (isMainLevel) {
+                            document.querySelectorAll('.collapse.show').forEach(function (openCollapse) {
+                                // Only close if it's not the current target and not a parent/child relationship
+                                if (openCollapse.id !== target.substring(1) &&
+                                    !openCollapse.contains(targetElement) &&
+                                    !targetElement.contains(openCollapse)) {
+                                    const bsCollapse = bootstrap.Collapse.getInstance(openCollapse);
+                                    if (bsCollapse) {
+                                        bsCollapse.hide();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Initialize Bootstrap collapse instances for nested menus
+            document.querySelectorAll('.collapse').forEach(function (collapseElement) {
+                new bootstrap.Collapse(collapseElement, {
+                    toggle: false
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Inisialisasi flatpickr
+        flatpickr("#startDate", {
+            dateFormat: "Y-m-d",
+        });
+
+        flatpickr("#endDate", {
+            dateFormat: "Y-m-d",
+        });
+
+        // Form validation
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-lb-tab .nav-link');
+            const currentPath = window.location.pathname;
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        var options = {
+            chart: {
+                height: 350,
+                type: 'radar'
+            },
+            series: [{
+                name: 'Expenses',
+                data: [90, 32, 30, 40, 100, 20]
+            }],
+            labels: ['Design', 'SaaS Services', 'Development', 'SEO', 'Entertainment', 'Marketing'],
+            stroke: {
+                width: 2,
+                colors: ['#754FFE']
+            },
+            fill: {
+                opacity: 0.4,
+                colors: ['#754FFE']
+            },
+            markers: {
+                size: 5,
+                colors: ['#754FFE'],
+                strokeColor: '#fff',
+                strokeWidth: 2
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#budgetExpenseChart"), options);
+        chart.render();
+    </script>
+
 </body>
 
 </html>
