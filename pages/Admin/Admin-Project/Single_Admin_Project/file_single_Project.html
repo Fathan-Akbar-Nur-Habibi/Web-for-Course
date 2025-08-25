@@ -1,73 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Files | Geeks</title>
-    <!-- Bootstrap 5.0.2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Files</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css" rel="stylesheet">
+  <!-- Feather Icons via CDN (Font-based style) -->
+  <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+  <!-- ApexCharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"></script>
 
   <style>
-    body {
-      overflow-x: hidden;
+    /* Global Styles */
+    :root {
+      --gk-primary: #6366f1;
+      --gk-light-primary: #a5b4fc;
+      --gk-info: #06b6d4;
+      --gk-success: #10b981;
+      --gk-warning: #f59e0b;
+      --gk-white: #ffffff;
+      --gk-gray-500: #6b7280;
+      --gk-border-color: #e5e7eb;
     }
 
+    body {
+      overflow-x: hidden;
+      background-color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* Sidebar Styles */
     #sidebar {
-      min-width: 250px;
-      max-width: 250px;
+      min-width: 280px;
+      max-width: 280px;
       background: #343a40;
       color: #fff;
-      transition: all 0.3s;
+      transition: margin-left 0.3s ease;
+      position: fixed;
+      height: calc(100vh - 70px);
+      top: 70px;
+      z-index: 1020;
+      overflow-y: auto;
     }
 
     #sidebar.collapsed {
-      margin-left: -250px;
+      margin-left: -280px;
     }
 
     #sidebar .nav-link {
       color: #adb5bd;
+      border-radius: 0.375rem;
+      margin-bottom: 0.1rem;
+      transition: all 0.2s ease;
+      padding: 0.4rem 1rem;
     }
 
     #sidebar .nav-link:hover {
       color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
     }
 
-    #main-content {
-      transition: all 0.3s;
+    #sidebar .nav-link.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
-    #sidebar.collapsed+#main-content {
+    /* Main Content Styles */
+    #main-content-wrapper {
+      transition: margin-left 0.3s ease;
+      margin-left: 280px;
+      padding-top: 70px;
+      width: calc(100% - 280px);
+      min-height: 100vh;
+    }
+
+    body.sidebar-collapsed #main-content-wrapper {
       margin-left: 0;
+      width: 100%;
     }
 
-    #main-content {
-      margin-left: 250px;
-    }
-
+    /* Sidebar Heading */
     .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
+      font-size: 0.75rem;
       text-transform: uppercase;
+      color: #6c757d;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      font-weight: bold;
     }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
+    /* Navbar Styles */
+    .navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      height: 70px;
+      background-color: #fff !important;
+      border-bottom: 1px solid #dee2e6;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    /* Toggle button style */
+    #toggleSidebar {
+      border: none;
+      background: none;
+      color: #495057;
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+    }
+
+    #toggleSidebar:hover {
+      background-color: #f8f9fa;
+    }
+
+    /* Search input styling */
+    .search-container {
+      max-width: 400px;
+    }
+
+    /* Notification badge */
+    .notification-badge {
+      position: relative;
+    }
+
+    .notification-badge::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background-color: #dc3545;
       border-radius: 50%;
-    }
-  </style>
-  <style>
-    .dropdown-menu {
-      min-width: 250px;
+      border: 2px solid #fff;
     }
 
+    /* Nested collapse styling */
+    .nested-collapse {
+      padding-left: 2rem;
+    }
+
+    .nested-collapse .nav-link {
+      padding-left: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Status option styles */
     .status-option {
       cursor: pointer;
-      padding-left: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+    }
+
+    .status-option:hover {
+      background-color: #f8f9fa;
     }
 
     .status-circle {
@@ -78,272 +174,1293 @@
       margin-right: 8px;
     }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
+    /* Card Styles */
+    .card {
+      border: none;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      border-radius: 0.5rem;
       transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
     }
 
-    #sidebar.collapsed+#main-content {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Button Styles */
+    .btn-ghost {
+      background-color: transparent;
+      border: none;
+      color: var(--gk-gray-500);
+    }
+
+    .btn-ghost:hover {
+      background-color: #f3f4f6;
+      color: var(--gk-gray-500);
+    }
+
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+    }
+
+    /* Avatar Styles */
+    .avatar-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-group .avatar {
+      margin-left: -10px;
+      position: relative;
+      z-index: 1;
+      transition: z-index 0.2s;
+    }
+
+    .avatar-group .avatar:first-child {
       margin-left: 0;
+    }
+
+    .avatar-group .avatar:hover {
+      z-index: 10;
+    }
+
+    .avatar-group img,
+    .avatar-group .avatar-initials {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    /* Tab Navigation */
+    .nav-lb-tab .nav-link.active {
+      border-bottom: 2px solid #0d6efd;
+      color: #0d6efd;
+    }
+
+    .nav-lb-tab .nav-link {
+      color: #6c757d;
+      text-decoration: none;
+      padding: 0.75rem 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-lb-tab .nav-link:hover {
+      color: #0d6efd;
+      text-decoration: none;
+    }
+
+    /* Typography */
+    h4 {
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .text-muted {
+      color: var(--gk-gray-500) !important;
+    }
+
+    /* Badge styles */
+    .bg-light-primary {
+      background-color: rgba(99, 102, 241, 0.1) !important;
+    }
+
+    .text-primary {
+      color: var(--gk-primary) !important;
+    }
+
+    .bg-light-info {
+      background-color: rgba(6, 182, 212, 0.1) !important;
+    }
+
+    .text-info {
+      color: var(--gk-info) !important;
+    }
+
+    .bg-light-danger {
+      background-color: rgba(239, 68, 68, 0.1) !important;
+    }
+
+    .text-danger {
+      color: #ef4444 !important;
+    }
+
+    .bg-primary-soft {
+      background-color: rgba(13, 110, 253, 0.1) !important;
+      color: #0d6efd !important;
+    }
+
+    /* Chart containers */
+    .apexcharts-canvas {
+      margin: 0 auto;
+    }
+
+    /* Avatar placeholder styles */
+    .avatar-placeholder {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border: 2px solid #fff;
+    }
+
+    /* Table styles */
+    .table-hover tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .table-centered th,
+    .table-centered td {
+      vertical-align: middle;
+    }
+
+    .badge {
+      padding: 0.35em 0.65em;
+      font-size: 0.75em;
+      border-radius: 0.375rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        margin-left: -100%;
+        z-index: 1050;
+        position: fixed;
+        top: 70px;
+        height: calc(100vh - 70px);
+      }
+
+      #sidebar.collapsed {
+        margin-left: -100%;
+      }
+
+      #sidebar:not(.collapsed) {
+        margin-left: 0;
+      }
+
+      body.sidebar-collapsed #main-content-wrapper {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      #main-content-wrapper {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+        display: none;
+      }
+
+      .overlay.show {
+        display: block;
+      }
+
+      .search-container {
+        max-width: 200px;
+      }
+
+      .avatar-group {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .avatar-group .avatar {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .search-container {
+        display: none;
+      }
+
+      .navbar .d-flex {
+        gap: 0.5rem;
+      }
+
+      .col-xl-3 {
+        margin-bottom: 1rem;
+      }
+
+      .container-fluid {
+        padding: 10px;
+      }
     }
   </style>
 </head>
 
 <body>
-    <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-        <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-        <form class="d-flex ms-3 flex-grow-1">
-            <div class="input-group w-50">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-            </div>
-        </form>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+    <div class="container-fluid px-3">
+      <button class="btn" id="toggleSidebar" type="button" aria-label="Toggle sidebar">
+        <i class="bi bi-list fs-3"></i>
+      </button>
 
-        <div class="d-flex align-items-center ms-auto">
-            <!--notification dropdown-->
-            <div class="dropdown me-3">
-                <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bell text-dark fs-4"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown"
-                    style="width: 300px;">
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                        <strong>Notification</strong>
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <hr>
-                    <div class="px-2 mb-2">
-                        <div class="d-flex mb-2">
-                            <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Kristin Watson</strong> : <br>
-                                liked your comment on course JavaScript Introduction! <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>2 hours ago, 2:19
-                                    PM</small>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Brooklyn Simons</strong> : <br>
-                                Just launched a new course Recat for Beginners <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>17 June 2025, 2:19
-                                    PM</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center border-top pt-2">
-                        <a href="#" class="text-decoration-none text-dark fw-bold">See All Notification</a>
-                    </div>
-                </div>
-            </div>
-
-            <!--profile Dropdown-->
-            <div class="dropdown">
-                <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-                    <div class="d-flex align-items-center px-3 py-2">
-                        <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-                        <div>
-                            <div><strong>Your Name</strong></div>
-                            <div class="text-muted small">your@email.com</div>
-                        </div>
-                    </div>
-                    <hr class="my-1">
-
-                    <!--status sub-dropdown-->
-                    <div class="dropdown">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#statusMenu" role="button">
-                            <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                        <div class="collapse" id="statusMenu">
-                            <div class="px-3 py-2">
-                                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-credit-card me-2"></i>Subscription</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a>
-
-                    <hr class="my-1">
-                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
-                </div>
-            </div>
+      <form class="d-flex ms-3 flex-grow-1" role="search">
+        <div class="input-group search-container">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search text-muted"></i>
+          </span>
+          <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+            aria-label="Search">
         </div>
+      </form>
+
+      <div class="d-flex align-items-center ms-auto">
+        <!-- Notifications -->
+        <div class="dropdown me-3">
+          <button class="btn btn-link text-decoration-none notification-badge" type="button" id="notifDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+            <i class="bi bi-bell text-dark fs-4"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+            style="width: 320px;">
+            <div class="px-3 py-3 border-bottom">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="mb-0 fw-bold">Notifications</h6>
+                <button class="btn btn-sm btn-outline-secondary" aria-label="Settings">
+                  <i class="bi bi-gear"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+              <div class="d-flex mb-3">
+                <div class="avatar-placeholder bg-info me-3">KW</div>
+                <div class="flex-grow-1">
+                  <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                    JavaScript Introduction!</p>
+                  <small class="text-muted">
+                    <i class="bi bi-clock me-1"></i>2 hours ago
+                  </small>
+                </div>
+              </div>
+              <div class="d-flex mb-3">
+                <div class="avatar-placeholder bg-success me-3">BS</div>
+                <div class="flex-grow-1">
+                  <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                    for Beginners</p>
+                  <small class="text-muted">
+                    <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center border-top py-2">
+              <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile -->
+        <div class="dropdown">
+          <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Profile menu">
+            <div class="avatar-placeholder bg-primary">JD</div>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+            <div class="d-flex align-items-center px-3 py-3 border-bottom">
+              <div class="avatar-placeholder bg-primary me-3">JD</div>
+              <div>
+                <div class="fw-bold">John Doe</div>
+                <div class="text-muted small">john.doe@email.com</div>
+              </div>
+            </div>
+
+            <div class="px-3 py-2">
+              <div class="dropdown-item-text fw-bold mb-2">
+                <i class="bi bi-circle-fill text-success me-2"></i>Status
+              </div>
+              <div class="ms-3">
+                <div class="status-option">
+                  <span class="status-circle bg-success"></span>Online
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-secondary"></span>Offline
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-warning"></span>Away
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-danger"></span>Busy
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-person me-2"></i>Profile
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-credit-card me-2"></i>Subscription
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-gear me-2"></i>Settings
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item text-danger" href="#">
+              <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div class="overlay d-md-none" id="overlay"></div>
+
+  <!-- Page wrapper -->
+  <div class="d-flex flex-grow-1" id="page-wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="bg-dark vh-100 overflow-auto collapsed" aria-label="Main navigation">
+      <ul class="nav flex-column px-2 mt-4">
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button" aria-expanded="false"
+            aria-controls="dashboardMenu">
+            <i class="bi bi-speedometer2 me-2"></i>Dashboard
+          </a>
+          <div class="collapse" id="dashboardMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu" role="button" aria-expanded="false"
+            aria-controls="coursesMenu">
+            <i class="bi bi-book me-2"></i>Courses
+          </a>
+          <div class="collapse" id="coursesMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#userMenu" role="button" aria-expanded="false"
+            aria-controls="userMenu">
+            <i class="bi bi-people me-2"></i>User
+          </a>
+          <div class="collapse" id="userMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu" role="button" aria-expanded="false"
+            aria-controls="cmsMenu">
+            <i class="bi bi-columns me-2"></i>CMS
+          </a>
+          <div class="collapse" id="cmsMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu" role="button" aria-expanded="true"
+            aria-controls="projectMenu">
+            <i class="bi bi-kanban me-2"></i>Project
+          </a>
+          <div class="collapse show" id="projectMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">List</a></li>
+              <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="collapse" href="#projectSingleMenu" aria-expanded="true"
+                  aria-controls="projectSingleMenu">
+                  Single
+                </a>
+                <div class="collapse show nested-collapse" id="projectSingleMenu">
+                  <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link " href="#">Task</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Files</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#authMenu" role="button" aria-expanded="false"
+            aria-controls="authMenu">
+            <i class="bi bi-lock me-2"></i>Authentication
+          </a>
+          <div class="collapse" id="authMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="sidebar-heading">Apps</li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
+
+        <li class="sidebar-heading">Components</li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu" role="button" aria-expanded="false"
+            aria-controls="tablesMenu">
+            <i class="bi bi-table me-2"></i>Tables
+          </a>
+          <div class="collapse" id="tablesMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Basic</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Data Tables</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu" role="button" aria-expanded="false"
+            aria-controls="siteSettingsMenu">
+            <i class="bi bi-gear me-2"></i>Site Settings
+          </a>
+          <div class="collapse" id="siteSettingsMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">General</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </nav>
 
-    <!--Sidebar-->
-    <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
-        <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
-            <ul class="nav flex-column px-2 mt-4">
-                <!--Dashboar-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
-                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
-                    </a>
-                    <div class="collapse" id="dashboardMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--courses-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
-                        <i class="bi bi-book me-2"></i>Courses
-                    </a>
-                    <div class="collapse" id="coursesMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--user-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
-                        <i class="bi bi-people me-2"></i>User
-                    </a>
-                    <div class="collapse" id="userMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--cms-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
-                        <i class="bi bi-columns me-2"></i>CMS
-                    </a>
-                    <div class="collapse" id="cmsMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--Project-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-                        <i class="bi bi-kanban"></i>Project
-                    </a>
-                    <div class="collapse" id="projectMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" id="#projectSingleMenu">
-                                    Single
-                                </a>
-                                <ul class="nav flex-column ms-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Task</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--authentication-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
-                        <i class="bi bi-lock me-2"></i>Authentication
-                    </a>
-                    <div class="collapse" id="authMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--APPS-->
-                <li class="sidebar-heading">Apps</li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
-
-                <!-- Components -->
-                <li class="sidebar-heading">Components</li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-                        <i class="bi bi-table me-2"></i> Tables
-                    </a>
-                    <div class="collapse" id="tablesMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Basic</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Data Tables</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
-                </li>
-
-                <!-- Site Settings -->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-                        <i class="bi bi-gear me-2"></i> Site Settings
-                    </a>
-                    <div class="collapse" id="siteSettingsMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">General</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-            </ul>
+    <!-- Main content -->
+    <main id="main-content-wrapper" class="flex-grow-1 bg-light">
+      <section class="container-fluid p-4">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-12 mb-2">
+            <!-- Page header -->
+            <div class="d-flex flex-column flex-lg-row gap-2 align-items-lg-center justify-content-between">
+              <div>
+                <h1 class="mb-0 h2 fw-bold">Geeks UI - Design &amp; Development</h1>
+              </div>
+              <div class="d-flex align-items-center">
+                <!-- avatar group -->
+                <div class="avatar-group">
+                  <!-- avatar -->
+                  <span class="avatar avatar-md">
+                    <img alt="avatar" src="/assets/images/avatar-1.jpg" class="rounded-circle imgtooltip"
+                      data-template="one">
+                    <span id="one" class="d-none">
+                      <small class="fw-semibold">Paul Haney</small>
+                    </span>
+                  </span>
+                  <!-- avatar -->
+                  <span class="avatar avatar-md">
+                    <img alt="avatar" src="/assets/images/avatar-2.jpg" class="rounded-circle imgtooltip"
+                      data-template="two">
+                    <span id="two" class="d-none">
+                      <small class="fw-semibold">Gali Linear</small>
+                    </span>
+                  </span>
+                  <!-- avatar -->
+                  <span class="avatar avatar-md">
+                    <img alt="avatar" src="/assets/images/avatar-3.jpg" class="rounded-circle imgtooltip"
+                      data-template="mary">
+                    <span id="mary" class="d-none">
+                      <small class="fw-semibold">Mary Holler</small>
+                    </span>
+                  </span>
+                  <!-- avatar -->
+                  <span class="avatar avatar-md">
+                    <img alt="avatar" src="/assets/images/avatar-4.jpg" class="rounded-circle imgtooltip"
+                      data-template="nordal">
+                    <span id="nordal" class="d-none">
+                      <small class="fw-semibold">Lio Nordal</small>
+                    </span>
+                  </span>
+                  <!-- avatar with initials -->
+                  <span class="avatar avatar-md">
+                    <span class="avatar-initials rounded-circle bg-light text-dark">5+</span>
+                  </span>
+                  <a href="#" class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2">+</a>
+                </div>
+              
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- row -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <!-- nav -->
+            <ul class="nav nav-lb-tab">
+              <!-- nav-link -->
+              <li class="nav-item ms-0 me-3">
+                <a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/overview_single_Project.html">Overview</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/task_single_Project.html">Task</a>
+              </li>
+              <!-- nav-link -->
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/budget_single_Project.html">Budget</a>
+              </li>
+              <!-- nav-link -->
+              <li class="nav-item mx-3">
+                <a class="nav-link active" href="/pages/Admin/Admin-Project/Single_Admin_Project/file_single_Project.html">Files</a>
+              </li>
+              <!-- nav-link -->
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/team_single_Project.html">Team</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- row -->
+        <div class="row mb-4">
+          <!-- col -->
+          <div class="col-xl-2 col-lg-4 col-md-6 col-12">
+            <!-- search -->
+            <div>
+              <input type="search" class="form-control" placeholder="Search File name">
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+        <div class="row">
+          <!-- col -->
+          <div class="col-12">
+            <!-- card -->
+            <div class="card">
+              <!-- card header -->
+              <div class="card-header">
+                <h4 class="mb-0">Files</h4>
+              </div>
+              <!-- table -->
+              <div class="table-responsive overflow-y-hidden">
+                <table class="table mb-0 text-nowrap table-hover table-centered">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Name</th>
+                      <th>File size</th>
+                      <th>Modified</th>
+                      <th>Uploaded by</th>
+                      <th>Options</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-primary">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-earmark-spreadsheet text-primary" viewBox="0 0 16 16">
+                                <path
+                                  d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark text-primary-hover fs-6 ">Admin-Dashboard-Design.excl</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td>2.3MB</td>
+                      <td>27 Sept, 2021</td>
+                      <td>
+                        <img src="/assets/images/avatar-1.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                          width="40">
+                      </td>
+                      <td>
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="five">
+                          <i data-feather="download" class="fs-6"></i>
 
-        <!-- Main page -->
+                          <div id="five" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="six">
+                          <i data-feather="link" class="fs-6"></i>
+                          <div id="six" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownOne">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-info">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-image text-info" viewBox="0 0 16 16">
+                                <path d="M8.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
+                                <path
+                                  d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v8l-2.083-2.083a.5.5 0 0 0-.76.063L8 11 5.835 9.7a.5.5 0 0 0-.611.076L3 12V2z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Admin-Dashboard-Design.jpeg</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td>10MB</td>
+                      <td>29 Sept, 2021</td>
+                      <td>
+                        <img src="/assets/images/avatar-2.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                          width="40">
+                      </td>
+                      <td>
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="seven">
+                          <i data-feather="download" class=" fs-6"></i>
+                          <div id="seven" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="eight">
+                          <i data-feather="link" class="fs-6"></i>
+                          <div id="eight" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownTwo" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownTwo">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center d-flex flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-success">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-word text-success" viewBox="0 0 16 16">
+                                <path
+                                  d="M4.879 4.515a.5.5 0 0 1 .606.364l1.036 4.144.997-3.655a.5.5 0 0 1 .964 0l.997 3.655 1.036-4.144a.5.5 0 0 1 .97.242l-1.5 6a.5.5 0 0 1-.967.01L8 7.402l-1.018 3.73a.5.5 0 0 1-.967-.01l-1.5-6a.5.5 0 0 1 .364-.606z">
+                                </path>
+                                <path
+                                  d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#" class="text-inherit text-decoration-none text-dark fs-6">Geeks UI
+                                Description.doc</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td>45MB</td>
+                      <td>01 Oct, 2021</td>
+                      <td>
+                        <span class="avatar avatar-sm avatar-primary">
+                          <img src="/assets/images/avatar-3.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                            width="40">
+                        </span>
+                      </td>
+                      <td>
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="nine">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="nine" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="ten">
+                          <i data-feather="link" class="fs-6"></i>
+                          <div id="ten" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownThree" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownThree">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
 
-    </div>
-    <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script> 
-        document.getElementById('toggleSidebar').addEventListener('click', function() { 
-            const sidebar = document.getElementById('sidebar'); 
-            sidebar.classList.toggle('collapsed');
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-danger">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-ppt text-danger" viewBox="0 0 16 16">
+                                <path
+                                  d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z">
+                                </path>
+                                <path
+                                  d="M6 5a1 1 0 0 1 1-1h1.188a2.75 2.75 0 0 1 0 5.5H7v2a.5.5 0 0 1-1 0V5zm1 3.5h1.188a1.75 1.75 0 1 0 0-3.5H7v3.5z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Geeks-UI-Marketing-Process.ppt</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td>122MB</td>
+                      <td>04 Oct, 2021</td>
+                      <td>
+                        <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                          width="40">
+                      </td>
+                      <td>
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="eleven">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="eleven" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="twelve">
+                          <i data-feather="link" class=" fs-6"></i>
+                          <div id="twelve" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownFive" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownFive">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-warning">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-text text-warning" viewBox="0 0 16 16">
+                                <path
+                                  d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z">
+                                </path>
+                                <path
+                                  d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Geeks-UI-Marketing-Process.txt</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td>43.5MB</td>
+                      <td>06 Oct, 2021</td>
+                      <td>
+                        <span class="avatar avatar-sm avatar-success">
+                          <img src="/assets/images/avatar-1.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                            width="40">
+                        </span>
+                      </td>
+                      <td>
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="thirteen">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="thirteen" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="fourteen">
+                          <i data-feather="link" class=" fs-6"></i>
+                          <div id="fourteen" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownFour" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownFour">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-danger">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-earmark-slides text-danger" viewBox="0 0 16 16">
+                                <path
+                                  d="M5 6a.5.5 0 0 0-.496.438l-.5 4A.5.5 0 0 0 4.5 11h3v2.016c-.863.055-1.5.251-1.5.484 0 .276.895.5 2 .5s2-.224 2-.5c0-.233-.637-.429-1.5-.484V11h3a.5.5 0 0 0 .496-.562l-.5-4A.5.5 0 0 0 11 6H5zm2 3.78V7.22c0-.096.106-.156.19-.106l2.13 1.279a.125.125 0 0 1 0 .214l-2.13 1.28A.125.125 0 0 1 7 9.778z">
+                                </path>
+                                <path
+                                  d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Geeks-UI-promo-trailer-template.mov</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td>115MB</td>
+                      <td>08 Oct, 2021</td>
+                      <td>
+                        <img src="/assets/images/avatar-6.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                          width="40">
+                      </td>
+                      <td>
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="fifteen">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="fifteen" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="sixteen">
+                          <i data-feather="link" class="fs-5"></i>
+                          <div id="sixteen" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownSix" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownSix">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-success">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-excel text-success" viewBox="0 0 16 16">
+                                <path
+                                  d="M5.18 4.616a.5.5 0 0 1 .704.064L8 7.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 8l2.233 2.68a.5.5 0 0 1-.768.64L8 8.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 8 5.116 5.32a.5.5 0 0 1 .064-.704z">
+                                </path>
+                                <path
+                                  d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Earning-from-Dashboard.xlsx</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td>55MB</td>
+                      <td>12 Oct, 2021</td>
+                      <td>
+                        <span class="avatar avatar-sm avatar-danger">
+                          <img src="/assets/images/avatar-5.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                            width="40">
+                        </span>
+                      </td>
+                      <td>
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="seventeen">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="seventeen" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="eighteen">
+                          <i data-feather="link" class="fs-6"></i>
+                          <div id="eighteen" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td class="align-middle">
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownSeven" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownSeven">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-danger">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-ppt text-danger" viewBox="0 0 16 16">
+                                <path
+                                  d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z">
+                                </path>
+                                <path
+                                  d="M6 5a1 1 0 0 1 1-1h1.188a2.75 2.75 0 0 1 0 5.5H7v2a.5.5 0 0 1-1 0V5zm1 3.5h1.188a1.75 1.75 0 1 0 0-3.5H7v3.5z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Geeks-UI-Marketing-Process.ppt</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">122MB</td>
+                      <td class="align-middle">04 Oct, 2021</td>
+                      <td>
+                        <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                          width="40">
+                      </td>
+                      <td class="align-middle">
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="nineteen">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="nineteen" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="twenty">
+                          <i data-feather="link" class="fs-6"></i>
+                          <div id="twenty" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td class="align-middle">
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownEight" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownEight">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-warning">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-text text-warning" viewBox="0 0 16 16">
+                                <path
+                                  d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z">
+                                </path>
+                                <path
+                                  d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Geeks-UI-Marketing-Process.txt</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">43.5MB</td>
+                      <td class="align-middle">06 Oct, 2021</td>
+                      <td>
+                        <span class="avatar avatar-sm avatar-success">
+                          <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                            width="40">
+                        </span>
+                      </td>
+                      <td class="align-middle">
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="twentyOne">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="twentyOne" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="twentyTwo">
+                          <i data-feather="link" class=" fs-6"></i>
+                          <div id="twentyTwo" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td class="align-middle">
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownNine" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownNine">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center flex-row gap-3">
+                          <div class="icon-shape icon-lg rounded-3 bg-light-danger">
+                            <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-file-earmark-slides text-danger" viewBox="0 0 16 16">
+                                <path
+                                  d="M5 6a.5.5 0 0 0-.496.438l-.5 4A.5.5 0 0 0 4.5 11h3v2.016c-.863.055-1.5.251-1.5.484 0 .276.895.5 2 .5s2-.224 2-.5c0-.233-.637-.429-1.5-.484V11h3a.5.5 0 0 0 .496-.562l-.5-4A.5.5 0 0 0 11 6H5zm2 3.78V7.22c0-.096.106-.156.19-.106l2.13 1.279a.125.125 0 0 1 0 .214l-2.13 1.28A.125.125 0 0 1 7 9.778z">
+                                </path>
+                                <path
+                                  d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z">
+                                </path>
+                              </svg>
+                            </a>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">
+                              <a href="#"
+                                class="text-inherit text-decoration-none text-dark fs-6">Geeks-UI-promo-trailer-template.mov</a>
+                            </h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">115MB</td>
+                      <td class="align-middle">08 Oct, 2021</td>
+                      <td>
+                        <img src="/assets/images/avatar-6.jpg" alt="" class="rounded-circle avatar avatar-sm"
+                          width="40">
+                      </td>
+                      <td class="align-middle">
+                        <a href="#" class="text-body text-primary-hover texttooltip" data-template="twentyThree">
+                          <i data-feather="download" class="fs-6"></i>
+                          <div id="twentyThree" class="d-none">
+                            <h6 class="mb-0 text-white">Download</h6>
+                          </div>
+                        </a>
+                        <a href="#" class="text-body text-primary-hover ms-3 texttooltip" data-template="twentyFour">
+                          <i data-feather="link" class="fs-6"></i>
+                          <div id="twentyFour" class="d-none">
+                            <h6 class="mb-0 text-white">Link</h6>
+                          </div>
+                        </a>
+                      </td>
+                      <td class="align-middle">
+                        <span class="dropdown dropstart">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button"
+                            id="DropdownTen" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="more-vertical"></i>
+                          </a>
+                          <span class="dropdown-menu" aria-labelledby="DropdownTen">
+                            <span class="dropdown-header">Settings</span>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </span>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+  <script>
+    feather.replace()
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Sidebar toggle logic
+      const toggleSidebar = document.getElementById('toggleSidebar');
+      const sidebar = document.getElementById('sidebar');
+      const body = document.body;
+      const overlay = document.getElementById('overlay');
+      const mainContentWrapper = document.getElementById('main-content-wrapper');
+
+      function toggleSidebarState() {
+        sidebar.classList.toggle('collapsed');
+        body.classList.toggle('sidebar-collapsed');
+
+        // Handle overlay for mobile
+        if (window.innerWidth <= 768) {
+          overlay.classList.toggle('show');
+        }
+      }
+
+      toggleSidebar.addEventListener('click', function () {
+        toggleSidebarState();
+      });
+
+      // Hide sidebar on overlay click for mobile
+      overlay.addEventListener('click', function () {
+        if (!sidebar.classList.contains('collapsed')) {
+          toggleSidebarState();
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+          overlay.classList.remove('show');
+        }
+      });
+
+      // Initialize sidebar as collapsed by default
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('collapsed');
+        body.classList.remove('sidebar-collapsed');
+      }
     });
-    </script>
+  </script>
 </body>
 
 </html>
