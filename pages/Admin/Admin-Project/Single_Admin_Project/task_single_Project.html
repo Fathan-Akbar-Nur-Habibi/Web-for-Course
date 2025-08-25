@@ -1,199 +1,544 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Task | Geeks</title>
-    <!-- Bootstrap 5.0.2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Project Task Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"></script>
 
-  <style>
-    body {
-      overflow-x: hidden;
-    }
+    <style>
+        /* Global Styles */
+        :root {
+            --gk-primary: #6366f1;
+            --gk-light-primary: #a5b4fc;
+            --gk-info: #06b6d4;
+            --gk-success: #10b981;
+            --gk-warning: #f59e0b;
+            --gk-white: #ffffff;
+            --gk-gray-500: #6b7280;
+            --gk-border-color: #e5e7eb;
+        }
 
-    #sidebar {
-      min-width: 250px;
-      max-width: 250px;
-      background: #343a40;
-      color: #fff;
-      transition: all 0.3s;
-    }
+        body {
+            overflow-x: hidden;
+            background-color: #f8fafc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
 
-    #sidebar.collapsed {
-      margin-left: -250px;
-    }
+        /* Sidebar Styles */
+        #sidebar {
+            min-width: 280px;
+            max-width: 280px;
+            background: #343a40;
+            color: #fff;
+            transition: margin-left 0.3s ease;
+            position: fixed;
+            height: calc(100vh - 70px);
+            top: 70px;
+            z-index: 1020;
+            overflow-y: auto;
+        }
 
-    #sidebar .nav-link {
-      color: #adb5bd;
-    }
+        #sidebar.collapsed {
+            margin-left: -280px;
+        }
 
-    #sidebar .nav-link:hover {
-      color: #fff;
-    }
+        #sidebar .nav-link {
+            color: #adb5bd;
+            border-radius: 0.375rem;
+            margin-bottom: 0.1rem;
+            transition: all 0.2s ease;
+            padding: 0.4rem 1rem;
+        }
 
-    #main-content {
-      transition: all 0.3s;
-    }
+        #sidebar .nav-link:hover {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
+        #sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
 
-    #main-content {
-      margin-left: 250px;
-    }
+        /* Main Content Styles */
+        #main-content-wrapper {
+            transition: margin-left 0.3s ease;
+            margin-left: 280px;
+            padding-top: 70px;
+            width: calc(100% - 280px);
+            min-height: 100vh;
+        }
 
-    .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
-      text-transform: uppercase;
-    }
+        body.sidebar-collapsed #main-content-wrapper {
+            margin-left: 0;
+            width: 100%;
+        }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-  </style>
-  <style>
-    .dropdown-menu {
-      min-width: 250px;
-    }
+        /* Sidebar Heading */
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            font-weight: bold;
+        }
 
-    .status-option {
-      cursor: pointer;
-      padding-left: 1.5rem;
-    }
+        /* Navbar Styles */
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            height: 70px;
+            background-color: #fff !important;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
 
-    .status-circle {
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-    }
+        /* Toggle button style */
+        #toggleSidebar {
+            border: none;
+            background: none;
+            color: #495057;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+        }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
-      transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
-    }
+        #toggleSidebar:hover {
+            background-color: #f8f9fa;
+        }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
-    }
-  </style>
+        /* Search input styling */
+        .search-container {
+            max-width: 400px;
+        }
+
+        /* Notification badge */
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Nested collapse styling */
+        .nested-collapse {
+            padding-left: 2rem;
+        }
+
+        .nested-collapse .nav-link {
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Status option styles */
+        .status-option {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .status-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-circle {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        /* Card Styles */
+        .card {
+            border: none;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Button Styles */
+        .btn-ghost {
+            background-color: transparent;
+            border: none;
+            color: var(--gk-gray-500);
+        }
+
+        .btn-ghost:hover {
+            background-color: #f3f4f6;
+            color: var(--gk-gray-500);
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            padding: 0;
+        }
+
+        /* Avatar Styles */
+        .avatar-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar-group .avatar {
+            margin-left: -10px;
+            position: relative;
+            z-index: 1;
+            transition: z-index 0.2s;
+        }
+
+        .avatar-group .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-group .avatar:hover {
+            z-index: 10;
+        }
+
+        .avatar-group img,
+        .avatar-group .avatar-initials {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        /* Tab Navigation */
+        .nav-lb-tab .nav-link.active {
+            border-bottom: 2px solid #0d6efd;
+            color: #0d6efd;
+        }
+
+        .nav-lb-tab .nav-link {
+            color: #6c757d;
+            text-decoration: none;
+            padding: 0.75rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-lb-tab .nav-link:hover {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        /* Typography */
+        h4 {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .text-muted {
+            color: var(--gk-gray-500) !important;
+        }
+
+        /* Badge styles */
+        .bg-light-primary {
+            background-color: rgba(99, 102, 241, 0.1) !important;
+        }
+
+        .text-primary {
+            color: var(--gk-primary) !important;
+        }
+
+        .bg-light-info {
+            background-color: rgba(6, 182, 212, 0.1) !important;
+        }
+
+        .text-info {
+            color: var(--gk-info) !important;
+        }
+
+        .bg-light-danger {
+            background-color: rgba(239, 68, 68, 0.1) !important;
+        }
+
+        .text-danger {
+            color: #ef4444 !important;
+        }
+
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1) !important;
+            color: #0d6efd !important;
+        }
+
+        /* Chart containers */
+        .apexcharts-canvas {
+            margin: 0 auto;
+        }
+
+        /* Avatar placeholder styles */
+        .avatar-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 2px solid #fff;
+        }
+
+        /* Table styles */
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .table-centered th,
+        .table-centered td {
+            vertical-align: middle;
+        }
+
+        .badge {
+            padding: 0.35em 0.65em;
+            font-size: 0.75em;
+            border-radius: 0.375rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #sidebar {
+                min-width: 100%;
+                max-width: 100%;
+                margin-left: -100%;
+                z-index: 1050;
+                position: fixed;
+                top: 70px;
+                height: calc(100vh - 70px);
+            }
+
+            #sidebar.collapsed {
+                margin-left: -100%;
+            }
+
+            #sidebar:not(.collapsed) {
+                margin-left: 0;
+            }
+
+            body.sidebar-collapsed #main-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            #main-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+                display: none;
+            }
+
+            .overlay.show {
+                display: block;
+            }
+
+            .search-container {
+                max-width: 200px;
+            }
+
+            .avatar-group {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .avatar-group .avatar {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-container {
+                display: none;
+            }
+
+            .navbar .d-flex {
+                gap: 0.5rem;
+            }
+
+            .col-xl-3 {
+                margin-bottom: 1rem;
+            }
+
+            .container-fluid {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-        <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-        <form class="d-flex ms-3 flex-grow-1">
-            <div class="input-group w-50">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-            </div>
-        </form>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+        <div class="container-fluid px-3">
+            <button class="btn" id="toggleSidebar" type="button" aria-label="Toggle sidebar">
+                <i class="bi bi-list fs-3"></i>
+            </button>
 
-        <div class="d-flex align-items-center ms-auto">
-            <!--notification dropdown-->
-            <div class="dropdown me-3">
-                <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bell text-dark fs-4"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown"
-                    style="width: 300px;">
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                        <strong>Notification</strong>
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <hr>
-                    <div class="px-2 mb-2">
-                        <div class="d-flex mb-2">
-                            <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Kristin Watson</strong> : <br>
-                                liked your comment on course JavaScript Introduction! <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>2 hours ago, 2:19
-                                    PM</small>
+            <form class="d-flex ms-3 flex-grow-1" role="search">
+                <div class="input-group search-container">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+                        aria-label="Search">
+                </div>
+            </form>
+
+            <div class="d-flex align-items-center ms-auto">
+                <!-- Notifications -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button"
+                        id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                        <i class="bi bi-bell text-dark fs-4"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+                        style="width: 320px;">
+                        <div class="px-3 py-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold">Notifications</h6>
+                                <button class="btn btn-sm btn-outline-secondary" aria-label="Settings">
+                                    <i class="bi bi-gear"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="d-flex">
-                            <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Brooklyn Simons</strong> : <br>
-                                Just launched a new course Recat for Beginners <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>17 June 2025, 2:19
-                                    PM</small>
+
+                        <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+                            <div class="d-flex mb-3">
+                                <div class="avatar-placeholder bg-info me-3">KW</div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                                        JavaScript Introduction!</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>2 hours ago
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="avatar-placeholder bg-success me-3">BS</div>
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                                        for Beginners</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center border-top pt-2">
-                        <a href="#" class="text-decoration-none text-dark fw-bold">See All Notification</a>
+
+                        <div class="text-center border-top py-2">
+                            <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--profile Dropdown-->
-            <div class="dropdown">
-                <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-                    <div class="d-flex align-items-center px-3 py-2">
-                        <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-                        <div>
-                            <div><strong>Your Name</strong></div>
-                            <div class="text-muted small">your@email.com</div>
-                        </div>
-                    </div>
-                    <hr class="my-1">
-
-                    <!--status sub-dropdown-->
-                    <div class="dropdown">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#statusMenu" role="button">
-                            <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                        <div class="collapse" id="statusMenu">
-                            <div class="px-3 py-2">
-                                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
+                <!-- Profile -->
+                <div class="dropdown">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false" aria-label="Profile menu">
+                        <div class="avatar-placeholder bg-primary">JD</div>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+                        <div class="d-flex align-items-center px-3 py-3 border-bottom">
+                            <div class="avatar-placeholder bg-primary me-3">JD</div>
+                            <div>
+                                <div class="fw-bold">John Doe</div>
+                                <div class="text-muted small">john.doe@email.com</div>
                             </div>
                         </div>
+
+                        <div class="px-3 py-2">
+                            <div class="dropdown-item-text fw-bold mb-2">
+                                <i class="bi bi-circle-fill text-success me-2"></i>Status
+                            </div>
+                            <div class="ms-3">
+                                <div class="status-option">
+                                    <span class="status-circle bg-success"></span>Online
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-secondary"></span>Offline
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-warning"></span>Away
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-danger"></span>Busy
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-person me-2"></i>Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-credit-card me-2"></i>Subscription
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-gear me-2"></i>Settings
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item text-danger" href="#">
+                            <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                        </a>
                     </div>
-
-                    <a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-credit-card me-2"></i>Subscription</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a>
-
-                    <hr class="my-1">
-                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!--Sidebar-->
-    <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
-        <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
+    <!-- Overlay for mobile -->
+    <div class="overlay d-md-none" id="overlay"></div>
+
+    <!-- Page wrapper -->
+    <div class="d-flex flex-grow-1" id="page-wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="bg-dark vh-100 overflow-auto collapsed" aria-label="Main navigation">
             <ul class="nav flex-column px-2 mt-4">
-                <!--Dashboar-->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button" 
+                       aria-expanded="false" aria-controls="dashboardMenu">
                         <i class="bi bi-speedometer2 me-2"></i>Dashboard
                     </a>
                     <div class="collapse" id="dashboardMenu">
@@ -204,9 +549,9 @@
                     </div>
                 </li>
 
-                <!--courses-->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu" role="button"
+                       aria-expanded="false" aria-controls="coursesMenu">
                         <i class="bi bi-book me-2"></i>Courses
                     </a>
                     <div class="collapse" id="coursesMenu">
@@ -218,9 +563,9 @@
                     </div>
                 </li>
 
-                <!--user-->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#userMenu" role="button"
+                       aria-expanded="false" aria-controls="userMenu">
                         <i class="bi bi-people me-2"></i>User
                     </a>
                     <div class="collapse" id="userMenu">
@@ -231,9 +576,9 @@
                     </div>
                 </li>
 
-                <!--cms-->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu" role="button"
+                       aria-expanded="false" aria-controls="cmsMenu">
                         <i class="bi bi-columns me-2"></i>CMS
                     </a>
                     <div class="collapse" id="cmsMenu">
@@ -246,35 +591,37 @@
                     </div>
                 </li>
 
-                <!--Project-->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-                        <i class="bi bi-kanban"></i>Project
+                    <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu" role="button"
+                       aria-expanded="true" aria-controls="projectMenu">
+                        <i class="bi bi-kanban me-2"></i>Project
                     </a>
-                    <div class="collapse" id="projectMenu">
+                    <div class="collapse show" id="projectMenu">
                         <ul class="nav flex-column ms-4">
                             <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" id="#projectSingleMenu">
+                                <a class="nav-link active" data-bs-toggle="collapse" href="#projectSingleMenu"
+                                    aria-expanded="true" aria-controls="projectSingleMenu">
                                     Single
                                 </a>
-                                <ul class="nav flex-column ms-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Task</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                                </ul>
+                                <div class="collapse show nested-collapse" id="projectSingleMenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                                        <li class="nav-item"><a class="nav-link active" href="#">Task</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!--authentication-->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#authMenu" role="button"
+                       aria-expanded="false" aria-controls="authMenu">
                         <i class="bi bi-lock me-2"></i>Authentication
                     </a>
                     <div class="collapse" id="authMenu">
@@ -288,18 +635,17 @@
                     </div>
                 </li>
 
-                <!--APPS-->
                 <li class="sidebar-heading">Apps</li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
 
-                <!-- Components -->
                 <li class="sidebar-heading">Components</li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-                        <i class="bi bi-table me-2"></i> Tables
+                    <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu" role="button"
+                       aria-expanded="false" aria-controls="tablesMenu">
+                        <i class="bi bi-table me-2"></i>Tables
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
@@ -310,13 +656,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
+                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
                 </li>
 
-                <!-- Site Settings -->
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-                        <i class="bi bi-gear me-2"></i> Site Settings
+                    <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu" role="button"
+                       aria-expanded="false" aria-controls="siteSettingsMenu">
+                        <i class="bi bi-gear me-2"></i>Site Settings
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
@@ -329,20 +675,706 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
-        </div>
+        </nav>
 
-        <!-- Main page -->
+        <!-- Main content -->
+        <main id="main-content-wrapper" class="flex-grow-1 bg-light">
+            <section class="container-fluid p-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <!-- Page header -->
+                        <div class="d-flex flex-column flex-lg-row gap-2 align-items-lg-center justify-content-between mb-2">
+                            <div>
+                                <h2 class="mb-0 fw-bold">Geeks UI - Design &amp; Development</h2>
+                            </div>
+                            <!-- Avatar group -->
+                            <div class="avatar-group">
+                                <span class="avatar avatar-md">
+                                    <div class="avatar-placeholder bg-primary">PH</div>
+                                </span>
+                                <span class="avatar avatar-md">
+                                    <div class="avatar-placeholder bg-success">GL</div>
+                                </span>
+                                <span class="avatar avatar-md">
+                                    <div class="avatar-placeholder bg-warning">MH</div>
+                                </span>
+                                <span class="avatar avatar-md">
+                                    <div class="avatar-placeholder bg-info">LN</div>
+                                </span>
+                                <span class="avatar avatar-md">
+                                    <span class="avatar-initials rounded-circle bg-light text-dark border"
+                                        style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: bold;">5+</span>
+                                </span>
+                                <a href="#" class="btn btn-outline-secondary border-2 rounded-circle ms-2"
+                                    style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;" 
+                                    aria-label="Add member">+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Tab navigation -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <ul class="nav nav-lb-tab" role="tablist">
+                            <li class="nav-item ms-0 me-3">
+                                <a class="nav-link" href="#" role="tab">Overview</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link active" href="#" role="tab" aria-current="page">Task</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link" href="#" role="tab">Budget</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link" href="#" role="tab">Files</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link" href="#" role="tab">Team</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Search section -->
+                <div class="row mb-4">
+                    <div class="col-xxl-2 col-lg-3 col-md-12 col-12">
+                        <form role="search">
+                            <label for="memberSearch" class="visually-hidden">Search Member</label>
+                            <input type="search" class="form-control" id="memberSearch" placeholder="Search Member">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Stats cards -->
+                <div class="row gy-4 mb-4">
+                    <div class="col-md-6 col-xl-3 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="mb-0">Task Summary</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                            id="dropdownSeven" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Options">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownSeven">
+                                            <li><h6 class="dropdown-header">Settings</h6></li>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="text-center my-4">
+                                    <h1 class="display-3 text-primary mb-0 fw-bold">50</h1>
+                                    <p class="mb-0">Total Task Count</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="mb-0">In Progress</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                            id="dropdownEight" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Options">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownEight">
+                                            <li><h6 class="dropdown-header">Settings</h6></li>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="text-center my-4">
+                                    <h1 class="display-3 text-info mb-0 fw-bold">12</h1>
+                                    <p class="mb-0">
+                                        <span class="text-dark fw-semibold">6</span>
+                                        In Progress
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="mb-0">Completed</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                            id="dropdownNine" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Options">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownNine">
+                                            <li><h6 class="dropdown-header">Settings</h6></li>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="text-center my-4">
+                                    <h1 class="display-3 text-success mb-0 fw-bold">30</h1>
+                                    <p class="mb-0">
+                                        <span class="text-dark fw-semibold">8</span>
+                                        Today Completed
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="mb-0">Overdue</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                            id="dropdownTen" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Options">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownTen">
+                                            <li><h6 class="dropdown-header">Settings</h6></li>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="text-center my-4">
+                                    <h1 class="display-3 text-danger mb-0 fw-bold">8</h1>
+                                    <p class="mb-0">
+                                        <span class="text-dark fw-semibold">4</span>
+                                        Yesterday
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts section -->
+                <div class="row gy-4 mb-4">
+                    <div class="col-xl-8 col-md-12 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="mb-0">Task Summary</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                            id="dropdownChart1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Chart options">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownChart1">
+                                            <li><h6 class="dropdown-header">Settings</h6></li>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="mt-4 mb-3 text-muted">New vs. Closed</p>
+                                <div id="taskSummaryChart" style="min-height: 365px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-12 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mb-4">
+                                        <h4 class="mb-0">Task Completion Status</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                            id="dropdownChart2" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Chart options">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownChart2">
+                                            <li><h6 class="dropdown-header">Settings</h6></li>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="taskStatusChart" class="d-flex justify-content-center" style="min-height: 297px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom section with task by sections and task list -->
+                <div class="row gy-4">
+                    <div class="col-xl-4 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4 class="mb-0">Task by Sections</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                            id="dropdownChart3" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Chart options">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownChart3">
+                                            <li><h6 class="dropdown-header">Settings</h6></li>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="taskSectionChart" style="min-height: 367.7px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-8 col-12">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h4 class="mb-0">Upcoming task by Assignee</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table text-nowrap mb-0 table-hover table-centered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Tasks</th>
+                                            <th scope="col">End Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Progress</th>
+                                            <th scope="col">Assignee</th>
+                                            <th scope="col"><span class="visually-hidden">Actions</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Design Wireframes</td>
+                                            <td>Set end date</td>
+                                            <td><span class="badge bg-light-primary text-primary">In Review</span></td>
+                                            <td>
+                                                <div id="taskWireframeChart" style="min-height: 69.7px; width: 80px;"></div>
+                                            </td>
+                                            <td><div class="avatar-placeholder bg-primary" style="width: 32px; height: 32px; font-size: 0.8rem;">A1</div></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                                        id="dropdownTask1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Task options">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownTask1">
+                                                        <li><h6 class="dropdown-header">Settings</h6></li>
+                                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prototype design</td>
+                                            <td>Aug 15, 2021</td>
+                                            <td><span class="badge bg-light-info text-info">In Progress</span></td>
+                                            <td>
+                                                <div id="taskPrototypeChart" style="min-height: 69.7px; width: 80px;"></div>
+                                            </td>
+                                            <td><div class="avatar-placeholder bg-success" style="width: 32px; height: 32px; font-size: 0.8rem;">A2</div></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                                        id="dropdownTask2" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Task options">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownTask2">
+                                                        <li><h6 class="dropdown-header">Settings</h6></li>
+                                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Content Writing</td>
+                                            <td>Aug 16, 2021</td>
+                                            <td><span class="badge bg-light-danger text-danger">Cancel</span></td>
+                                            <td>
+                                                <div id="taskContentChart" style="min-height: 69.7px; width: 80px;"></div>
+                                            </td>
+                                            <td><div class="avatar-placeholder bg-warning" style="width: 32px; height: 32px; font-size: 0.8rem;">A3</div></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                                        id="dropdownTask3" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Task options">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownTask3">
+                                                        <li><h6 class="dropdown-header">Settings</h6></li>
+                                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Figma to Bootstrap Conversion</td>
+                                            <td>Aug 18, 2021</td>
+                                            <td><span class="badge bg-primary-soft">In Review</span></td>
+                                            <td>
+                                                <div id="taskFigmaChart" style="min-height: 69.7px; width: 80px;"></div>
+                                            </td>
+                                            <td><div class="avatar-placeholder bg-info" style="width: 32px; height: 32px; font-size: 0.8rem;">A4</div></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                                        id="dropdownTask4" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Task options">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownTask4">
+                                                        <li><h6 class="dropdown-header">Settings</h6></li>
+                                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Interface Design</td>
+                                            <td>Aug 18, 2021</td>
+                                            <td><span class="badge bg-primary-soft">In Review</span></td>
+                                            <td>
+                                                <div id="taskInterfaceChart" style="min-height: 69.7px; width: 80px;"></div>
+                                            </td>
+                                            <td><div class="avatar-placeholder bg-secondary" style="width: 32px; height: 32px; font-size: 0.8rem;">A5</div></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle btn-icon" type="button"
+                                                        id="dropdownTask5" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Task options">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownTask5">
+                                                        <li><h6 class="dropdown-header">Settings</h6></li>
+                                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
-    <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script> 
-        document.getElementById('toggleSidebar').addEventListener('click', function() { 
-            const sidebar = document.getElementById('sidebar'); 
-            sidebar.classList.toggle('collapsed');
-    });
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sidebar toggle logic
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const body = document.body;
+            const overlay = document.getElementById('overlay');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
+
+            function toggleSidebarState() {
+                sidebar.classList.toggle('collapsed');
+                body.classList.toggle('sidebar-collapsed');
+                
+                // Handle overlay for mobile
+                if (window.innerWidth <= 768) {
+                    overlay.classList.toggle('show');
+                }
+            }
+
+            toggleSidebar.addEventListener('click', function () {
+                toggleSidebarState();
+            });
+
+            // Hide sidebar on overlay click for mobile
+            overlay.addEventListener('click', function () {
+                if (!sidebar.classList.contains('collapsed')) {
+                    toggleSidebarState();
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 768) {
+                    overlay.classList.remove('show');
+                }
+            });
+
+            // Initialize sidebar as collapsed by default
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('collapsed');
+                body.classList.remove('sidebar-collapsed');
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Task Summary Chart (Mixed Chart)
+            const taskSummaryOptions = {
+                series: [
+                    {
+                        name: 'Closed',
+                        type: 'column',
+                        data: [12, 18, 20, 32, 19, 25, 30]
+                    },
+                    {
+                        name: 'New',
+                        type: 'line',
+                        data: [20, 32, 28, 50, 38, 35, 49]
+                    }
+                ],
+                chart: {
+                    height: 350,
+                    type: 'line',
+                    toolbar: {
+                        show: false
+                    },
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                colors: ['#a5b4fc', '#6366f1'],
+                stroke: {
+                    width: [0, 4],
+                    curve: 'straight'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '50%',
+                        borderRadius: 3
+                    }
+                },
+                fill: {
+                    opacity: [1, 1]
+                },
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                markers: {
+                    size: 0
+                },
+                xaxis: {
+                    type: 'category',
+                    labels: {
+                        style: {
+                            colors: '#6b7280',
+                            fontSize: '13px',
+                            fontFamily: 'Inter, sans-serif'
+                        }
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#e5e7eb'
+                    },
+                    axisTicks: {
+                        show: true,
+                        color: '#e5e7eb'
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: ''
+                    },
+                    min: 0,
+                    max: 50,
+                    labels: {
+                        style: {
+                            colors: '#6b7280',
+                            fontSize: '13px',
+                            fontFamily: 'Inter, sans-serif'
+                        }
+                    }
+                },
+                tooltip: {
+                    shared: true,
+                    intersect: false,
+                    y: {
+                        formatter: function (y) {
+                            if (typeof y !== "undefined") {
+                                return y.toFixed(0);
+                            }
+                            return y;
+                        }
+                    }
+                },
+                grid: {
+                    borderColor: '#e5e7eb',
+                    strokeDashArray: 0
+                },
+                legend: {
+                    show: false
+                }
+            };
+
+            const taskSummaryChart = new ApexCharts(document.querySelector("#taskSummaryChart"), taskSummaryOptions);
+            taskSummaryChart.render();
+
+            // Task Status Chart (Donut Chart)
+            const taskStatusOptions = {
+                series: [75, 25],
+                chart: {
+                    type: 'donut',
+                    height: 290
+                },
+                labels: ['Completed', 'Incomplete'],
+                colors: ['#6366f1', '#06b6d4'],
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '75%'
+                        }
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    horizontalAlign: 'center',
+                    fontSize: '14px',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 500,
+                    labels: {
+                        colors: '#374151'
+                    },
+                    markers: {
+                        width: 14,
+                        height: 14
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                            return val + "%"
+                        }
+                    }
+                },
+                stroke: {
+                    width: 2,
+                    colors: ['transparent']
+                }
+            };
+
+            const taskStatusChart = new ApexCharts(document.querySelector("#taskStatusChart"), taskStatusOptions);
+            taskStatusChart.render();
+
+            // Task Section Chart (Radial Bar)
+            const taskSectionOptions = {
+                series: [44, 65, 89, 75],
+                chart: {
+                    height: 350,
+                    type: 'radialBar',
+                },
+                plotOptions: {
+                    radialBar: {
+                        dataLabels: {
+                            name: {
+                                fontSize: '22px',
+                            },
+                            value: {
+                                fontSize: '16px',
+                            },
+                            total: {
+                                show: true,
+                                label: 'Total',
+                                formatter: function (w) {
+                                    return 273
+                                }
+                            }
+                        }
+                    }
+                },
+                labels: ['Design', 'Frontend', 'Development', 'Issues'],
+                colors: ['#6366f1', '#10b981', '#06b6d4', '#f59e0b']
+            };
+
+            const taskSectionChart = new ApexCharts(document.querySelector("#taskSectionChart"), taskSectionOptions);
+            taskSectionChart.render();
+
+            // Individual task progress charts
+            const createProgressChart = (selector, percentage, color = '#10b981') => {
+                const options = {
+                    series: [percentage],
+                    chart: {
+                        height: 70,
+                        type: 'radialBar',
+                    },
+                    plotOptions: {
+                        radialBar: {
+                            hollow: {
+                                size: '45%',
+                            },
+                            dataLabels: {
+                                name: {
+                                    show: false,
+                                },
+                                value: {
+                                    show: true,
+                                    fontSize: '11px',
+                                    fontWeight: 600,
+                                    color: color,
+                                    formatter: function (val) {
+                                        return parseInt(val) + "%"
+                                    }
+                                }
+                            },
+                            track: {
+                                background: '#f2f2f2',
+                                strokeWidth: '100%',
+                            }
+                        }
+                    },
+                    colors: [color],
+                    stroke: {
+                        lineCap: 'round'
+                    }
+                };
+                
+                const chart = new ApexCharts(document.querySelector(selector), options);
+                chart.render();
+            };
+
+            // Create individual progress charts
+            createProgressChart("#taskWireframeChart", 65);
+            createProgressChart("#taskPrototypeChart", 75);
+            createProgressChart("#taskContentChart", 85);
+            createProgressChart("#taskFigmaChart", 40);
+            createProgressChart("#taskInterfaceChart", 35);
+        });
     </script>
 </body>
 
