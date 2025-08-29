@@ -1,73 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mail | Geeks</title>
-    <!-- Bootstrap 5.0.2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mail </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+  <!-- Feather Icons via CDN (Font-based style) -->
+  <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"></script>
 
   <style>
-    body {
-      overflow-x: hidden;
+    /* Global Styles */
+    :root {
+      --gk-primary: #6366f1;
+      --gk-light-primary: #a5b4fc;
+      --gk-info: #06b6d4;
+      --gk-success: #10b981;
+      --gk-warning: #f59e0b;
+      --gk-white: #ffffff;
+      --gk-gray-500: #6b7280;
+      --gk-border-color: #e5e7eb;
     }
 
+    body {
+      overflow-x: hidden;
+      background-color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* Sidebar Styles */
     #sidebar {
-      min-width: 250px;
-      max-width: 250px;
+      min-width: 280px;
+      max-width: 280px;
       background: #343a40;
       color: #fff;
-      transition: all 0.3s;
+      transition: margin-left 0.3s ease;
+      position: fixed;
+      height: calc(100vh - 70px);
+      top: 70px;
+      z-index: 1020;
+      overflow-y: auto;
     }
 
     #sidebar.collapsed {
-      margin-left: -250px;
+      margin-left: -280px;
     }
 
     #sidebar .nav-link {
       color: #adb5bd;
+      border-radius: 0.375rem;
+      margin-bottom: 0.1rem;
+      transition: all 0.2s ease;
+      padding: 0.4rem 1rem;
     }
 
     #sidebar .nav-link:hover {
       color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
     }
 
-    #main-content {
-      transition: all 0.3s;
+    #sidebar .nav-link.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
-    #sidebar.collapsed+#main-content {
+    /* Main Content Styles */
+    #main-content-wrapper {
+      transition: margin-left 0.3s ease;
+      margin-left: 280px;
+      padding-top: 70px;
+      width: calc(100% - 280px);
+      min-height: 100vh;
+    }
+
+    body.sidebar-collapsed #main-content-wrapper {
       margin-left: 0;
+      width: 100%;
     }
 
-    #main-content {
-      margin-left: 250px;
-    }
-
+    /* Sidebar Heading */
     .sidebar-heading {
-      padding: 1rem;
-      font-weight: bold;
-      background: #212529;
+      font-size: 0.75rem;
       text-transform: uppercase;
+      color: #6c757d;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      font-weight: bold;
     }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
+    /* Navbar Styles */
+    .navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      height: 70px;
+      background-color: #fff !important;
+      border-bottom: 1px solid #dee2e6;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    /* Toggle button style */
+    #toggleSidebar {
+      border: none;
+      background: none;
+      color: #495057;
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+    }
+
+    #toggleSidebar:hover {
+      background-color: #f8f9fa;
+    }
+
+    /* Search input styling */
+    .search-container {
+      max-width: 400px;
+    }
+
+    /* Notification badge */
+    .notification-badge {
+      position: relative;
+    }
+
+    .notification-badge::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background-color: #dc3545;
       border-radius: 50%;
-    }
-  </style>
-  <style>
-    .dropdown-menu {
-      min-width: 250px;
+      border: 2px solid #fff;
     }
 
+    /* Nested collapse styling */
+    .nested-collapse {
+      padding-left: 2rem;
+    }
+
+    .nested-collapse .nav-link {
+      padding-left: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Status option styles */
     .status-option {
       cursor: pointer;
-      padding-left: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+    }
+
+    .status-option:hover {
+      background-color: #f8f9fa;
     }
 
     .status-circle {
@@ -78,272 +174,1014 @@
       margin-right: 8px;
     }
 
-    /* MAIN CONTENT */
-    #main-content {
-      margin-left: 250px;
+    /* Card Styles */
+    .card {
+      border: none;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      border-radius: 0.5rem;
       transition: all 0.3s ease;
-      padding: 20px;
-      width: 100%;
     }
 
-    #sidebar.collapsed+#main-content {
-      margin-left: 0;
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Button Styles */
+    .btn-ghost {
+      background-color: transparent;
+      border: none;
+      color: var(--gk-gray-500);
+    }
+
+    .btn-ghost:hover {
+      background-color: #f3f4f6;
+      color: var(--gk-gray-500);
+    }
+
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+    }
+
+    /* Mail specific styles */
+    .mail-sidebar {
+      background-color: #f8f9fa;
+      border-radius: 0.75rem 0 0 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .mail-content {
+      border-radius: 0 0.75rem 0.75rem 0;
+      background-color: white;
+    }
+
+    .mail-header {
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+      padding: 1rem 1.5rem;
+    }
+
+    .mail-list {
+      max-height: calc(100vh - 250px);
+      overflow-y: auto;
+    }
+
+    .list-group-mail .list-group-item {
+      border: none;
+      border-bottom: 1px solid #f1f3f4;
+      padding: 1rem 1.5rem;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .list-group-mail .list-group-item:hover {
+      background-color: #f8f9fa !important;
+      cursor: pointer;
+    }
+
+    .list-group-mail .list-group-item:last-child {
+      border-bottom: none;
+    }
+
+    .list-mail {
+      position: relative;
+    }
+
+    .actions-mail {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .list-mail:hover .actions-mail {
+      opacity: 1;
+    }
+
+    .actions-mail a {
+      color: #6c757d;
+      text-decoration: none;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+    }
+
+    .actions-mail a:hover {
+      color: #495057;
+      background-color: #e9ecef;
+    }
+
+    .list-title {
+      min-width: 120px;
+      margin-right: 1rem;
+    }
+
+    .list-title a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #495057;
+    }
+
+    .list-text {
+      color: #6c757d;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .list-time {
+      min-width: 80px;
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .list-time p {
+      color: #6c757d;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    .list-badge {
+      margin-right: 1rem;
+    }
+
+    .mail-navigation {
+      padding: 0;
+    }
+
+    .mail-navigation .nav-link {
+      color: #6c757d;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 0.25rem;
+      transition: all 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mail-navigation .nav-link:hover {
+      background-color: #e9ecef;
+      color: #495057;
+      text-decoration: none;
+    }
+
+    .mail-navigation .nav-link.active {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .mail-search {
+      max-width: 300px;
+    }
+
+    .mail-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .mail-pagination {
+      background-color: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+      padding: 1rem 1.5rem;
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 768px) {
+      #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        margin-left: -100%;
+        z-index: 1050;
+        position: fixed;
+        top: 70px;
+        height: calc(100vh - 70px);
+      }
+
+      #sidebar.collapsed {
+        margin-left: -100%;
+      }
+
+      #sidebar:not(.collapsed) {
+        margin-left: 0;
+      }
+
+      body.sidebar-collapsed #main-content-wrapper {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      #main-content-wrapper {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+        display: none;
+      }
+
+      .overlay.show {
+        display: block;
+      }
+
+      .search-container {
+        max-width: 200px;
+      }
+
+      .mail-sidebar {
+        display: none;
+      }
+
+      .mail-content {
+        border-radius: 0.75rem;
+      }
+
+      .list-title {
+        min-width: 80px;
+        margin-right: 0.5rem;
+      }
+
+      .list-badge {
+        display: none !important;
+      }
+
+      .mail-search {
+        max-width: 100%;
+        margin-top: 0.5rem;
+      }
+
+      .mail-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .search-container {
+        display: none;
+      }
+
+      .navbar .d-flex {
+        gap: 0.5rem;
+      }
+
+      .container-fluid {
+        padding: 15px;
+      }
+
+      .list-group-mail .list-group-item {
+        padding: 0.75rem 1rem;
+      }
+
+      .actions-mail {
+        position: static;
+        transform: none;
+        opacity: 1;
+        margin-top: 0.5rem;
+        justify-content: flex-end;
+      }
+
+      .list-text {
+        -webkit-line-clamp: 3;
+      }
     }
   </style>
 </head>
 
 <body>
-    <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3 fixed-top">
-        <button class="btn" id="toggleSidebar"><i class="bi bi-list fs-3"></i></button>
-        <form class="d-flex ms-3 flex-grow-1">
-            <div class="input-group w-50">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input class="form-control" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
-            </div>
-        </form>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+    <div class="container-fluid px-3">
+      <button class="btn" id="toggleSidebar" type="button" aria-label="Toggle sidebar">
+        <i class="bi bi-list fs-3"></i>
+      </button>
 
-        <div class="d-flex align-items-center ms-auto">
-            <!--notification dropdown-->
-            <div class="dropdown me-3">
-                <a href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bell text-dark fs-4"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end p-2 shadow" aria-labelledby="notifDropdown"
-                    style="width: 300px;">
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                        <strong>Notification</strong>
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <hr>
-                    <div class="px-2 mb-2">
-                        <div class="d-flex mb-2">
-                            <img src="/assets/images/avatar-3.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Kristin Watson</strong> : <br>
-                                liked your comment on course JavaScript Introduction! <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>2 hours ago, 2:19
-                                    PM</small>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <img src="/assets/images/avatar-5.jpg" width="50" height="50" class="rounded-circle me-2"
-                                alt="">
-                            <div>
-                                <strong>Brooklyn Simons</strong> : <br>
-                                Just launched a new course Recat for Beginners <br>
-                                <small class="text-success"><i class="bi bi-hand-thumbs-up me-2"></i>17 June 2025, 2:19
-                                    PM</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center border-top pt-2">
-                        <a href="#" class="text-decoration-none text-dark fw-bold">See All Notification</a>
-                    </div>
-                </div>
-            </div>
-
-            <!--profile Dropdown-->
-            <div class="dropdown">
-                <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-                    <div class="d-flex align-items-center px-3 py-2">
-                        <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle me-2" alt="user">
-                        <div>
-                            <div><strong>Your Name</strong></div>
-                            <div class="text-muted small">your@email.com</div>
-                        </div>
-                    </div>
-                    <hr class="my-1">
-
-                    <!--status sub-dropdown-->
-                    <div class="dropdown">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" href="#statusMenu" role="button">
-                            <span><i class="bi bi-circle-fill me-2"></i>Status</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                        <div class="collapse" id="statusMenu">
-                            <div class="px-3 py-2">
-                                <div class="status-option"><span class="status-circle bg-success"></span>Online</div>
-                                <div class="status-option"><span class="status-circle bg-secondary"></span>Offline</div>
-                                <div class="status-option"><span class="status-circle bg-warning"></span>Away</div>
-                                <div class="status-option"><span class="status-circle bg-danger"></span>Busy</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-credit-card me-2"></i>Subscription</a>
-                    <a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a>
-
-                    <hr class="my-1">
-                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
-                </div>
-            </div>
+      <form class="d-flex ms-3 flex-grow-1" role="search">
+        <div class="input-group search-container">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search text-muted"></i>
+          </span>
+          <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+            aria-label="Search">
         </div>
+      </form>
+
+      <div class="d-flex align-items-center ms-auto">
+        <!-- Notifications -->
+        <div class="dropdown me-3">
+          <button class="btn btn-link text-decoration-none notification-badge" type="button" id="notifDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+            <i class="bi bi-bell text-dark fs-4"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+            style="width: 320px;">
+            <div class="px-3 py-3 border-bottom">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="mb-0 fw-bold">Notifications</h6>
+                <button class="btn btn-sm btn-outline-secondary" aria-label="Settings">
+                  <i class="bi bi-gear"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+              <div class="d-flex mb-3">
+                <img src="/assets/images/avatar-3.jpg" class="rounded-circle me-3" width="40" height="40">
+                <div class="flex-grow-1">
+                  <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course JavaScript Introduction!
+                  </p>
+                  <small class="text-muted">
+                    <i class="bi bi-clock me-1"></i>2 hours ago
+                  </small>
+                </div>
+              </div>
+              <div class="d-flex mb-3">
+                <img src="/assets/images/avatar-5.jpg" class="rounded-circle me-3" width="40" height="40">
+                <div class="flex-grow-1">
+                  <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React for Beginners</p>
+                  <small class="text-muted">
+                    <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center border-top py-2">
+              <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile -->
+        <div class="dropdown">
+          <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Profile menu">
+
+            <img src="/assets/images/avatar-1.jpg" class="rounded-circle" width="40">
+          </button>
+          <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+            <div class="d-flex align-items-center px-3 py-3 border-bottom">
+              <img src="/assets/images/avatar-1.jpg" class="rounded-circle me-3" width="40">
+              <div>
+                <div class="fw-bold">John Doe</div>
+                <div class="text-muted small">john.doe@email.com</div>
+              </div>
+            </div>
+
+            <div class="px-3 py-2">
+              <div class="dropdown-item-text fw-bold mb-2">
+                <i class="bi bi-circle-fill text-success me-2"></i>Status
+              </div>
+              <div class="ms-3">
+                <div class="status-option">
+                  <span class="status-circle bg-success"></span>Online
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-secondary"></span>Offline
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-warning"></span>Away
+                </div>
+                <div class="status-option">
+                  <span class="status-circle bg-danger"></span>Busy
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-person me-2"></i>Profile
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-credit-card me-2"></i>Subscription
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-gear me-2"></i>Settings
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item text-danger" href="#">
+              <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div class="overlay d-md-none" id="overlay"></div>
+
+  <!-- Page wrapper -->
+  <div class="d-flex flex-grow-1" id="page-wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="bg-dark vh-100 overflow-auto collapsed" aria-label="Main navigation">
+      <ul class="nav flex-column px-2 mt-4">
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button" aria-expanded="false"
+            aria-controls="dashboardMenu">
+            <i class="bi bi-speedometer2 me-2"></i>Dashboard
+          </a>
+          <div class="collapse" id="dashboardMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu" role="button" aria-expanded="false"
+            aria-controls="coursesMenu">
+            <i class="bi bi-book me-2"></i>Courses
+          </a>
+          <div class="collapse" id="coursesMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#userMenu" role="button" aria-expanded="false"
+            aria-controls="userMenu">
+            <i class="bi bi-people me-2"></i>User
+          </a>
+          <div class="collapse" id="userMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu" role="button" aria-expanded="false"
+            aria-controls="cmsMenu">
+            <i class="bi bi-columns me-2"></i>CMS
+          </a>
+          <div class="collapse" id="cmsMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu" role="button" aria-expanded="true"
+            aria-controls="projectMenu">
+            <i class="bi bi-kanban me-2"></i>Project
+          </a>
+          <div class="collapse " id="projectMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">List</a></li>
+              <li class="nav-item">
+                <a class="nav-link " data-bs-toggle="collapse" href="#projectSingleMenu" aria-expanded="true"
+                  aria-controls="projectSingleMenu">
+                  Single
+                </a>
+                <div class="collapse nested-collapse" id="projectSingleMenu">
+                  <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link " href="#">Task</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#authMenu" role="button" aria-expanded="false"
+            aria-controls="authMenu">
+            <i class="bi bi-lock me-2"></i>Authentication
+          </a>
+          <div class="collapse" id="authMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="sidebar-heading">Apps</li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
+
+        <li class="sidebar-heading">Components</li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu" role="button" aria-expanded="false"
+            aria-controls="tablesMenu">
+            <i class="bi bi-table me-2"></i>Tables
+          </a>
+          <div class="collapse" id="tablesMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">Basic</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Data Tables</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu" role="button" aria-expanded="false"
+            aria-controls="siteSettingsMenu">
+            <i class="bi bi-gear me-2"></i>Site Settings
+          </a>
+          <div class="collapse" id="siteSettingsMenu">
+            <ul class="nav flex-column ms-4">
+              <li class="nav-item"><a class="nav-link" href="#">General</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </nav>
 
-    <!--Sidebar-->
-    <div class="d-flex" style="margin-top: 70px;"> <!--offset for fixed navbar-->
-        <div id="sidebar" class="bg-dark position-fixed vh-100 overflow-auto">
-            <ul class="nav flex-column px-2 mt-4">
-                <!--Dashboar-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button">
-                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
-                    </a>
-                    <div class="collapse" id="dashboardMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--courses-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu">
-                        <i class="bi bi-book me-2"></i>Courses
-                    </a>
-                    <div class="collapse" id="coursesMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--user-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#userMenu">
-                        <i class="bi bi-people me-2"></i>User
-                    </a>
-                    <div class="collapse" id="userMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--cms-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu">
-                        <i class="bi bi-columns me-2"></i>CMS
-                    </a>
-                    <div class="collapse" id="cmsMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--Project-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu">
-                        <i class="bi bi-kanban"></i>Project
-                    </a>
-                    <div class="collapse" id="projectMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" id="#projectSingleMenu">
-                                    Single
-                                </a>
-                                <ul class="nav flex-column ms-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Task</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--authentication-->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#authMenu">
-                        <i class="bi bi-lock me-2"></i>Authentication
-                    </a>
-                    <div class="collapse" id="authMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!--APPS-->
-                <li class="sidebar-heading">Apps</li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
-
-                <!-- Components -->
-                <li class="sidebar-heading">Components</li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#tablesMenu">
-                        <i class="bi bi-table me-2"></i> Tables
-                    </a>
-                    <div class="collapse" id="tablesMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Basic</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Data Tables</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i> Help Center</a>
-                </li>
-
-                <!-- Site Settings -->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu">
-                        <i class="bi bi-gear me-2"></i> Site Settings
-                    </a>
-                    <div class="collapse" id="siteSettingsMenu">
-                        <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">General</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-            </ul>
+    <!-- Main content -->
+    <main id="main-content-wrapper" class="flex-grow-1">
+      <section class="container-fluid p-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="border-bottom pb-3 mb-4">
+              <h2 class="mb-0 fw-bold">Mail</h2>
+              <!--breadcrumb-->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">App</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Mail</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
         </div>
 
-        <!-- Main page -->
+        <div class="row">
+          <div class="col-12">
+            <!--mail layout card-->
+            <div class="card">
+              <div class="row g-0 h-100">
+                <!--mail sidebar-->
+                <div class="col-xl-3 col-lg-4 mail-sidebar d-none d-lg-block">
+                  <div class="d-grid mb-4">
+                    <button class="btn btn-primary" data-bs-toggle="model" data-bs-target="#composeMailModal">
+                      <i class="bi bi-plus-circle me-2"></i>Compose New Email
+                    </button>
+                  </div>
 
-    </div>
-    <!-- Bootstrap Bundle with Popper (Bootstrap 5.0.2) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script> 
-        document.getElementById('toggleSidebar').addEventListener('click', function() { 
-            const sidebar = document.getElementById('sidebar'); 
-            sidebar.classList.toggle('collapsed');
+                  <nav class="mail-navigation">
+                    <ul class="nav flex-column">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="inbox" class="me-2"> </i>
+                            Inbox
+                          </span>
+                          <span class="badge bg-primary rounded-pill">3</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="send" class="me-2"></i>
+                            Sent
+                          </span>
+                          <span class="badge bg-secondary rounded-pill">5</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="mail" class="me-2"></i>Drafts
+                          </span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="alert-circle" class="me-2"></i>Spam
+                          </span>
+                          <span class="badge bg-warning rounded-pill">1</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="trash" class="me-2"></i>Trash
+                          </span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                          <span class="d-flex align-items-center">
+                            <i data-feather="archive" class="me-2"></i>Archive
+                          </span>
+
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="star" class="me-2"></i>Starred
+                          </span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="bookmark" class="me-2"></i> Important
+                          </span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <span class="d-flex align-items-center">
+                            <i data-feather="tag" class="me-2 text-success"></i>Personal
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+
+                <!--Mail content-->
+                <div class="col-xl-9 col-lg-8 col-12 mail-content"> 
+                  <!--Mail header-->
+                  <div class="mail-header"> 
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3"> 
+                      <div class="mail-toolbar"> 
+                        <div class="d-flex align-items-center border rounded-2 px-2 py-1"> 
+                          <div class="form-check me-2"> 
+                            <input class="form-check-input" type="checkbox" value="" id="checkAll">
+                          </div>
+                          <div class="dropdown"> 
+                            <button class="btn btn-sm " type="button" data-bs-toggle="dropdown"> 
+                              <i data-feather="chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-start">  
+                              <li><a class="dropdown-item" href="#">All</a></li>
+                              <li><a class="dropdown-item" href="#">Read</a></li>
+                              <li><a class="dropdown-item" href="#">Unread</a></li>
+                              <li><a class="dropdown-item" href="#">Starred</a></li>
+                              <li><a class="dropdown-item" href="#">Unstarred</a></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <button class="btn btn-outline-secondary btn-icon" title="Refresh"> 
+                          <i data-feather="rotate-cw"></i>
+                        </button>
+
+                        <div class="dropdown"> 
+                          <button class="btn btn-outline-secondary btn-icon" type="button" data-bs-toggle="dropdown"> 
+                            <i data-feather="more-vertical"></i>
+                          </button>
+                          <ul class="dropdown-menu"> 
+                            <li><a class="dropdown-item" href="#">Mark all as read</a></li>
+                            <li><a class="dropdown-item" href="#">Select All</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                             <li><a class="dropdown-item" href="#">Export</a></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="mail-search"> 
+                        <div class="input-group"> 
+                          <span class="input-group-text bg-white">
+                            <i class="bi bi-search"></i>
+                          </span>
+                          <input type="search" class="form-control" placeholder="Search emails...">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--mail list-->
+                  <div class="mail-list"> 
+                    <div class="list-group list-group-flush list-group-mail"> 
+                      <!--email item 1-->
+                      <div class="list-group-item list-group-item-action list-mail"> 
+                        <div class="d-flex align-items-center"> 
+                          <div class="me-3"> 
+                            <input class="form-check-input" type="checkbox" id="mail">
+                          </div>
+                          <div class="me-3"> 
+                            <i class="bi bi-star-fill text-warning"></i>
+                          </div>
+                          <div class="list-title"> 
+                            <a href="#" class="fw-semibold text-dark">Material UI</a>
+                          </div>
+                          <div class="flex-grow-1 me-3"> 
+                            <a href="#" class="text-decoration none"> 
+                              <p class="mb-0 list-text fw-semibold text-dark"> 
+                                Start working on Material UI Design layouts encourage consistency across platforms,
+                                environments, and screen sizes by using uniform elements and spacing
+                              </p>
+                            </a>
+                          </div>
+                          <div class="list-badge me-3">
+                            <span class="badge bg-danger">Important</span>
+                          </div>
+                          <div class="list-time"> 
+                            <p class="mb-0">10:49 pm</p>
+                          </div>
+                        </div>
+                        <div class="actions-mail"> 
+                          <a href="#" title="Archive"><i data-feather="archive"></i></a>
+                          <a href="#" title="Delete"><i data-feather="trash-2"></i></a>
+                          <a href="#" title="Mark as read"><i data-feather="mail"></i></a>
+                          <a href="#" title="Hide"><i data-feather="eye-off"></i></a>
+                        </div>
+                      </div>
+
+                      <!-- Email Item 2 -->
+                      <div class="list-group-item list-group-item-action list-mail bg-light">
+                        <div class="d-flex align-items-center">
+                          <div class="me-3">
+                            <input class="form-check-input" type="checkbox" id="mail2">
+                          </div>
+                          <div class="me-3">
+                            <i class="bi bi-star text-muted"></i>
+                          </div>
+                          <div class="list-title">
+                            <a href="#">Search Console</a>
+                          </div>
+                          <div class="flex-grow-1 me-3">
+                            <a href="#" class="text-decoration-none">
+                              <p class="mb-0 list-text">
+                                New Mobile Usability issues detected for site. To fix this error, make sure the pages
+                                use relative width and position values for CSS elements.
+                              </p>
+                            </a>
+                          </div>
+                          <div class="list-time">
+                            <p class="mb-0">2:02 am</p>
+                          </div>
+                        </div>
+                        <div class="actions-mail">
+                          <a href="#" title="Archive"><i data-feather="archive"></i></a>
+                          <a href="#" title="Delete"><i data-feather="trash-2"></i></a>
+                          <a href="#" title="Mark as read"><i data-feather="mail"></i></a>
+                          <a href="#" title="Hide"><i data-feather="eye-off"></i></a>
+                        </div>
+                      </div>
+                      <!-- Email Item 3 -->
+                      <div class="list-group-item list-group-item-action list-mail bg-light">
+                        <div class="d-flex align-items-center">
+                          <div class="me-3">
+                            <input class="form-check-input" type="checkbox" id="mail3">
+                          </div>
+                          <div class="me-3">
+                            <i class="bi bi-star text-muted"></i>
+                          </div>
+                          <div class="list-title">
+                            <a href="#">Indie Hackers</a>
+                          </div>
+                          <div class="flex-grow-1 me-3">
+                            <a href="#" class="text-decoration-none">
+                              <p class="mb-0 list-text">
+                                Get conversions by sampling product features in your blog amet consectetur adipisicing
+                                elit. Quibusdam aut soluta repellendus culpa voluptatibus.
+                              </p>
+                            </a>
+                          </div>
+                          <div class="list-badge me-3">
+                            <span class="badge bg-success">Social</span>
+                          </div>
+                          <div class="list-time">
+                            <p class="mb-0">4:02 am</p>
+                          </div>
+                        </div>
+                        <div class="actions-mail">
+                          <a href="#" title="Archive"><i data-feather="archive"></i></a>
+                          <a href="#" title="Delete"><i data-feather="trash-2"></i></a>
+                          <a href="#" title="Mark as read"><i data-feather="mail"></i></a>
+                          <a href="#" title="Hide"><i data-feather="eye-off"></i></a> 
+                        </div>
+                      </div>
+
+                      <!-- Email Item 4 -->
+                      <div class="list-group-item list-group-item-action list-mail bg-light">
+                        <div class="d-flex align-items-center">
+                          <div class="me-3">
+                            <input class="form-check-input" type="checkbox" id="mail4">
+                          </div>
+                          <div class="me-3">
+                            <i class="bi bi-star text-muted"></i>
+                          </div>
+                          <div class="list-title">
+                            <a href="#">LinkedIn</a>
+                          </div>
+                          <div class="flex-grow-1 me-3">
+                            <a href="#" class="text-decoration-none">
+                              <p class="mb-0 list-text">
+                                See Jitu and other people's connections, experience lorem ipsum dolor sit amet
+                                consectetur adipisicing elit. Minima atque beatae nisi illo.
+                              </p>
+                            </a>
+                          </div>
+                          <div class="list-time">
+                            <p class="mb-0">May 12</p>
+                          </div>
+                        </div>
+                        <div class="actions-mail">
+                          <a href="#" title="Archive"><i data-feather="archive"></i></a>
+                          <a href="#" title="Delete"><i data-feather="trash-2"></i></a>
+                          <a href="#" title="Mark as read"><i data-feather="mail"></i></a>
+                          <a href="#" title="Hide"><i data-feather="eye-off"></i></a> 
+                        </div>
+                      </div>              
+
+                      <!-- Email Item 5 -->
+                      <div class="list-group-item list-group-item-action list-mail">
+                        <div class="d-flex align-items-center">
+                          <div class="me-3">
+                            <input class="form-check-input" type="checkbox" id="mail5">
+                          </div>
+                          <div class="me-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                          </div>
+                          <div class="list-title">
+                            <a href="#" class="fw-semibold text-dark">Bootstrap Themes</a>
+                          </div>
+                          <div class="flex-grow-1 me-3">
+                            <a href="#" class="text-decoration-none">
+                              <p class="mb-0 list-text fw-semibold text-dark">
+                                [Bootstrap Themes] New order (89153)! You've received the following consectetur
+                                adipisicing elit. Sequi sed dolor repellat reprehenderit.
+                              </p>
+                            </a>
+                          </div>
+                          <div class="list-time">
+                            <p class="mb-0">May 2</p>
+                          </div>
+                        </div>
+                        <div class="actions-mail">
+                          <a href="#" title="Archive"><i data-feather="archive"></i></a>
+                          <a href="#" title="Delete"><i data-feather="trash-2"></i></a>
+                          <a href="#" title="Mark as read"><i data-feather="mail"></i></a>
+                          <a href="#" title="Hide"><i data-feather="eye-off"></i></a> 
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Mail Pagination -->
+                  <div class="mail-pagination">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-0 text-muted">Showing 1-20 of 289 emails</p>
+                      <div class="d-flex gap-1">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" disabled>
+                          <i data-feather="chevron-left"></i> Newer
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm">
+                          Older <i data-feather="chevron-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+  <script>
+    feather.replace()
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Sidebar toggle logic
+      const toggleSidebar = document.getElementById('toggleSidebar');
+      const sidebar = document.getElementById('sidebar');
+      const body = document.body;
+      const overlay = document.getElementById('overlay');
+
+      function toggleSidebarState() {
+        sidebar.classList.toggle('collapsed');
+        body.classList.toggle('sidebar-collapsed');
+
+        // Handle overlay for mobile
+        if (window.innerWidth <= 768) {
+          overlay.classList.toggle('show');
+        }
+      }
+
+      toggleSidebar.addEventListener('click', function () {
+        toggleSidebarState();
+      });
+
+      // Hide sidebar on overlay click for mobile
+      overlay.addEventListener('click', function () {
+        if (!sidebar.classList.contains('collapsed')) {
+          toggleSidebarState();
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+          overlay.classList.remove('show');
+        }
+      });
+
+      // Initialize sidebar as collapsed by default
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('collapsed');
+        body.classList.remove('sidebar-collapsed');
+      }
+
+      // Email selection functionality
+      const checkAllBox = document.getElementById('checkAll');
+      const emailCheckboxes = document.querySelectorAll('.list-group-mail input[type="checkbox"]:not(#checkAll)');
+
+      checkAllBox.addEventListener('change', function() {
+        emailCheckboxes.forEach(checkbox => {
+          checkbox.checked = this.checked;
+        });
+      });
+
+      // Individual checkbox handling
+      emailCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const checkedCount = document.querySelectorAll('.list-group-mail input[type="checkbox"]:checked:not(#checkAll)').length;
+          checkAllBox.checked = checkedCount === emailCheckboxes.length;
+          checkAllBox.indeterminate = checkedCount > 0 && checkedCount < emailCheckboxes.length;
+        });
+      });
+
+      // Email hover effects
+      document.querySelectorAll('.list-mail').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateX(4px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateX(0)';
+        });
+      });
     });
-    </script>
+  </script>
 </body>
 
 </html>
