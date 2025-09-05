@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Tables | Admin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"></script>
+
+    <style>
+        /* Global Styles */
+        :root {
+            --gk-primary: #6366f1;
+            --gk-light-primary: #a5b4fc;
+            --gk-info: #06b6d4;
+            --gk-success: #10b981;
+            --gk-warning: #f59e0b;
+            --gk-white: #ffffff;
+            --gk-gray-500: #6b7280;
+            --gk-border-color: #e5e7eb;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: #f8fafc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            min-width: 280px;
+            max-width: 280px;
+            background: #343a40;
+            color: #fff;
+            transition: margin-left 0.3s ease;
+            position: fixed;
+            height: calc(100vh - 70px);
+            top: 70px;
+            z-index: 1020;
+            overflow-y: auto;
+        }
+
+        #sidebar.collapsed {
+            margin-left: -280px;
+        }
+
+        #sidebar .nav-link {
+            color: #adb5bd;
+            border-radius: 0.375rem;
+            margin-bottom: 0.1rem;
+            transition: all 0.2s ease;
+            padding: 0.4rem 1rem;
+        }
+
+        #sidebar .nav-link:hover {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        #sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content Styles */
+        #main-content-wrapper {
+            transition: margin-left 0.3s ease;
+            margin-left: 280px;
+            padding-top: 70px;
+            width: calc(100% - 280px);
+            min-height: 100vh;
+        }
+
+        body.sidebar-collapsed #main-content-wrapper {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        /* Sidebar Heading */
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            font-weight: bold;
+        }
+
+        /* Navbar Styles */
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            height: 70px;
+            background-color: #fff !important;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        /* Toggle button style */
+        #toggleSidebar {
+            border: none;
+            background: none;
+            color: #495057;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+        }
+
+        #toggleSidebar:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Search input styling */
+        .search-container {
+            max-width: 400px;
+        }
+
+        /* Notification badge */
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Nested collapse styling */
+        .nested-collapse {
+            padding-left: 2rem;
+        }
+
+        .nested-collapse .nav-link {
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Status option styles */
+        .status-option {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .status-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-circle {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        /* Card Styles */
+        .card {
+            border: none;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Button Styles */
+        .btn-ghost {
+            background-color: transparent;
+            border: none;
+            color: var(--gk-gray-500);
+        }
+
+        .btn-ghost:hover {
+            background-color: #f3f4f6;
+            color: var(--gk-gray-500);
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            padding: 0;
+        }
+
+        /* Avatar Styles */
+        .avatar-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar-group .avatar {
+            margin-left: -10px;
+            position: relative;
+            z-index: 1;
+            transition: z-index 0.2s;
+        }
+
+        .avatar-group .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-group .avatar:hover {
+            z-index: 10;
+        }
+
+        .avatar-group img,
+        .avatar-group .avatar-initials {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        /* Tab Navigation */
+        .nav-lb-tab .nav-link.active {
+            border-bottom: 2px solid #0d6efd;
+            color: #0d6efd;
+        }
+
+        .nav-lb-tab .nav-link {
+            color: #6c757d;
+            text-decoration: none;
+            padding: 0.75rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-lb-tab .nav-link:hover {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        /* Typography */
+        h4 {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .text-muted {
+            color: var(--gk-gray-500) !important;
+        }
+
+        /* Badge styles */
+        .bg-light-primary {
+            background-color: rgba(99, 102, 241, 0.1) !important;
+        }
+
+        .text-primary {
+            color: var(--gk-primary) !important;
+        }
+
+        .bg-light-info {
+            background-color: rgba(6, 182, 212, 0.1) !important;
+        }
+
+        .text-info {
+            color: var(--gk-info) !important;
+        }
+
+        .bg-light-danger {
+            background-color: rgba(239, 68, 68, 0.1) !important;
+        }
+
+        .text-danger {
+            color: #ef4444 !important;
+        }
+
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1) !important;
+            color: #0d6efd !important;
+        }
+
+        .bg-gray-200 {
+            background-color: #e5e7eb !important;
+        }
+
+        /* Chart containers */
+        .apexcharts-canvas {
+            margin: 0 auto;
+        }
+
+        /* Avatar placeholder styles */
+        .avatar-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 2px solid #fff;
+        }
+
+        .avatar.avatar-xs {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Table styles */
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .table-centered th,
+        .table-centered td {
+            vertical-align: middle;
+        }
+
+        .badge {
+            padding: 0.35em 0.65em;
+            font-size: 0.75em;
+            border-radius: 0.375rem;
+        }
+
+        /* Kanban Specific Styles */
+        .task-kanban-container {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            min-height: calc(100vh - 250px);
+        }
+
+        .task-card {
+            min-width: 320px;
+            max-width: 320px;
+            flex-shrink: 0;
+            background-color: #f8f9fa !important;
+            border: 1px solid #e9ecef;
+        }
+
+        .task-kanban .card {
+            margin-bottom: 1rem;
+            background-color: white;
+            border: 1px solid #dee2e6;
+        }
+
+        .task-kanban .card:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Page Header Styles */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h2 {
+            color: white;
+            margin: 0;
+        }
+
+        /* Project Header Styles */
+        .project-header {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-header h3 {
+            color: #1f2937;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Choices.js custom styling */
+        .choices {
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .choices__inner {
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            min-height: calc(2.25rem + 2px);
+            padding: 0.375rem 0.75rem;
+        }
+
+        .choices__list--single {
+            padding: 0;
+        }
+
+        .choices__item {
+            margin-bottom: 0;
+        }
+
+        /* Custom scrollbar for task container */
+        .task-kanban-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .task-kanban-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .task-kanban-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        .task-kanban-container::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #sidebar {
+                min-width: 100%;
+                max-width: 100%;
+                margin-left: -100%;
+                z-index: 1050;
+                position: fixed;
+                top: 70px;
+                height: calc(100vh - 70px);
+            }
+
+            #sidebar.collapsed {
+                margin-left: -100%;
+            }
+
+            #sidebar:not(.collapsed) {
+                margin-left: 0;
+            }
+
+            body.sidebar-collapsed #main-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            #main-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+                display: none;
+            }
+
+            .overlay.show {
+                display: block;
+            }
+
+            .search-container {
+                max-width: 200px;
+            }
+
+            .avatar-group {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .avatar-group .avatar {
+                margin-left: 0;
+            }
+
+            .task-card {
+                min-width: 280px;
+                max-width: 280px;
+            }
+
+            .project-header {
+                padding: 1rem;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-section .form-select {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-container {
+                display: none;
+            }
+
+            .navbar .d-flex {
+                gap: 0.5rem;
+            }
+
+            .container-fluid {
+                padding: 15px;
+            }
+
+            .task-card {
+                min-width: 260px;
+                max-width: 260px;
+            }
+
+            .project-header h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
+        <div class="container-fluid px-3">
+            <button class="btn" id="toggleSidebar" type="button" aria-label="Toggle sidebar">
+                <i class="bi bi-list fs-3"></i>
+            </button>
+
+            <form class="d-flex ms-3 flex-grow-1" role="search">
+                <div class="input-group search-container">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+                        aria-label="Search">
+                </div>
+            </form>
+
+            <div class="d-flex align-items-center ms-auto">
+                <!-- Notifications -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button"
+                        id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                        <i class="bi bi-bell text-dark fs-4"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+                        style="width: 320px;">
+                        <div class="px-3 py-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold">Notifications</h6>
+                                <button class="btn btn-sm btn-outline-secondary" aria-label="Settings">
+                                    <i class="bi bi-gear"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
+                            <div class="d-flex mb-3">
+                                <img src="/assets/images/avatar-3.jpg" class="rounded-circle me-3" width="40"
+                                    height="40">
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                                        JavaScript Introduction!
+                                    </p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>2 hours ago
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <img src="/assets/images/avatar-5.jpg" class="rounded-circle me-3" width="40"
+                                    height="40">
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                                        for Beginners</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center border-top py-2">
+                            <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile -->
+                <div class="dropdown">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false" aria-label="Profile menu">
+
+                        <img src="/assets/images/avatar-1.jpg" class="rounded-circle" width="40">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
+                        <div class="d-flex align-items-center px-3 py-3 border-bottom">
+                            <img src="/assets/images/avatar-1.jpg" class="rounded-circle me-3" width="40">
+                            <div>
+                                <div class="fw-bold">John Doe</div>
+                                <div class="text-muted small">john.doe@email.com</div>
+                            </div>
+                        </div>
+
+                        <div class="px-3 py-2">
+                            <div class="dropdown-item-text fw-bold mb-2">
+                                <i class="bi bi-circle-fill text-success me-2"></i>Status
+                            </div>
+                            <div class="ms-3">
+                                <div class="status-option">
+                                    <span class="status-circle bg-success"></span>Online
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-secondary"></span>Offline
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-warning"></span>Away
+                                </div>
+                                <div class="status-option">
+                                    <span class="status-circle bg-danger"></span>Busy
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-person me-2"></i>Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-credit-card me-2"></i>Subscription
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-gear me-2"></i>Settings
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item text-danger" href="#">
+                            <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay d-md-none" id="overlay"></div>
+
+    <!-- Page wrapper -->
+    <div class="d-flex flex-grow-1" id="page-wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="bg-dark vh-100 overflow-auto collapsed" aria-label="Main navigation">
+            <ul class="nav flex-column px-2 mt-4">
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#dashboardMenu" role="button"
+                        aria-expanded="false" aria-controls="dashboardMenu">
+                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                    </a>
+                    <div class="collapse" id="dashboardMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#coursesMenu" role="button"
+                        aria-expanded="false" aria-controls="coursesMenu">
+                        <i class="bi bi-book me-2"></i>Courses
+                    </a>
+                    <div class="collapse" id="coursesMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#userMenu" role="button" aria-expanded="false"
+                        aria-controls="userMenu">
+                        <i class="bi bi-people me-2"></i>User
+                    </a>
+                    <div class="collapse" id="userMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#cmsMenu" role="button" aria-expanded="false"
+                        aria-controls="cmsMenu">
+                        <i class="bi bi-columns me-2"></i>CMS
+                    </a>
+                    <div class="collapse" id="cmsMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#projectMenu" role="button" aria-expanded="true"
+                        aria-controls="projectMenu">
+                        <i class="bi bi-kanban me-2"></i>Project
+                    </a>
+                    <div class="collapse " id="projectMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link " data-bs-toggle="collapse" href="#projectSingleMenu"
+                                    aria-expanded="true" aria-controls="projectSingleMenu">
+                                    Single
+                                </a>
+                                <div class="collapse nested-collapse" id="projectSingleMenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
+                                        <li class="nav-item"><a class="nav-link " href="#">Task</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#authMenu" role="button" aria-expanded="false"
+                        aria-controls="authMenu">
+                        <i class="bi bi-lock me-2"></i>Authentication
+                    </a>
+                    <div class="collapse" id="authMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="sidebar-heading">Apps</li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
+
+                <li class="sidebar-heading">Components</li>
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="collapse" href="#tablesMenu" role="button"
+                        aria-expanded="false" aria-controls="tablesMenu">
+                        <i class="bi bi-table me-2"></i>Tables
+                    </a>
+                    <div class="collapse" id="tablesMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">Basic</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#">Data Tables</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#siteSettingsMenu" role="button"
+                        aria-expanded="false" aria-controls="siteSettingsMenu">
+                        <i class="bi bi-gear me-2"></i>Site Settings
+                    </a>
+                    <div class="collapse" id="siteSettingsMenu">
+                        <ul class="nav flex-column ms-4">
+                            <li class="nav-item"><a class="nav-link" href="#">General</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main id="main-content-wrapper" class="flex-grow-1">
+            <section class="container-fluid p-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <!-- Page header -->
+                        <div class="border-bottom pb-3 mb-3">
+                            <div class="d-flex flex-column gap-1">
+                                <h1 class="mb-0 h2 fw-bold">Data Tables</h1>
+                                <!-- Breadcrumb -->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="admin-dashboard.html">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Data Tables</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- basic table -->
+                    <div class="col-md-12 col-12">
+                        <div class="card mb-5">
+                            <!-- card header  -->
+                            <div class="card-header">
+                                <h4 class="mb-1">Data Table Basic</h4>
+                                <p class="mb-0">
+                                    DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible
+                                    tool, built upon the foundations of progressive enhancement, that adds all of these
+                                    advanced
+                                    features to any HTML table.
+                                </p>
+                            </div>
+                            <!-- table  -->
+                            <div class="card-body">
+                                <div class="table-card">
+                                    <!-- HAPUS KONTROL MANUAL YANG ADA DI SINI -->
+                                    <div id="dataTableBasic_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
+                                        <!-- HAPUS BARIS PERTAMA (SEARCH DAN LENGTH) -->
+                                        <!-- HAPUS BARIS TERAKHIR (INFO DAN PAGINATION) -->
+                                        <table id="dataTableBasic"
+                                            class="table table-hover dataTable dtr-inline collapsed"
+                                            style="width: 100%;" aria-describedby="dataTableBasic_info">
+                                            <colgroup>
+                                                <col data-dt-column="0" style="width: 132.766px;">
+                                                <col data-dt-column="1" style="width: 135.984px;">
+                                                <col data-dt-column="2" style="width: 122.281px;">
+                                                <col data-dt-column="3" style="width: 82.9688px;">
+                                            </colgroup>
+                                            <thead class="table-light">
+                                                <tr role="row">
+                                                    <th data-dt-column="0" rowspan="1" colspan="1"
+                                                        class="dt-orderable-asc dt-orderable-desc dt-ordering-asc"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: Activate to invert sorting" tabindex="0"><span
+                                                            class="dt-column-title" role="button">Name</span><span
+                                                            class="dt-column-order"></span>
+                                                    </th>
+                                                    <th data-dt-column="1" rowspan="1" colspan="1"
+                                                        class="dt-orderable-asc dt-orderable-desc"
+                                                        aria-label="Position: Activate to sort" tabindex="0">
+                                                        <span class="dt-column-title" role="button">Position</span><span
+                                                            class="dt-column-order"></span>
+                                                    </th>
+                                                    <th data-dt-column="2" rowspan="1" colspan="1"
+                                                        class="dt-orderable-asc dt-orderable-desc"
+                                                        aria-label="Office: Activate to sort" tabindex="0"><span
+                                                            class="dt-column-title" role="button">Office</span><span
+                                                            class="dt-column-order"></span></th>
+                                                    <th data-dt-column="3" rowspan="1" colspan="1"
+                                                        class="dt-type-numeric dt-orderable-asc dt-orderable-desc"
+                                                        aria-label="Age: Activate to sort" tabindex="0"><span
+                                                            class="dt-column-title" role="button">Age</span><span
+                                                            class="dt-column-order"></span></th>
+                                                    <th data-dt-column="4" rowspan="1" colspan="1"
+                                                        class="dt-type-date dt-orderable-asc dt-orderable-desc dtr-hidden"
+                                                        aria-label="Start date: Activate to sort" tabindex="0"
+                                                        style="display: none;"><span class="dt-column-title"
+                                                            role="button">Start date</span><span
+                                                            class="dt-column-order"></span></th>
+                                                    <th data-dt-column="5" rowspan="1" colspan="1"
+                                                        class="dt-type-numeric dt-orderable-asc dt-orderable-desc dtr-hidden"
+                                                        aria-label="Salary: Activate to sort" tabindex="0"
+                                                        style="display: none;"><span class="dt-column-title"
+                                                            role="button">Salary</span><span
+                                                            class="dt-column-order"></span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="dtr-control sorting_1" tabindex="0">Airi Satou</td>
+                                                    <td>Accountant</td>
+                                                    <td>Tokyo</td>
+                                                    <td class="dt-type-numeric">33</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2008/11/28
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $162,700
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="sorting_1 dtr-control">Angelica Ramos</td>
+                                                    <td>Chief Executive Officer (CEO)</td>
+                                                    <td>London</td>
+                                                    <td class="dt-type-numeric">47</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2009/10/09
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $1,200,000
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="dtr-control sorting_1" tabindex="0">Ashton Cox</td>
+                                                    <td>Junior Technical Author</td>
+                                                    <td>San Francisco</td>
+                                                    <td class="dt-type-numeric">66</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2009/01/12
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $86,000
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="sorting_1 dtr-control">Bradley Greer</td>
+                                                    <td>Software Engineer</td>
+                                                    <td>London</td>
+                                                    <td class="dt-type-numeric">41</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2012/10/13
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $132,000
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="sorting_1 dtr-control">Brenden Wagner</td>
+                                                    <td>Software Engineer</td>
+                                                    <td>San Francisco</td>
+                                                    <td class="dt-type-numeric">28</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2011/06/07
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $206,850
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="dtr-control sorting_1" tabindex="0">Brielle
+                                                        Williamson</td>
+                                                    <td>Integration Specialist</td>
+                                                    <td>New York</td>
+                                                    <td class="dt-type-numeric">61</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2012/12/02
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $372,000
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="sorting_1 dtr-control">Bruno Nash</td>
+                                                    <td>Software Engineer</td>
+                                                    <td>London</td>
+                                                    <td class="dt-type-numeric">38</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2011/05/03
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $163,500
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="sorting_1 dtr-control">Caesar Vance</td>
+                                                    <td>Pre-Sales Support</td>
+                                                    <td>New York</td>
+                                                    <td class="dt-type-numeric">21</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2011/12/12
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $106,450
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="sorting_1 dtr-control">Cara Stevens</td>
+                                                    <td>Sales Assistant</td>
+                                                    <td>New York</td>
+                                                    <td class="dt-type-numeric">46</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2011/12/06
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $145,600
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="dtr-control sorting_1" tabindex="0">Cedric Kelly</td>
+                                                    <td>Senior Javascript Developer</td>
+                                                    <td>Edinburgh</td>
+                                                    <td class="dt-type-numeric">22</td>
+                                                    <td class="dt-type-date dtr-hidden" style="display: none;">
+                                                        2012/03/29
+                                                    </td>
+                                                    <td class="dt-type-numeric dtr-hidden" style="display: none;">
+                                                        $433,060
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Sidebar toggle logic
+                const toggleSidebar = document.getElementById('toggleSidebar');
+                const sidebar = document.getElementById('sidebar');
+                const body = document.body;
+                const overlay = document.getElementById('overlay');
+                const mainContentWrapper = document.getElementById('main-content-wrapper');
+
+                function toggleSidebarState() {
+                    sidebar.classList.toggle('collapsed');
+                    body.classList.toggle('sidebar-collapsed');
+                    // Handle overlay for mobile
+                    if (window.innerWidth <= 768) {
+                        overlay.classList.toggle('show');
+                    }
+                }
+
+                toggleSidebar.addEventListener('click', function () {
+                    toggleSidebarState();
+                });
+
+                // Hide sidebar on overlay click for mobile
+                overlay.addEventListener('click', function () {
+                    if (!sidebar.classList.contains('collapsed')) {
+                        toggleSidebarState();
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', function () {
+                    if (window.innerWidth > 768) {
+                        overlay.classList.remove('show');
+                    }
+                });
+
+                // Initialize sidebar as collapsed by default
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('collapsed');
+                    body.classList.remove('sidebar-collapsed');
+                }
+
+                // Initialize DataTable
+                $(document).ready(function () {
+                    var table = $('#dataTableBasic').DataTable({
+                        // Make all columns searchable
+                        columnDefs: [
+                            { targets: '_all', searchable: true }
+                        ],
+                        // Show all columns in search (including hidden ones)
+                        searching: true,
+                        // Enable responsive behavior
+                        responsive: true,
+                        // Show all entries initially
+                        pageLength: 10,
+                        // Configure the DOM structure to place controls properly
+                        dom: '<"row justify-content-between align-items-center"<"col-xl-4 col-12 d-xl-flex px-5 py-3"f><"col-xl-2 px-5 py-3 d-xl-flex justify-content-start"l>>' +
+                            '<"row"<"col-sm-12"tr>>' +
+                            '<"row align-items-center border-top px-4 py-2"<"col-sm-6"i><"col-sm-6 d-flex justify-content-end"p>>',
+                        // Configure language for Indonesian
+                        language: {
+                            search: "Search:",
+                            lengthMenu: "_MENU_ <br>entries per page",
+                            info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                            infoEmpty: "Menampilkan 0 sampai 0 dari 0 entri",
+                            infoFiltered: "(disaring dari _MAX_ entri total)",
+                            paginate: {
+                                first: "first",
+                                last: "last",
+                                next: "Next",
+                                previous: "Previous"
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+</body>
+
+</html>
