@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Setting | Geeks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/cpurse-lead.css">
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="/pages/homepage.html">
+                <img src="/assets/images/computer_geeks.png" alt="logo" width="90" height="50" class="me-2" />
+            </a>
+
+            <!-- Toggler for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar menu -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left menu -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Browse Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="browseDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Browse</a>
+                        <ul class="dropdown-menu" aria-labelledby="browseDropdown">
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Web Development</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Design</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Mobile App</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">IT Software</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Marketing</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Music</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Life Style</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Business</a></li>
+              <li><a href="/pages/course-category/mostpopular.html" class="dropdown-item">Photography</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Landings Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="landingsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Landings</a>
+                        <ul class="dropdown-menu" aria-labelledby="landingsDropdown">
+              <li><a href="/pages/landings/landing-courses.html" class="dropdown-item">Courses</a></li>
+              <li><a href="/pages/landings/course-lead.html" class="dropdown-item">Lead Course</a></li>
+              <li><a href="/pages/landings/request-access.html" class="dropdown-item">Request Course</a></li>
+              <li><a href="/pages/landings/landing-sass.html" class="dropdown-item">Saas</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Pages Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                        <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+              <li><a href="/pages/course-path.html" class="dropdown-item">Courses</a></li>
+              <li><a href="/pages/course-single.html" class="dropdown-item">Paths</a></li>
+              <li><a href="/pages/blog.html" class="dropdown-item">Blog</a></li>
+              <li><a href="/pages/career.html" class="dropdown-item">Career</a></li>
+              <li><a href="/pages/coming-soon.html" class="dropdown-item">Specialty</a></li>
+              <li><a href="/pages/about.html" class="dropdown-item">About</a></li>
+              <li><a href="/pages/help-center.html" class="dropdown-item">Help Center</a></li>
+              <li><a href="/pages/pricing.html" class="dropdown-item">Pricing</a></li>
+              <li><a href="/pages/compare-plan.html" class="dropdown-item">Compare</a></li>
+              <li><a href="/pages/contact.html" class="dropdown-item">Contact</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Accounts Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Accounts</a>
+                        <ul class="dropdown-menu" aria-labelledby="accountsDropdown">
+              <li><a href="/pages/instructor/dashboard-instructor.html" class="dropdown-item">Instructors</a></li>
+              <li><a href="/pages/student/dashboard-student.html" class="dropdown-item">Student</a></li>
+              <li><a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html" class="dropdown-item">Admin</a></li>
+              <li><a href="/pages/sign-in.html" class="dropdown-item">Sign In</a></li>
+              <li><a href="/pages/sign-up.html" class="dropdown-item">Sign Out</a></li>
+              <li><a href="/pages/forget-password.html" class="dropdown-item">Forgot Password</a></li>
+              <li><a href="/pages/edit-profile.html" class="dropdown-item">Edit Profile</a></li>
+              <li><a href="/pages/student/account_setting/security.html" class="dropdown-item">Security</a></li>
+              <li><a href="/pages/student/account_setting/social-profile.html" class="dropdown-item">Social Profile</a></li>
+              <li><a href="/pages/student/account_setting/notifications.html" class="dropdown-item">Notification</a></li>
+              <li><a href="/pages/student/account_setting/profile-privacy.html" class="dropdown-item">Privacy Settings</a></li>
+              <li><a href="/pages/student/account_setting/delete-profile.html" class="dropdown-item">Delete Profile</a></li>
+              <li><a href="/pages/student/account_setting/linked-accounts.html" class="dropdown-item">Linked Accounts</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- More Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">...</a>
+                        <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#documentation">
+                                    Documentations
+                                    <p class="mb-0 small text-muted">Browse all documentations</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="log">
+                                    Changelog V1.04
+                                    <p class="mb-0 small text-muted">See what's new</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Search form -->
+                <form class="d-flex me-5" action="/search" method="GET">
+                    <input class="form-control me-2 bg-light" type="search" placeholder="Search Something..."
+                        aria-label="Search" name="query" />
+                    <button class="btn btn-primary" type="submit"><i data-feather="search"></i></button>
+                </form>
+
+                <!-- Profile Dropdown -->
+                <div class="dropdown">
+                    <a href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                        aria-haspopup="true" role="button" class="d-flex align-items-center text-decoration-none">
+                        <img src="/assets/images/avatar-1.jpg" alt="profile" width="50" height="50"
+                            class="rounded-circle" />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 280px;"
+                        aria-labelledby="profileDropdown">
+                        <li class="d-flex align-items-center mb-3">
+                            <img src="/assets/images/avatar-1.jpg" alt="Anette Black" class="rounded-circle me-2"
+                                width="50" height="50" />
+                            <div>
+                                <strong>Anette Black</strong><br />
+                                <small class="text-muted">anette@mail.com</small>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li class="dropdown dropend">
+                            <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span><i class="bi bi-circle-fill text-success me-2"></i>Status</span>
+                                <i class="bi bi-caret-right-fill"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-success me-2"></i>Online</a></li>
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-secondary me-2"></i>Offline</a></li>
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-warning me-2"></i>Away</a></li>
+                                <li><a href="#" class="dropdown-item"><i
+                                            class="bi bi-circle-fill text-danger me-2"></i>Busy</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-star me-2"></i>Subscription</a></li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a href="#" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar and Main Content Wrapper -->
+    <div class="d-flex" style="padding-top: 70px;">
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="d-lg-block bg-light sidebar collapse border-end shadow-sm" style="width: 250px;">
+            <div class="position-sticky">
+                <div class="list-group-flush mt-4 px-3">
+                    <!--main-->
+                    <a href="/pages/student/dashboard-student.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                    </a>
+                    <a href="/pages/student/my-learning.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-journal-code me-2"></i> My Learning
+                    </a>
+                    <a href="/pages/student/myProjects.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-kanban me-2"></i> My Projects
+                    </a>
+
+                    <!--My Quiz Dropdown-->
+                    <button
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" data-bs-target="#quizSubmenu" aria-expanded="false"
+                        aria-controls="quizSubmenu">
+                        <span><i class="bi bi-question-circle me-2"> My Quiz</i></span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse ps-3" id="quizSubmenu">
+                        <a href="/pages/student/quiz.html" class="list-group-item list-group-item-action">Quiz</a>
+                        <a href="/pages/student/myQuiz.html" class="list-group-item list-group-item-action">My Quiz</a>
+                        <a href="#" class="list-group-item list-group-item-action">Quiz Single</a>
+                        <a href="/pages/student/quiz-result.html" class="list-group-item list-group-item-action">Quiz Result</a>
+                    </div>
+                    <!-- Certificate (dropdown) -->
+                    <button
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" data-bs-target="#certificateSubmenu" aria-expanded="false"
+                        aria-controls="certificateSubmenu">
+                        <span><i class="bi bi-award me-2"></i> Certificate</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse ps-3" id="certificateSubmenu">
+                        <a href="/pages/student/certificate.html" class="list-group-item list-group-item-action">Certificate</a>
+                        <a href="/pages/student/myCertificate.html" class="list-group-item list-group-item-action">My Certificate</a>
+                    </div>
+                    <a href="/pages/student-subscription.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-box me-2"></i>Subscription
+                    </a>
+                    <a href="/pages/student/billing-info.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-receipt me-2"></i>Billing Info
+                    </a>
+                    <a href="/pages/student/payment-method.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-credit-card me-2"></i>Payment
+                    </a>
+                    <a href="/pages/student/invoice.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-file-earmark-text me-2"></i>Invoice
+                    </a>
+
+                    <!--learn-->
+                    <div class="mt-4 fw-bold text-uppercase small text-muted">LEARN</div>
+                    <a href="/pages/student/learn/All-courses.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-journals me-2"></i>All Courses
+                    </a>
+                    <a href="/pages/student/learn/learningPath.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-signpost me-2"></i>Learning Paths
+                    </a>
+                    <a href="/pages/student/learn/projects.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-kanban-fill me-2"></i>Projects
+                    </a>
+                    <a href="/pages/student/learn/quizzes.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-patch-question me-2"></i>Quizzes
+                    </a>
+
+                    <!--Account Settings-->
+                    <div class="mt-4 fw-bold text-uppercase small text-muted">Account Setting</div>
+                    <a href="/pages/student/account_setting/profile-edit.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person-circle me-2"></i>Edit Profile
+                    </a>
+                    <a href="/pages/student/account_setting/security.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-shield-lock me-2"></i>Security
+                    </a>
+                    <a href="/pages/student/account_setting/social-profile.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-people me-2"></i>Social Profiles
+                    </a>
+                    <a href="/pages/student/account_setting/notifications.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-link-45deg me-2"></i>Notification
+                    </a>
+                    <a href="/pages/student/account_setting/profile-privacy.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-shield me-2"></i>Profile Privacy
+                    </a>
+                    <a href="/pages/student/account_setting/delete-profile.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person-circle me-2"></i>Delete Profile
+                    </a>
+                    <a href="/pages/student/account_setting/linked-accounts.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-link-45deg me-2"></i>Linked Accounts
+                    </a>
+                    <a href="/pages/homepage.html" class="list-group-item list-group-item-action">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+
+    <div class="container my-5"> 
+        <div class="row "> 
+            <div class="col-12"> 
+                <h1 class="mb-0">Linked Accounts</h1>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12"> 
+                <div class="card"> 
+                    <div class="card-header bg-light"> 
+                        <h3 class="mb-0">Linked Accounts</h3>
+                        <p>You can link your social accounts into your geeks accounts & also access your history of linked accounts and manage your accounts in this sections.</p>
+                    </div>
+                    <!--card body-->
+                    <div class="card-body p-4"> 
+                        <i class="bi bi-facebook fs-2 btn-outline-primary"></i>
+                        <span class="fs-3 fw-bold text-dark"> Facebook</span>
+                        <p>Enable one-click login and receive more personalized course recommendations.</p>
+                        <a href="#" class="btn btn-primary fw-bolder">Remove My Facebook Account</a>
+                    </div>
+                    <div class="card-body p-4"> 
+                        <i class="bi bi-google fs-2 btn-outline-danger"></i>
+                        <span class="fs-3 fw-bold text-dark"> Google</span>
+                        <p>Enable one-click login and receive more personalized course recommendations.</p>
+                        <a href="#" class="btn btn-danger fw-bolder">Link My Google Account</a>
+                    </div>
+                    <div class="card-body p-4"> 
+                        <i class="bi bi-github fs-2 btn-outline-dark"></i>
+                        <span class="fs-3 fw-bold text-dark"> Github</span>
+                        <p>Enable one-click login and receive more personalized course recommendations.</p>
+                        <a href="#" class="btn btn-outline-dark fw-bolder">Link My Github Account</a>
+                    </div>
+                    <div class="card-body p-4"> 
+                        <i class="bi bi-twitter fs-2 btn-outline-primary"></i>
+                        <span class="fs-3 fw-bold text-dark"> Twitter</span>
+                        <p>Enable one-click login and receive more personalized course recommendations.</p>
+                        <a href="#" class="btn btn-outline-dark fw-bolder">Link My Twitter Account</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    </div> <!--div final-->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script>
+    feather.replace()
+</script>
+
+
+</html>
