@@ -17,47 +17,47 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-primary bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-primary bg-white shadow-sm">
         <div class="container">
             <!--logo-->
-            <a href="/pages/homepage.html" class="navbar-brand d-flex align-items-center">
-                <img src="/assets/images/computer_geeks.png" alt="logo" width="90" height="50" class="bg-light me-2" />
+            <a class="navbar-brand d-flex align-items-center" href="/pages/homepage.html">
+                <img src="/assets/images/computer_geeks.png" alt="logo" width="90" height="50" class="me-2 bg-white">
             </a>
-            <!--toggler for mobile-->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <!--Toogler for mobile-->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse "
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportContent" aria-expanded="false"
+                aria-label="Toogle navigation">
 
-                <span class="navbar-toggle-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <!--navbar menu-->
+            <!--navbar menu : left side-->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!--lesft menu-->
+                <!--left menu-->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!--help center-->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="HelpCenterDropsown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="HelpcenterDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Help Center
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="HelpCenterDropdown">
-                            <li><a href="/pages/help-center.html" class="dropdown-item">Help Ceneter</a></li>
+                            Help Center</a>
+                        <ul class="dropdown-menu" aria-labelledby="HelpcenterDropdown">
+                            <li><a href="/pages/help-center.html" class="dropdown-item">Help Center</a></li>
                             <li><a href="/pages/help-center-faq.html" class="dropdown-item">FAQ's</a></li>
-                            <li><a href="/pages/help-center-browse&resource.html" class="dropdown-item">Guide</a></li>
-                            <li><a href="/pages/help-center-guide-single.html">Guide Single</a></li>
-                            <li><a href="/pages/help-center-support.html" class="dropdown=item">Support</a></li>
+                            <li><a href="/pages/help-center-guide.html" class="dropdown-item">Guide </a></li>
+                            <li><a href="/pages/help-center-guide-single.html" class="dropdown-item">Guide Single</a>
+                            </li>
+                            <li><a href="/pages/help-center-support.html" class="dropdown-item">Support</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
-            <!--navbar right side-->
+            <!--navbar menu: right side "search"-->
             <form class="d-flex me-3" action="/search" method="GET">
-                <input class="form-control me-2 bg-light border-primary" type="search" placeholder="Seacrh Something..."
-                    aria-label="Search" name="query" />
-                <button class="btn btn-primary "><i data-feather="search"></i></button>
+                <input class="form-control me-2" type="search" placeholder="search something.." aria-label="Search"
+                    name="query" />
+                <button class="btn btn-primary" type="submit"><i data-feather="search"></i></button>
             </form>
             <div class="d-flex">
-                <a class="btn btn-primary" href="/pages/help-center-support.html">Submit</a>
+                <a href="/pages/help-center-support.html" class="btn btn-primary">Submit Ticket</a>
             </div>
         </div>
     </nav>
@@ -583,11 +583,11 @@
                     <!-- list -->
                     <h3 class="fw-bold mb-3 fs-5">Company</h3>
                     <ul class="list-unstyled nav nav-footer flex-column nav-x-0">
-                        <li><a href="#" class="nav-link">About</a></li>
-                        <li><a href="#" class="nav-link">Pricing</a></li>
-                        <li><a href="#" class="nav-link">Blog</a></li>
-                        <li><a href="#" class="nav-link">Careers</a></li>
-                        <li><a href="#" class="nav-link">Contact</a></li>
+                            <li><a href="/pages/about.html" class="nav-link">About</a></li>
+                            <li><a href="/pages/pricing.html" class="nav-link">Pricing</a></li>
+                            <li><a href="/pages/blog.html" class="nav-link">Blog</a></li>
+                            <li><a href="/pages/career.html" class="nav-link">Careers</a></li>
+                            <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -596,11 +596,11 @@
                     <!-- list -->
                     <h3 class="fw-bold mb-3 fs-5">Support</h3>
                     <ul class="list-unstyled nav nav-footer flex-column nav-x-0">
-                        <li><a href="#" class="nav-link">Help and Support</a></li>
-                        <li><a href="#" class="nav-link">Become Instructor</a></li>
-                        <li><a href="#" class="nav-link">Get the app</a></li>
-                        <li><a href="#" class="nav-link">FAQ’s</a></li>
-                        <li><a href="#" class="nav-link">Tutorial</a></li>
+                            <li><a href="/pages/help-center.html" class="nav-link">Help and Support</a></li>
+                            <li><a href="/pages/career.html" class="nav-link">Become Instructor</a></li>
+                            <li><a href="/pages/help-center-browse&resource.html" class="nav-link">Get the app</a></li>
+                            <li><a href="/pages/help-center-faq.html" class="nav-link">FAQ’s</a></li>
+                            <li><a href="/pages/course-category/mostpopular.html" class="nav-link">Tutorial</a></li>
                     </ul>
                 </div>
             </div>
