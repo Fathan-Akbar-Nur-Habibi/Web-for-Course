@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMS Category</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <style>
         /* Prevent horizontal scroll */
         body {
@@ -45,7 +47,7 @@
             width: calc(100% - 280px);
         }
 
-        #sidebar.collapsed + #main-content {
+        #sidebar.collapsed+#main-content {
             margin-left: 0;
             width: 100%;
         }
@@ -178,23 +180,23 @@
                 margin-left: -100%;
                 z-index: 1050;
             }
-            
+
             #sidebar.show {
                 margin-left: 0;
             }
-            
+
             #main-content {
                 margin-left: 0;
                 width: 100%;
             }
-            
+
             .overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0,0,0,0.5);
+                background-color: rgba(0, 0, 0, 0.5);
                 z-index: 1040;
             }
 
@@ -222,26 +224,30 @@
         .bg-primary-soft {
             background-color: rgba(13, 110, 253, 0.1) !important;
         }
+
         .bg-success-soft {
             background-color: rgba(25, 135, 84, 0.1) !important;
         }
+
         .bg-info-soft {
             background-color: rgba(13, 202, 240, 0.1) !important;
         }
+
         .bg-warning-soft {
             background-color: rgba(255, 193, 7, 0.1) !important;
         }
+
         .bg-secondary-soft {
             background-color: rgba(108, 117, 125, 0.1) !important;
         }
-        
+
         /* Hover effects */
         .card:hover {
             transform: translateY(-2px);
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
             transition: all 0.3s ease;
         }
-        
+
         .table tbody tr:hover {
             background-color: rgba(0, 0, 0, 0.025);
         }
@@ -252,6 +258,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
@@ -267,7 +274,8 @@
                     <span class="input-group-text bg-white border-end-0">
                         <i class="bi bi-search text-muted"></i>
                     </span>
-                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+                        aria-label="Search">
                 </div>
             </form>
 
@@ -275,10 +283,12 @@
             <div class="d-flex align-items-center ms-auto">
                 <!-- Notification Dropdown -->
                 <div class="dropdown me-3">
-                    <button class="btn btn-link text-decoration-none notification-badge" type="button" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button"
+                        id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-bell text-dark fs-4"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown" style="width: 320px;">
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+                        style="width: 320px;">
                         <!-- Notification Header -->
                         <div class="px-3 py-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center">
@@ -288,33 +298,37 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <!-- Notification Items -->
                         <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
                             <div class="d-flex mb-3">
-                                <div class="bg-secondary rounded-circle me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                <div class="bg-secondary rounded-circle me-3"
+                                    style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
                                     <img src="/assets/images/avatar-3.jpg" width="40" class="rounded-circle">
                                 </div>
                                 <div class="flex-grow-1">
-                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course JavaScript Introduction!</p>
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                                        JavaScript Introduction!</p>
                                     <small class="text-muted">
                                         <i class="bi bi-clock me-1"></i>2 hours ago
                                     </small>
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
-                                <div class="bg-primary rounded-circle me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                <div class="bg-primary rounded-circle me-3"
+                                    style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
                                     <img src="/assets/images/avatar-5.jpg" width="40" class="rounded-circle">
                                 </div>
                                 <div class="flex-grow-1">
-                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React for Beginners</p>
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                                        for Beginners</p>
                                     <small class="text-muted">
                                         <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
                                     </small>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Notification Footer -->
                         <div class="text-center border-top py-2">
                             <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
@@ -324,16 +338,19 @@
 
                 <!-- Profile Dropdown -->
                 <div class="dropdown">
-                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="bg-success rounded-circle" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="bg-success rounded-circle"
+                            style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
                             <img src="/assets/images/avatar-1.jpg" width="40" class="rounded-circle">
                         </div>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
                         <!-- Profile Info -->
                         <div class="d-flex align-items-center px-3 py-3 border-bottom">
-                            <div class="rounded-circle me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
-                               <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle">
+                            <div class="rounded-circle me-3"
+                                style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <img src="/assets/images/avatar-1.jpg" width="50" class="rounded-circle">
                             </div>
                             <div>
                                 <div class="fw-bold">Your Name</div>
@@ -376,7 +393,7 @@
                         </a>
 
                         <div class="dropdown-divider"></div>
-                        
+
                         <a class="dropdown-item text-danger" href="#">
                             <i class="bi bi-box-arrow-right me-2"></i>Sign Out
                         </a>
@@ -400,8 +417,8 @@
                     </a>
                     <div class="collapse" id="dashboardMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Dashboard/analytics_dasboard.html">Analytics</a></li>
                         </ul>
                     </div>
                 </li>
@@ -413,9 +430,9 @@
                     </a>
                     <div class="collapse" id="coursesMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Courses/allCourses_admin.html">All Courses</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Courses/coursesCategory_admin.html">Courses Category</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Courses/categorySingle_admin.html">Category Single</a></li>
                         </ul>
                     </div>
                 </li>
@@ -427,8 +444,8 @@
                     </a>
                     <div class="collapse" id="userMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link active" href="#">Instructor</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="/pages/Admin/Admin-User/instructor_User.html">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-User/students_User.html">Students</a></li>
                         </ul>
                     </div>
                 </li>
@@ -440,10 +457,10 @@
                     </a>
                     <div class="collapse" id="cmsMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/overview_CMS.html">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/allPost_CMS.html">All Post</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/newPost.html">New Post</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/category._CMS.html">Category</a></li>
                         </ul>
                     </div>
                 </li>
@@ -455,19 +472,19 @@
                     </a>
                     <div class="collapse" id="projectMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Project/grid_Project.html">Grid</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Project/list_Project.html">List</a></li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">
                                     Single
                                 </a>
                                 <div class="collapse" id="projectSingleMenu">
                                     <ul class="nav flex-column ms-4">
-                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Task</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/overview_single_Project.html">Overview</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/task_single_Project.html">Task</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/budget_single_Project.html">Budget</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/team_single_Project.html">Team</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Project/Single_Admin_Project/file_single_Project.html">Files</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -482,21 +499,21 @@
                     </a>
                     <div class="collapse" id="authMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/sign-in.html">Sign In</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/sign-up.html">Sign Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/forget-password.html">Forget Password</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-Auth/notification.html">Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/homepage.html">404 Error</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <!-- APPS -->
                 <li class="sidebar-heading">Apps</li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/chat-app.html"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/task-app.html"><i class="bi bi-list-task me-2"></i>Task</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/mail.html"><i class="bi bi-envelope me-2"></i>Mail</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/calender.html"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
 
                 <!-- Components -->
                 <li class="sidebar-heading">Components</li>
@@ -506,14 +523,14 @@
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Basic</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Data Tables</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/components/table/basic_table.html">Basic</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/components/table/data_tables.html">Data Tables</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
+                    <a class="nav-link" href="/pages/help-center.html"><i class="bi bi-question-circle me-2"></i>Help Center</a>
                 </li>
 
                 <!-- Site Settings -->
@@ -523,10 +540,10 @@
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">General</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/components/sitesettings/general.html">General</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/components/sitesettings/google.html">Google</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/components/sitesettings/social.html">Social</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/components/sitesettings/social_login.html">Social Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
                         </ul>
@@ -537,41 +554,43 @@
 
         <!-- Main Content -->
         <div id="main-content">
-            <section class="container-fluid p-4"> 
-                <div class="row"> 
+            <section class="container-fluid p-4">
+                <div class="row">
                     <!--page header-->
-                    <div class="col-lg-12 col-md-12 col-12"> 
-                        <div class="border-bottom pb-3 mb-3 d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between">
-                          <div class="d-flex flex-column gap-1"> 
-                            <h2 class="mb-0 fw-bold">Category</h2>
-                            <!--breadcrumb-->
-                            <nav aria-label="breadcrumb"> 
-                                <ol class="breadcrumb"> 
-                                    <li class="breadcrumb-item">
-                                        <a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Dashboard</a>
-                                    </li>
-                                    <li class="breadcrumb-item"><a href="#">CMS</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Category</li>
-                                </ol>
-                            </nav>
-                          </div>  
-                          <div> 
-                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCategory">Add New Category</a>
-                         </div>
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div
+                            class="border-bottom pb-3 mb-3 d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between">
+                            <div class="d-flex flex-column gap-1">
+                                <h2 class="mb-0 fw-bold">Category</h2>
+                                <!--breadcrumb-->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item"><a href="#">CMS</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Category</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#newCategory">Add New Category</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row"> 
-                    <div class="col-lg-12 col-md-12 col-12"> 
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
                         <!--card-->
-                        <div class="card mb-4"> 
+                        <div class="card mb-4">
                             <!--card header-->
-                            <div class="card-header border-bottom-0"> 
+                            <div class="card-header border-bottom-0">
                                 <!--form-->
-                                <form class="d-flex align-items-center"> 
-                                    <div class="position-relative flex-grow-1"> 
-                                        <span class="position-absolute search-icon"> 
+                                <form class="d-flex align-items-center">
+                                    <div class="position-relative flex-grow-1">
+                                        <span class="position-absolute search-icon">
                                             <i class="bi bi-search"></i>
                                         </span>
                                         <input type="search" class="form-control ps-6" placeholder="Search Category">
@@ -579,12 +598,12 @@
                                 </form>
                             </div>
                             <!--table-->
-                            <div class="table-responsive border-0 overflow-y-hidden"> 
-                                <table class="table mb-0 text-nowrap table-hover"> 
-                                    <thead class="table-light"> 
-                                        <tr> 
-                                            <th> 
-                                                <div class="form-check"> 
+                            <div class="table-responsive border-0 overflow-y-hidden">
+                                <table class="table mb-0 text-nowrap table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>
+                                                <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="checkAll">
                                                     <label class="form-check-label" for="checkAll"></label>
                                                 </div>
@@ -598,17 +617,19 @@
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody> 
-                                        <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"> 
-                                            <td> 
-                                                <div class="form-check"> 
+                                    <tbody>
+                                        <tr class="accordion-toggle" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="false"
+                                            aria-controls="collapseOne">
+                                            <td>
+                                                <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="categoryCheck1">
                                                     <label class="form-check-label" for="categoryCheck1"></label>
                                                 </div>
                                             </td>
-                                            <td> 
-                                                <a href="#" class="text-inherit position-relative text-decoration-none"> 
-                                                    <h5 class="mb-0 text-primary-hover text-dark"> 
+                                            <td>
+                                                <a href="#" class="text-inherit position-relative text-decoration-none">
+                                                    <h5 class="mb-0 text-primary-hover text-dark">
                                                         <i class="bi bi-chevron-right fs-6 me-2"></i>
                                                         Courses
                                                     </h5>
@@ -623,20 +644,24 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown dropstart">
-                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button"
+                                                        id="courseDropdown1" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="courseDropdown1">
-                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li>
+                                                            <h6 class="dropdown-header">Action</h6>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-send me-2"></i>Publish
-                                                        </a></li>
+                                                                <i class="bi bi-send me-2"></i>Publish
+                                                            </a></li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
-                                                        </a></li>
+                                                                <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                            </a></li>
                                                         <li><a class="dropdown-item text-danger" href="#">
-                                                            <i class="bi bi-trash me-2"></i>Delete
-                                                        </a></li>
+                                                                <i class="bi bi-trash me-2"></i>Delete
+                                                            </a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -662,20 +687,24 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown dropstart">
-                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button"
+                                                        id="courseDropdown2" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="courseDropdown2">
-                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li>
+                                                            <h6 class="dropdown-header">Action</h6>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-send me-2"></i>Publish
-                                                        </a></li>
+                                                                <i class="bi bi-send me-2"></i>Publish
+                                                            </a></li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
-                                                        </a></li>
+                                                                <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                            </a></li>
                                                         <li><a class="dropdown-item text-danger" href="#">
-                                                            <i class="bi bi-trash me-2"></i>Delete
-                                                        </a></li>
+                                                                <i class="bi bi-trash me-2"></i>Delete
+                                                            </a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -702,20 +731,24 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown dropstart">
-                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button"
+                                                        id="courseDropdown3" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="courseDropdown3">
-                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li>
+                                                            <h6 class="dropdown-header">Action</h6>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-send me-2"></i>Publish
-                                                        </a></li>
+                                                                <i class="bi bi-send me-2"></i>Publish
+                                                            </a></li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
-                                                        </a></li>
+                                                                <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                            </a></li>
                                                         <li><a class="dropdown-item text-danger" href="#">
-                                                            <i class="bi bi-trash me-2"></i>Delete
-                                                        </a></li>
+                                                                <i class="bi bi-trash me-2"></i>Delete
+                                                            </a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -741,20 +774,24 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown dropstart">
-                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown4" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button"
+                                                        id="courseDropdown4" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="courseDropdown4">
-                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li>
+                                                            <h6 class="dropdown-header">Action</h6>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-send me-2"></i>Publish
-                                                        </a></li>
+                                                                <i class="bi bi-send me-2"></i>Publish
+                                                            </a></li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
-                                                        </a></li>
+                                                                <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                            </a></li>
                                                         <li><a class="dropdown-item text-danger" href="#">
-                                                            <i class="bi bi-trash me-2"></i>Delete
-                                                        </a></li>
+                                                                <i class="bi bi-trash me-2"></i>Delete
+                                                            </a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -780,20 +817,24 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown dropstart">
-                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown5" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button"
+                                                        id="courseDropdown5" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="courseDropdown5">
-                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li>
+                                                            <h6 class="dropdown-header">Action</h6>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-send me-2"></i>Publish
-                                                        </a></li>
+                                                                <i class="bi bi-send me-2"></i>Publish
+                                                            </a></li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
-                                                        </a></li>
+                                                                <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                            </a></li>
                                                         <li><a class="dropdown-item text-danger" href="#">
-                                                            <i class="bi bi-trash me-2"></i>Delete
-                                                        </a></li>
+                                                                <i class="bi bi-trash me-2"></i>Delete
+                                                            </a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -819,20 +860,24 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown dropstart">
-                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown6" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button"
+                                                        id="courseDropdown6" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="courseDropdown6">
-                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li>
+                                                            <h6 class="dropdown-header">Action</h6>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-send me-2"></i>Publish
-                                                        </a></li>
+                                                                <i class="bi bi-send me-2"></i>Publish
+                                                            </a></li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
-                                                        </a></li>
+                                                                <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                            </a></li>
                                                         <li><a class="dropdown-item text-danger" href="#">
-                                                            <i class="bi bi-trash me-2"></i>Delete
-                                                        </a></li>
+                                                                <i class="bi bi-trash me-2"></i>Delete
+                                                            </a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -858,20 +903,24 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown dropstart">
-                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button" id="courseDropdown7" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-ghost btn-sm rounded-circle" type="button"
+                                                        id="courseDropdown7" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="courseDropdown7">
-                                                        <li><h6 class="dropdown-header">Action</h6></li>
+                                                        <li>
+                                                            <h6 class="dropdown-header">Action</h6>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-send me-2"></i>Publish
-                                                        </a></li>
+                                                                <i class="bi bi-send me-2"></i>Publish
+                                                            </a></li>
                                                         <li><a class="dropdown-item" href="#">
-                                                            <i class="bi bi-inbox me-2"></i>Move to Draft
-                                                        </a></li>
+                                                                <i class="bi bi-inbox me-2"></i>Move to Draft
+                                                            </a></li>
                                                         <li><a class="dropdown-item text-danger" href="#">
-                                                            <i class="bi bi-trash me-2"></i>Delete
-                                                        </a></li>
+                                                                <i class="bi bi-trash me-2"></i>Delete
+                                                            </a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -907,7 +956,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="categoryDescription" class="form-label">Description</label>
-                            <textarea class="form-control" id="categoryDescription" rows="3" placeholder="Enter category description"></textarea>
+                            <textarea class="form-control" id="categoryDescription" rows="3"
+                                placeholder="Enter category description"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="categoryStatus" class="form-label">Status</label>
@@ -928,14 +978,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const toggleSidebar = document.getElementById('toggleSidebar');
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('main-content');
             const overlay = document.getElementById('overlay');
-            
+
             // Toggle sidebar functionality
-            toggleSidebar.addEventListener('click', function() {
+            toggleSidebar.addEventListener('click', function () {
                 if (window.innerWidth <= 768) {
                     // Mobile behavior
                     sidebar.classList.toggle('show');
@@ -951,16 +1001,16 @@
                     sidebar.classList.toggle('collapsed');
                 }
             });
-            
+
             // Close sidebar when clicking overlay (mobile)
-            overlay.addEventListener('click', function() {
+            overlay.addEventListener('click', function () {
                 sidebar.classList.remove('show');
                 overlay.style.display = 'none';
                 document.body.style.overflow = '';
             });
-            
+
             // Handle window resize
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 if (window.innerWidth > 768) {
                     sidebar.classList.remove('show');
                     overlay.style.display = 'none';
@@ -971,12 +1021,12 @@
             // Status selection functionality
             const statusOptions = document.querySelectorAll('.status-option');
             statusOptions.forEach(option => {
-                option.addEventListener('click', function() {
+                option.addEventListener('click', function () {
                     // Remove active class from all options
                     statusOptions.forEach(opt => opt.classList.remove('active'));
                     // Add active class to clicked option
                     this.classList.add('active');
-                    
+
                     // Update status display (you can customize this)
                     const statusText = this.textContent.trim();
                     console.log('Status changed to:', statusText);
@@ -986,7 +1036,7 @@
             // Search functionality (basic)
             const searchInputs = document.querySelectorAll('input[type="search"]');
             searchInputs.forEach(input => {
-                input.addEventListener('input', function() {
+                input.addEventListener('input', function () {
                     const searchTerm = this.value.toLowerCase();
                     console.log('Searching for:', searchTerm);
                     // Add your search logic here
@@ -996,14 +1046,14 @@
             // Accordion toggle for categories
             const accordionToggles = document.querySelectorAll('.accordion-toggle');
             accordionToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
+                toggle.addEventListener('click', function () {
                     const target = this.getAttribute('data-bs-target');
                     const targetElement = document.querySelector(target);
                     const chevron = this.querySelector('i.bi-chevron-right');
-                    
+
                     if (targetElement) {
                         const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                        
+
                         if (chevron) {
                             if (isExpanded) {
                                 chevron.style.transform = 'rotate(0deg)';
@@ -1018,8 +1068,8 @@
             // Check all functionality
             const checkAll = document.getElementById('checkAll');
             const categoryChecks = document.querySelectorAll('[id^="categoryCheck"]');
-            
-            checkAll.addEventListener('change', function() {
+
+            checkAll.addEventListener('change', function () {
                 categoryChecks.forEach(check => {
                     check.checked = this.checked;
                 });
@@ -1027,7 +1077,7 @@
 
             // Individual checkbox change
             categoryChecks.forEach(check => {
-                check.addEventListener('change', function() {
+                check.addEventListener('change', function () {
                     const checkedBoxes = document.querySelectorAll('[id^="categoryCheck"]:checked');
                     checkAll.checked = checkedBoxes.length === categoryChecks.length;
                     checkAll.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < categoryChecks.length;
@@ -1036,4 +1086,5 @@
         });
     </script>
 </body>
+
 </html>

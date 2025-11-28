@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Layout</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <style>
         /* Prevent horizontal scroll */
         body {
@@ -45,7 +47,7 @@
             width: calc(100% - 280px);
         }
 
-        #sidebar.collapsed + #main-content {
+        #sidebar.collapsed+#main-content {
             margin-left: 0;
             width: 100%;
         }
@@ -145,23 +147,23 @@
                 margin-left: -100%;
                 z-index: 1050;
             }
-            
+
             #sidebar.show {
                 margin-left: 0;
             }
-            
+
             #main-content {
                 margin-left: 0;
                 width: 100%;
             }
-            
+
             .overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0,0,0,0.5);
+                background-color: rgba(0, 0, 0, 0.5);
                 z-index: 1040;
             }
 
@@ -189,31 +191,36 @@
         .bg-primary-soft {
             background-color: rgba(13, 110, 253, 0.1) !important;
         }
+
         .bg-success-soft {
             background-color: rgba(25, 135, 84, 0.1) !important;
         }
+
         .bg-info-soft {
             background-color: rgba(13, 202, 240, 0.1) !important;
         }
+
         .bg-warning-soft {
             background-color: rgba(255, 193, 7, 0.1) !important;
         }
+
         .bg-secondary-soft {
             background-color: rgba(108, 117, 125, 0.1) !important;
         }
-        
+
         /* Hover effects */
         .card:hover {
             transform: translateY(-2px);
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
             transition: all 0.3s ease;
         }
-        
+
         .table tbody tr:hover {
             background-color: rgba(0, 0, 0, 0.025);
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light navbar-fixed">
@@ -229,7 +236,8 @@
                     <span class="input-group-text bg-white border-end-0">
                         <i class="bi bi-search text-muted"></i>
                     </span>
-                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard" aria-label="Search">
+                    <input class="form-control border-start-0" type="search" placeholder="Search Entire Dashboard"
+                        aria-label="Search">
                 </div>
             </form>
 
@@ -237,10 +245,12 @@
             <div class="d-flex align-items-center ms-auto">
                 <!-- Notification Dropdown -->
                 <div class="dropdown me-3">
-                    <button class="btn btn-link text-decoration-none notification-badge" type="button" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-link text-decoration-none notification-badge" type="button"
+                        id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-bell text-dark fs-4"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown" style="width: 320px;">
+                    <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" aria-labelledby="notifDropdown"
+                        style="width: 320px;">
                         <!-- Notification Header -->
                         <div class="px-3 py-3 border-bottom">
                             <div class="d-flex justify-content-between align-items-center">
@@ -250,29 +260,33 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <!-- Notification Items -->
                         <div class="px-3 py-2" style="max-height: 300px; overflow-y: auto;">
                             <div class="d-flex mb-3">
-                                <img src="/assets/images/avatar-3.jpg" width="40" height="40" class="rounded-circle me-3" alt="">
+                                <img src="/assets/images/avatar-3.jpg" width="40" height="40"
+                                    class="rounded-circle me-3" alt="">
                                 <div class="flex-grow-1">
-                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course JavaScript Introduction!</p>
+                                    <p class="mb-1"><strong>Kristin Watson</strong> liked your comment on course
+                                        JavaScript Introduction!</p>
                                     <small class="text-muted">
                                         <i class="bi bi-clock me-1"></i>2 hours ago
                                     </small>
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
-                                <img src="/assets/images/avatar-5.jpg" width="40" height="40" class="rounded-circle me-3" alt="">
+                                <img src="/assets/images/avatar-5.jpg" width="40" height="40"
+                                    class="rounded-circle me-3" alt="">
                                 <div class="flex-grow-1">
-                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React for Beginners</p>
+                                    <p class="mb-1"><strong>Brooklyn Simons</strong> just launched a new course React
+                                        for Beginners</p>
                                     <small class="text-muted">
                                         <i class="bi bi-clock me-1"></i>17 June 2025, 2:19 PM
                                     </small>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Notification Footer -->
                         <div class="text-center border-top py-2">
                             <a href="#" class="text-decoration-none text-primary fw-bold">See All Notifications</a>
@@ -282,13 +296,15 @@
 
                 <!-- Profile Dropdown -->
                 <div class="dropdown">
-                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/assets/images/avatar-1.jpg" class="profile-img" alt="profile">
                     </button>
                     <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
                         <!-- Profile Info -->
                         <div class="d-flex align-items-center px-3 py-3 border-bottom">
-                            <img src="/assets/images/avatar-1.jpg" width="50" height="50" class="rounded-circle me-3" alt="user">
+                            <img src="/assets/images/avatar-1.jpg" width="50" height="50" class="rounded-circle me-3"
+                                alt="user">
                             <div>
                                 <div class="fw-bold">Your Name</div>
                                 <div class="text-muted small">your@email.com</div>
@@ -330,7 +346,7 @@
                         </a>
 
                         <div class="dropdown-divider"></div>
-                        
+
                         <a class="dropdown-item text-danger" href="#">
                             <i class="bi bi-box-arrow-right me-2"></i>Sign Out
                         </a>
@@ -354,8 +370,10 @@
                     </a>
                     <div class="collapse" id="dashboardMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Dashboard/analytics_dasboard.html">Analytics</a></li>
                         </ul>
                     </div>
                 </li>
@@ -367,9 +385,13 @@
                     </a>
                     <div class="collapse" id="coursesMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Courses/allCourses_admin.html">All Courses</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Courses/coursesCategory_admin.html">Courses Category</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Courses/categorySingle_admin.html">Category Single</a></li>
                         </ul>
                     </div>
                 </li>
@@ -381,8 +403,10 @@
                     </a>
                     <div class="collapse " id="userMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link active" href="#">Instructor</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-User/instructor_User.html">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-User/students_User.html">Students</a></li>
                         </ul>
                     </div>
                 </li>
@@ -394,10 +418,14 @@
                     </a>
                     <div class="collapse" id="cmsMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-CMS/overview_CMS.html">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/allPost_CMS.html">All
+                                    Post</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/newPost.html">New
+                                    Post</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-CMS/category._CMS.html">Category</a></li>
                         </ul>
                     </div>
                 </li>
@@ -409,19 +437,31 @@
                     </a>
                     <div class="collapse" id="projectMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/grid_Project.html">Grid</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/list_Project.html">List</a></li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="collapse" href="#projectSingleMenu">
                                     Single
                                 </a>
                                 <div class="collapse" id="projectSingleMenu">
                                     <ul class="nav flex-column ms-4">
-                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Task</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/overview_single_Project.html">Overview</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/task_single_Project.html">Task</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/budget_single_Project.html">Budget</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/team_single_Project.html">Team</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/file_single_Project.html">Files</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -436,21 +476,27 @@
                     </a>
                     <div class="collapse" id="authMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/sign-in.html">Sign In</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/sign-up.html">Sign Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/forget-password.html">Forget
+                                    Password</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Auth/notification.html">Notifications</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/homepage.html">404 Error</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <!-- APPS -->
                 <li class="sidebar-heading">Apps</li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/chat-app.html"><i
+                            class="bi bi-chat-dots me-2"></i> Chats</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/task-app.html"><i
+                            class="bi bi-list-task me-2"></i> Task</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/mail.html"><i
+                            class="bi bi-envelope me-2"></i> Mail</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/calender.html"><i
+                            class="bi bi-calendar me-2"></i> Calendar</a></li>
 
                 <!-- Components -->
                 <li class="sidebar-heading">Components</li>
@@ -460,14 +506,17 @@
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Basic</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Data Tables</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/table/basic_table.html">Basic</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/table/data_tables.html">Data Tables</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
+                    <a class="nav-link" href="/pages/help-center.html"><i class="bi bi-question-circle me-2"></i>Help
+                        Center</a>
                 </li>
 
                 <!-- Site Settings -->
@@ -477,10 +526,14 @@
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">General</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/general.html">General</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/google.html">Google</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/social.html">Social</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/social_login.html">Social Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
                         </ul>
@@ -495,7 +548,8 @@
                 <div class="row">
                     <!-- Page Header -->
                     <div class="col-lg-12 col-md-12 col-12">
-                        <div class="border-bottom pb-3 mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                        <div
+                            class="border-bottom pb-3 mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
                             <div class="d-flex flex-column gap-1 mb-3 mb-md-0">
                                 <h1 class="mb-0 h2 fw-bold">
                                     Instructor
@@ -515,11 +569,13 @@
                                 </nav>
                             </div>
                             <div class="btn-group" role="group" aria-label="View toggle">
-                                <input type="radio" class="btn-check" name="viewToggle" id="gridView" autocomplete="off" checked>
+                                <input type="radio" class="btn-check" name="viewToggle" id="gridView" autocomplete="off"
+                                    checked>
                                 <label class="btn btn-outline-secondary" for="gridView">
                                     <i class="bi bi-grid-3x3-gap"></i>
                                 </label>
-                                <input type="radio" class="btn-check" name="viewToggle" id="listView" autocomplete="off">
+                                <input type="radio" class="btn-check" name="viewToggle" id="listView"
+                                    autocomplete="off">
                                 <label class="btn btn-outline-secondary" for="listView">
                                     <i class="bi bi-list"></i>
                                 </label>
@@ -548,7 +604,8 @@
                                         <div class="card h-100">
                                             <div class="card-body d-flex flex-column">
                                                 <div class="text-center mb-4">
-                                                    <img src="/assets/images/avatar-2.jpg" class="rounded-circle mb-3" alt="Avatar" style="width: 80px; height: 80px;">
+                                                    <img src="/assets/images/avatar-2.jpg" class="rounded-circle mb-3"
+                                                        alt="Avatar" style="width: 80px; height: 80px;">
                                                     <h5 class="card-title mb-1">Wade Warren</h5>
                                                     <p class="card-text text-muted">Web Developer, Designer</p>
                                                 </div>
@@ -576,7 +633,8 @@
                                         <div class="card h-100">
                                             <div class="card-body d-flex flex-column">
                                                 <div class="text-center mb-4">
-                                                    <img src="/assets/images/avatar-3.jpg" class="rounded-circle mb-3" alt="Avatar" style="width: 80px; height: 80px;">
+                                                    <img src="/assets/images/avatar-3.jpg" class="rounded-circle mb-3"
+                                                        alt="Avatar" style="width: 80px; height: 80px;">
                                                     <h5 class="card-title mb-1">Dianna Smiley</h5>
                                                     <p class="card-text text-muted">Engineering Architect</p>
                                                 </div>
@@ -604,7 +662,8 @@
                                         <div class="card h-100">
                                             <div class="card-body d-flex flex-column">
                                                 <div class="text-center mb-4">
-                                                    <img src="/assets/images/avatar-4.jpg" class="rounded-circle mb-3" alt="Avatar" style="width: 80px; height: 80px;">
+                                                    <img src="/assets/images/avatar-4.jpg" class="rounded-circle mb-3"
+                                                        alt="Avatar" style="width: 80px; height: 80px;">
                                                     <h5 class="card-title mb-1">Esther Howard</h5>
                                                     <p class="card-text text-muted">Developer and Instructor</p>
                                                 </div>
@@ -632,7 +691,8 @@
                                         <div class="card h-100">
                                             <div class="card-body d-flex flex-column">
                                                 <div class="text-center mb-4">
-                                                    <img src="/assets/images/avatar-5.jpg" class="rounded-circle mb-3" alt="Avatar" style="width: 80px; height: 80px;">
+                                                    <img src="/assets/images/avatar-5.jpg" class="rounded-circle mb-3"
+                                                        alt="Avatar" style="width: 80px; height: 80px;">
                                                     <h5 class="card-title mb-1">Guy Hawkins</h5>
                                                     <p class="card-text text-muted">Professional Web Developer</p>
                                                 </div>
@@ -695,7 +755,8 @@
                                             <span class="input-group-text bg-white border-end-0">
                                                 <i class="bi bi-search text-muted"></i>
                                             </span>
-                                            <input type="search" class="form-control border-start-0" placeholder="Search Instructor">
+                                            <input type="search" class="form-control border-start-0"
+                                                placeholder="Search Instructor">
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -715,7 +776,9 @@
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <img src="/assets/images/avatar-1.jpg" alt="" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                                            <img src="/assets/images/avatar-1.jpg" alt=""
+                                                                class="rounded-circle me-3"
+                                                                style="width: 40px; height: 40px;">
                                                             <div>
                                                                 <h6 class="mb-0">Guy Hawkins</h6>
                                                                 <small class="text-muted">@guyhawkins</small>
@@ -723,7 +786,8 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <span class="badge bg-primary-soft text-primary">Engineering Architect</span>
+                                                        <span class="badge bg-primary-soft text-primary">Engineering
+                                                            Architect</span>
                                                     </td>
                                                     <td><strong>6</strong> Courses</td>
                                                     <td>7 July, 2020</td>
@@ -736,21 +800,31 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button class="btn btn-sm btn-outline-primary" title="Send Message">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                title="Send Message">
                                                                 <i class="bi bi-envelope"></i>
                                                             </button>
-                                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                            <button class="btn btn-sm btn-outline-danger"
+                                                                title="Delete">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
                                                             <div class="dropdown">
-                                                                <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown">
+                                                                <button class="btn btn-sm btn-outline-secondary"
+                                                                    data-bs-toggle="dropdown">
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View</a></li>
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                                                    <li><hr class="dropdown-divider"></li>
-                                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-eye me-2"></i>View</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-pencil me-2"></i>Edit</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"><i
+                                                                                class="bi bi-trash me-2"></i>Delete</a>
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -759,7 +833,9 @@
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <img src="/assets/images/avatar-2.jpg" alt="" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                                            <img src="/assets/images/avatar-2.jpg" alt=""
+                                                                class="rounded-circle me-3"
+                                                                style="width: 40px; height: 40px;">
                                                             <div>
                                                                 <h6 class="mb-0">Dianna Smiley</h6>
                                                                 <small class="text-muted">@diannasmiley</small>
@@ -767,7 +843,8 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <span class="badge bg-success-soft text-success">Front End Developer</span>
+                                                        <span class="badge bg-success-soft text-success">Front End
+                                                            Developer</span>
                                                     </td>
                                                     <td><strong>3</strong> Courses</td>
                                                     <td>6 July, 2020</td>
@@ -780,21 +857,31 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button class="btn btn-sm btn-outline-primary" title="Send Message">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                title="Send Message">
                                                                 <i class="bi bi-envelope"></i>
                                                             </button>
-                                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                            <button class="btn btn-sm btn-outline-danger"
+                                                                title="Delete">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
                                                             <div class="dropdown">
-                                                                <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown">
+                                                                <button class="btn btn-sm btn-outline-secondary"
+                                                                    data-bs-toggle="dropdown">
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View</a></li>
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                                                    <li><hr class="dropdown-divider"></li>
-                                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-eye me-2"></i>View</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-pencil me-2"></i>Edit</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"><i
+                                                                                class="bi bi-trash me-2"></i>Delete</a>
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -803,7 +890,9 @@
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <img src="/assets/images/avatar-6.jpg" alt="" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                                            <img src="/assets/images/avatar-6.jpg" alt=""
+                                                                class="rounded-circle me-3"
+                                                                style="width: 40px; height: 40px;">
                                                             <div>
                                                                 <h6 class="mb-0">Esther Howard</h6>
                                                                 <small class="text-muted">@estherhoward</small>
@@ -811,7 +900,8 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <span class="badge bg-info-soft text-info">Developer & Instructor</span>
+                                                        <span class="badge bg-info-soft text-info">Developer &
+                                                            Instructor</span>
                                                     </td>
                                                     <td><strong>3</strong> Courses</td>
                                                     <td>5 July, 2020</td>
@@ -824,21 +914,31 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button class="btn btn-sm btn-outline-primary" title="Send Message">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                title="Send Message">
                                                                 <i class="bi bi-envelope"></i>
                                                             </button>
-                                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                            <button class="btn btn-sm btn-outline-danger"
+                                                                title="Delete">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
                                                             <div class="dropdown">
-                                                                <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown">
+                                                                <button class="btn btn-sm btn-outline-secondary"
+                                                                    data-bs-toggle="dropdown">
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View</a></li>
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                                                    <li><hr class="dropdown-divider"></li>
-                                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-eye me-2"></i>View</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-pencil me-2"></i>Edit</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"><i
+                                                                                class="bi bi-trash me-2"></i>Delete</a>
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -847,7 +947,9 @@
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <img src="/assets/images/avatar-3.jpg" alt="" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                                            <img src="/assets/images/avatar-3.jpg" alt=""
+                                                                class="rounded-circle me-3"
+                                                                style="width: 40px; height: 40px;">
                                                             <div>
                                                                 <h6 class="mb-0">Jacob Jones</h6>
                                                                 <small class="text-muted">@jacobjones</small>
@@ -855,7 +957,8 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <span class="badge bg-warning-soft text-warning">Bootstrap Expert</span>
+                                                        <span class="badge bg-warning-soft text-warning">Bootstrap
+                                                            Expert</span>
                                                     </td>
                                                     <td><strong>7</strong> Courses</td>
                                                     <td>2 July, 2020</td>
@@ -868,21 +971,31 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button class="btn btn-sm btn-outline-primary" title="Send Message">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                title="Send Message">
                                                                 <i class="bi bi-envelope"></i>
                                                             </button>
-                                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                            <button class="btn btn-sm btn-outline-danger"
+                                                                title="Delete">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
                                                             <div class="dropdown">
-                                                                <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown">
+                                                                <button class="btn btn-sm btn-outline-secondary"
+                                                                    data-bs-toggle="dropdown">
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View</a></li>
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                                                    <li><hr class="dropdown-divider"></li>
-                                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-eye me-2"></i>View</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-pencil me-2"></i>Edit</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"><i
+                                                                                class="bi bi-trash me-2"></i>Delete</a>
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -891,7 +1004,9 @@
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <img src="/assets/images/avatar-4.jpg" alt="" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                                                            <img src="/assets/images/avatar-4.jpg" alt=""
+                                                                class="rounded-circle me-3"
+                                                                style="width: 40px; height: 40px;">
                                                             <div>
                                                                 <h6 class="mb-0">Kristin Watson</h6>
                                                                 <small class="text-muted">@kristinwatson</small>
@@ -899,7 +1014,8 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <span class="badge bg-secondary-soft text-secondary">Web Development</span>
+                                                        <span class="badge bg-secondary-soft text-secondary">Web
+                                                            Development</span>
                                                     </td>
                                                     <td><strong>5</strong> Courses</td>
                                                     <td>1 July, 2020</td>
@@ -912,21 +1028,31 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button class="btn btn-sm btn-outline-primary" title="Send Message">
+                                                            <button class="btn btn-sm btn-outline-primary"
+                                                                title="Send Message">
                                                                 <i class="bi bi-envelope"></i>
                                                             </button>
-                                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                            <button class="btn btn-sm btn-outline-danger"
+                                                                title="Delete">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
                                                             <div class="dropdown">
-                                                                <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown">
+                                                                <button class="btn btn-sm btn-outline-secondary"
+                                                                    data-bs-toggle="dropdown">
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View</a></li>
-                                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                                                    <li><hr class="dropdown-divider"></li>
-                                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-eye me-2"></i>View</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="bi bi-pencil me-2"></i>Edit</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <hr class="dropdown-divider">
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-danger" href="#"><i
+                                                                                class="bi bi-trash me-2"></i>Delete</a>
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -971,14 +1097,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const toggleSidebar = document.getElementById('toggleSidebar');
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('main-content');
             const overlay = document.getElementById('overlay');
-            
+
             // Toggle sidebar functionality
-            toggleSidebar.addEventListener('click', function() {
+            toggleSidebar.addEventListener('click', function () {
                 if (window.innerWidth <= 768) {
                     // Mobile behavior
                     sidebar.classList.toggle('show');
@@ -994,16 +1120,16 @@
                     sidebar.classList.toggle('collapsed');
                 }
             });
-            
+
             // Close sidebar when clicking overlay (mobile)
-            overlay.addEventListener('click', function() {
+            overlay.addEventListener('click', function () {
                 sidebar.classList.remove('show');
                 overlay.style.display = 'none';
                 document.body.style.overflow = '';
             });
-            
+
             // Handle window resize
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 if (window.innerWidth > 768) {
                     sidebar.classList.remove('show');
                     overlay.style.display = 'none';
@@ -1014,12 +1140,12 @@
             // Status selection functionality
             const statusOptions = document.querySelectorAll('.status-option');
             statusOptions.forEach(option => {
-                option.addEventListener('click', function() {
+                option.addEventListener('click', function () {
                     // Remove active class from all options
                     statusOptions.forEach(opt => opt.classList.remove('active'));
                     // Add active class to clicked option
                     this.classList.add('active');
-                    
+
                     // Update status display (you can customize this)
                     const statusText = this.textContent.trim();
                     console.log('Status changed to:', statusText);
@@ -1029,7 +1155,7 @@
             // Search functionality (basic)
             const searchInputs = document.querySelectorAll('input[type="search"]');
             searchInputs.forEach(input => {
-                input.addEventListener('input', function() {
+                input.addEventListener('input', function () {
                     const searchTerm = this.value.toLowerCase();
                     console.log('Searching for:', searchTerm);
                     // Add your search logic here
@@ -1041,7 +1167,7 @@
             const listViewRadio = document.getElementById('listView');
             const gridViewPane = document.getElementById('tabPaneGrid');
             const listViewPane = document.getElementById('tabPaneList');
-            
+
             // Function to switch views
             function switchView(showGrid) {
                 if (showGrid) {
@@ -1052,15 +1178,15 @@
                     listViewPane.classList.add('active', 'show');
                 }
             }
-            
+
             // Event listeners for view toggle
-            gridViewRadio.addEventListener('change', function() {
+            gridViewRadio.addEventListener('change', function () {
                 if (this.checked) {
                     switchView(true);
                 }
             });
-            
-            listViewRadio.addEventListener('change', function() {
+
+            listViewRadio.addEventListener('change', function () {
                 if (this.checked) {
                     switchView(false);
                 }
@@ -1068,4 +1194,5 @@
         });
     </script>
 </body>
+
 </html>

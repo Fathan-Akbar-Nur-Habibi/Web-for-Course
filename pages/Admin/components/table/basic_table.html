@@ -13,8 +13,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css" rel="stylesheet">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.44.0/apexcharts.min.js"></script>
 
     <style>
         /* Global Styles */
@@ -619,7 +619,6 @@
                 <div class="dropdown">
                     <button class="btn btn-link text-decoration-none p-0" type="button" id="profileDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false" aria-label="Profile menu">
-
                         <img src="/assets/images/avatar-1.jpg" class="rounded-circle" width="40">
                     </button>
                     <div class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="profileDropdown">
@@ -630,14 +629,13 @@
                                 <div class="text-muted small">john.doe@email.com</div>
                             </div>
                         </div>
-
                         <div class="px-3 py-2">
                             <div class="dropdown-item-text fw-bold mb-2">
                                 <i class="bi bi-circle-fill text-success me-2"></i>Status
                             </div>
                             <div class="ms-3">
                                 <div class="status-option">
-                                    <span class="status-circle bg-success"></span>Online
+                                    <span class="status-circle bg-success "></span>Online
                                 </div>
                                 <div class="status-option">
                                     <span class="status-circle bg-secondary"></span>Offline
@@ -650,9 +648,7 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="dropdown-divider"></div>
-
                         <a class="dropdown-item" href="#">
                             <i class="bi bi-person me-2"></i>Profile
                         </a>
@@ -662,9 +658,7 @@
                         <a class="dropdown-item" href="#">
                             <i class="bi bi-gear me-2"></i>Settings
                         </a>
-
                         <div class="dropdown-divider"></div>
-
                         <a class="dropdown-item text-danger" href="#">
                             <i class="bi bi-box-arrow-right me-2"></i>Sign Out
                         </a>
@@ -689,8 +683,10 @@
                     </a>
                     <div class="collapse" id="dashboardMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Dashboard/analytics_dasboard.html">Analytics</a></li>
                         </ul>
                     </div>
                 </li>
@@ -702,9 +698,13 @@
                     </a>
                     <div class="collapse" id="coursesMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">All Courses</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Courses Category</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category Single</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Courses/allCourses_admin.html">All Courses</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Courses/coursesCategory_admin.html">Courses Category</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Courses/categorySingle_admin.html">Category Single</a></li>
                         </ul>
                     </div>
                 </li>
@@ -716,8 +716,10 @@
                     </a>
                     <div class="collapse" id="userMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Instructor</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-User/instructor_User.html">Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-User/students_User.html">Students</a></li>
                         </ul>
                     </div>
                 </li>
@@ -729,10 +731,14 @@
                     </a>
                     <div class="collapse" id="cmsMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">All Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">New Post</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Category</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-CMS/overview_CMS.html">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/allPost_CMS.html">All
+                                    Post</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/Admin/Admin-CMS/newPost.html">New
+                                    Post</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-CMS/category._CMS.html">Category</a></li>
                         </ul>
                     </div>
                 </li>
@@ -744,8 +750,10 @@
                     </a>
                     <div class="collapse " id="projectMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Grid</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/grid_Project.html">Grid</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Project/list_Project.html">List</a></li>
                             <li class="nav-item">
                                 <a class="nav-link " data-bs-toggle="collapse" href="#projectSingleMenu"
                                     aria-expanded="true" aria-controls="projectSingleMenu">
@@ -753,11 +761,21 @@
                                 </a>
                                 <div class="collapse nested-collapse" id="projectSingleMenu">
                                     <ul class="nav flex-column">
-                                        <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-                                        <li class="nav-item"><a class="nav-link " href="#">Task</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Budget</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Files</a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/overview_single_Project.html">Overview</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/task_single_Project.html">Task</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/budget_single_Project.html">Budget</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/team_single_Project.html">Team</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="/pages/Admin/Admin-Project/Single_Admin_Project/file_single_Project.html">Files</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -772,37 +790,46 @@
                     </a>
                     <div class="collapse" id="authMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Forget Password</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Notification</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">404 Error</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/sign-in.html">Sign In</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/sign-up.html">Sign Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/forget-password.html">Forget
+                                    Password</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/Admin-Auth/notification.html">Notifications</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/pages/homepage.html">404 Error</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="sidebar-heading">Apps</li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Chats</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>Task</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Mail</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar me-2"></i>Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/chat-app.html"><i
+                            class="bi bi-chat-dots me-2"></i> Chats</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/task-app.html"><i
+                            class="bi bi-list-task me-2"></i> Task</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/mail.html"><i
+                            class="bi bi-envelope me-2"></i> Mail</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pages/Admin/Apps/calender.html"><i
+                            class="bi bi-calendar me-2"></i> Calendar</a></li>
 
                 <li class="sidebar-heading">Components</li>
                 <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="collapse" href="#tablesMenu" role="button" aria-expanded="false"
-                        aria-controls="tablesMenu">
+                    <a class="nav-link active" data-bs-toggle="collapse" href="#tablesMenu" role="button"
+                        aria-expanded="false" aria-controls="tablesMenu">
                         <i class="bi bi-table me-2"></i>Tables
                     </a>
                     <div class="collapse" id="tablesMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link active" href="#">Basic</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Data Tables</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/table/basic_table.html">Basic</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/table/data_tables.html">Data Tables</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a>
+                    <a class="nav-link" href="/pages/help-center.html"><i class="bi bi-question-circle me-2"></i>Help
+                        Center</a>
                 </li>
 
                 <li class="nav-item">
@@ -812,10 +839,14 @@
                     </a>
                     <div class="collapse" id="siteSettingsMenu">
                         <ul class="nav flex-column ms-4">
-                            <li class="nav-item"><a class="nav-link" href="#">General</a></li>
-                            <li class="nav-item"><a class="nav-link " href="#">Google</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Social Login</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/general.html">General</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/google.html">Google</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/social.html">Social</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                    href="/pages/Admin/components/sitesettings/social_login.html">Social Login</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">SMTP</a></li>
                         </ul>
@@ -826,19 +857,19 @@
 
         <!-- Main content -->
         <main id="main-content-wrapper" class="flex-grow-1">
-            <div class="row mt-4"> 
-                <div class="col-lg-12 col-md-12 col-12"> 
+            <div class="row mt-4">
+                <div class="col-lg-12 col-md-12 col-12">
                     <!--page header-->
-                    <div class="border-bottom pb-3 mb-3"> 
-                        <div class="d-flex flex-column gap-1"> 
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex flex-column gap-1">
                             <h2 class="mb-0 fw-bold">Tables</h2>
                             <!--breadcrumb-->
-                            <nav aria-label="breadcrumb">  
-                                <ol class="breadcrumb"> 
-                                    <li class="breadcrumb-item"> 
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
                                         <a href="/pages/Admin/Admin-Dashboard/overview_dashboard.html">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item" aria-current="page"> 
+                                    <li class="breadcrumb-item" aria-current="page">
                                         <a href="#">Tables</a>
                                     </li>
                                 </ol>
@@ -848,14 +879,14 @@
                 </div>
             </div>
 
-            <div class="row gy-5"> 
+            <div class="row gy-5">
                 <!--basic table-->
-                <div class="col-xl-6 col-12"> 
-                    <div class="card"> 
+                <div class="col-xl-6 col-12">
+                    <div class="card">
                         <!--card header-->
-                        <div class="card-header"> 
+                        <div class="card-header">
                             <h4 class="mb-1">Table Basic</h4>
-                            <p class="mb-0"> 
+                            <p class="mb-0">
                                 Just add the base class
                                 <code class="highlighter-rouge">.table</code>
                                 to any
@@ -864,10 +895,10 @@
                             </p>
                         </div>
                         <!--table-->
-                        <div class="table-responsive"> 
-                            <table class="table text-nowrap mb-0 table-centered"> 
-                                <thead> 
-                                    <tr> 
+                        <div class="table-responsive">
+                            <table class="table text-nowrap mb-0 table-centered">
+                                <thead>
+                                    <tr>
                                         <th>Project name</th>
                                         <th>Due Date</th>
                                         <th>Priority</th>
@@ -875,44 +906,51 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody> 
-                                    <tr> 
-                                        <td> 
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/dropbox-logo.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a href="#" class="text-inherit text-decoration-none text-dark ">Dropbox Design System</a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a href="#"
+                                                            class="text-inherit text-decoration-none text-dark ">Dropbox
+                                                            Design System</a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>June 2</td>
                                         <td><span class="badge bg-warning">Medium</span></td>
-                                        <td> 
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg" class="rounded-circle">  
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img src="/assets/images/avatar-2.jpg" alt="avatar" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img src="/assets/images/avatar-2.jpg" alt="avatar"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img src="/assets/images/avatar-3.jpg" alt="avatar" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img src="/assets/images/avatar-3.jpg" alt="avatar"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+5</span>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary" href="#" role="button" id="dropdownOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                                                    <i data-feather="more-vertical"></i> 
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary" href="#" role="button"
+                                                    id="dropdownOne" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownOne"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownOne">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another Action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -920,88 +958,101 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr> 
-                                <td>
-                                    <div class="d-flex align-items-center gap-3">
-                                        <div>
-                                            <div>
-                                                <img src="/assets/images/zapier.svg" alt="">
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
+                                                        <img src="/assets/images/zapier.svg" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a href="#"
+                                                            class="text-inherit text-decoration-none text-dark">Slack UI
+                                                            Design</a></h5>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="lh-1">
-                                            <h5 class="mb-1"><a href="#" class="text-inherit text-decoration-none text-dark">Slack UI Design</a></h5>
-                                        </div>
-                                    </div>
-                                </td>
+                                        </td>
                                         <td> June 12</td>
                                         <td><span class="badge bg-danger">High</span></td>
-                                        <td>  
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm">  
-                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+5</span>
                                                 </span>
                                             </div>
                                         </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="text-body text-primary-hover" href="#" role="button" id="dropdownTwo"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i data-feather="more-vertical"></i>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownTwo">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownTwo" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <i data-feather="more-vertical"></i>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownTwo">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
-                                    <tr> 
-                                        <td> 
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/visa.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a href="#" class="text-inherit text-decoration-none text-dark">Payment Method</a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a href="#"
+                                                            class="text-inherit text-decoration-none text-dark">Payment
+                                                            Method</a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>Aug 14</td>
                                         <td><span class="badge bg-info">Low</span></td>
-                                        <td>   
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg"
+                                                        class="rounded-circle">
                                                 </span>
                                                 <span class="avatar avatar-sm">
-                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg" class="rounded-circle">
+                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+1</span>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary-hover" href="#" role="button" id="dropdownThree" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownThree" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
                                                     <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownThree"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownThree">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another acton</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1016,24 +1067,24 @@
                 </div>
 
                 <!--dark table-->
-                <div class="col-xl-6 col-12"> 
-                    <div class="card"> 
+                <div class="col-xl-6 col-12">
+                    <div class="card">
                         <!--card header-->
-                        <div class="card-header"> 
+                        <div class="card-header">
                             <h4 class="mb-1">Table Dark</h4>
-                            <p class="mb-0"> 
+                            <p class="mb-0">
                                 Just add the base class
                                 <code class="highlighter-rouge">.table-dark</code>
-                                to Analytics    
+                                to Analytics
                                 <code class="highlighter-rouge">&lt;table&gt;</code>
                                 , then extend with custom styles
                             </p>
                         </div>
                         <!--tables-->
-                        <div class="table-responsive"> 
-                            <table class="table table-dark text-nowrap mb-0"> 
-                                <thead class="table-dark"> 
-                                    <tr> 
+                        <div class="table-responsive">
+                            <table class="table table-dark text-nowrap mb-0">
+                                <thead class="table-dark">
+                                    <tr>
                                         <th>Project name</th>
                                         <th>Due Date</th>
                                         <th>Priority</th>
@@ -1041,12 +1092,12 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody> 
-                                    <tr> 
-                                        <td>  
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/dropbox-logo.svg" alt="">
                                                     </div>
                                                 </div>
@@ -1055,30 +1106,33 @@
                                         </td>
                                         <td>June 2</td>
                                         <td><span class="badge bg-warning">Medium</span></td>
-                                        <td> 
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img src="/assets/images/avatar-1.jpg" alt="avatar" class="rounded-circle">
-                                                </span> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img src="/assets/images/avatar-1.jpg" alt="avatar"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg"
+                                                        class="rounded-circle">
+                                                </span>
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+5</span>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
+                                        <td>
+                                            <div class="dropdown">
                                                 <a class="text-body text-primary" role="button" id="dropdownFive"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > 
-                                                 <i data-feather="more-vertical"></i>
+                                                    data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownFive"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownFive">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1087,11 +1141,11 @@
                                         </td>
                                     </tr>
 
-                                    <tr> 
-                                        <td>  
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/slack-logo.svg" alt="">
                                                     </div>
                                                 </div>
@@ -1100,30 +1154,33 @@
                                         </td>
                                         <td>June 2</td>
                                         <td><span class="badge bg-danger">High</span></td>
-                                        <td> 
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img src="/assets/images/avatar-4.jpg" alt="avatar" class="rounded-circle">
-                                                </span> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img src="/assets/images/avatar-4.jpg" alt="avatar"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg"
+                                                        class="rounded-circle">
+                                                </span>
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+5</span>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
+                                        <td>
+                                            <div class="dropdown">
                                                 <a class="text-body text-primary" role="button" id="dropdownFive"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > 
-                                                 <i data-feather="more-vertical"></i>
+                                                    data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownFive"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownFive">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1132,11 +1189,11 @@
                                         </td>
                                     </tr>
 
-                                    <tr> 
-                                        <td>  
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/visa.svg" alt="">
                                                     </div>
                                                 </div>
@@ -1145,30 +1202,33 @@
                                         </td>
                                         <td>June 2</td>
                                         <td><span class="badge bg-warning">Medium</span></td>
-                                        <td> 
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img src="/assets/images/avatar-4.jpg" alt="avatar" class="rounded-circle">
-                                                </span> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img src="/assets/images/avatar-4.jpg" alt="avatar"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg"
+                                                        class="rounded-circle">
+                                                </span>
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+5</span>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
+                                        <td>
+                                            <div class="dropdown">
                                                 <a class="text-body text-primary" role="button" id="dropdownFive"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > 
-                                                 <i data-feather="more-vertical"></i>
+                                                    data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownFive"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownFive">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1185,9 +1245,9 @@
                 <!--light table-->
 
                 <div class="col-xl-6 col-12">
-                    <div class="card"> 
+                    <div class="card">
                         <!--card header-->
-                        <div class="card-header"> 
+                        <div class="card-header">
                             <h4 class="mb-1">Table Head Options</h4>
                             <p class="mb-1">Use the modifier classes
                                 <code>.table-light</code>
@@ -1196,9 +1256,9 @@
                             </p>
                         </div>
                         <!--table-->
-                        <div class="table-responsive"> 
-                            <table class="table text-nowrap mb-0 table-centered"> 
-                                <thead class="table-light"> 
+                        <div class="table-responsive">
+                            <table class="table text-nowrap mb-0 table-centered">
+                                <thead class="table-light">
                                     <tr>
                                         <th>Project Name</th>
                                         <th>Due Date</th>
@@ -1207,45 +1267,50 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody> 
-                                    <tr> 
-                                        <td> 
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/dropbox-logo.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a href="#" class="text-inherit text-decoration-none text-dark">Dropbox Design System </a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a href="#"
+                                                            class="text-inherit text-decoration-none text-dark">Dropbox
+                                                            Design System </a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>June 2</td>
                                         <td><span class="badge bg-warning">Medium</span></td>
-                                        <td>  
-                                            <div class="avatar-group"> 
+                                        <td>
+                                            <div class="avatar-group">
                                                 <span class="avatar avatar-sm">
-                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg" class="rounded-circle">
+                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg" class="rounded-circle">
-                                                </span> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg"
+                                                        class="rounded-circle">
+                                                </span>
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+5</span>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary-hover" href="#" role="button" id="dropdownTen"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > <i data-feather="more-vertical"></i>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownTen" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownTen"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownTen">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1253,41 +1318,46 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr> 
+                                    <tr>
                                         <td>
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/slack-logo.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a class="text-inherit text-decoration-none text-dark" href="#">Slack UI Design</a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a
+                                                            class="text-inherit text-decoration-none text-dark"
+                                                            href="#">Slack UI Design</a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>June 12</td>
                                         <td><span class="badge bg-danger">High</span></td>
-                                        <td>    
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg"
+                                                        class="rounded-circle">
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary-hover" href="#" role="button" id="dropdownTen"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > <i data-feather="more-vertical"></i>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownTen" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownTen"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownTen">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1295,41 +1365,46 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr> 
+                                    <tr>
                                         <td>
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/slack-logo.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a class="text-inherit text-decoration-none text-dark" href="#">Slack UI Design</a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a
+                                                            class="text-inherit text-decoration-none text-dark"
+                                                            href="#">Slack UI Design</a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>June 12</td>
                                         <td><span class="badge bg-danger">High</span></td>
-                                        <td>    
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg"
+                                                        class="rounded-circle">
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary-hover" href="#" role="button" id="dropdownTen"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > <i data-feather="more-vertical"></i>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownTen" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownTen"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownTen">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1343,9 +1418,9 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-12">
-                    <div class="card"> 
+                    <div class="card">
                         <!--card header-->
-                        <div class="card-header"> 
+                        <div class="card-header">
                             <h4 class="mb-1">Table Head Options</h4>
                             <p class="mb-1">Use the modifier classes
                                 <code>.table-light</code>
@@ -1354,9 +1429,9 @@
                             </p>
                         </div>
                         <!--table-->
-                        <div class="table-responsive"> 
-                            <table class="table text-nowrap mb-0 table-centered"> 
-                                <thead class="table-light"> 
+                        <div class="table-responsive">
+                            <table class="table text-nowrap mb-0 table-centered">
+                                <thead class="table-light">
                                     <tr>
                                         <th>Project Name</th>
                                         <th>Due Date</th>
@@ -1365,45 +1440,50 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody> 
-                                    <tr> 
-                                        <td> 
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/dropbox-logo.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a href="#" class="text-inherit text-decoration-none text-dark">Dropbox Design System </a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a href="#"
+                                                            class="text-inherit text-decoration-none text-dark">Dropbox
+                                                            Design System </a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>June 2</td>
                                         <td><span class="badge bg-warning">Medium</span></td>
-                                        <td>  
-                                            <div class="avatar-group"> 
+                                        <td>
+                                            <div class="avatar-group">
                                                 <span class="avatar avatar-sm">
-                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg" class="rounded-circle">
+                                                    <img alt="avatar" src="/assets/images/avatar-1.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg" class="rounded-circle">
-                                                </span> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-2.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm avatar-primary"> 
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-3.jpg"
+                                                        class="rounded-circle">
+                                                </span>
+                                                <span class="avatar avatar-sm avatar-primary">
                                                     <span class="avatar-initials rounded-circle fs-6">+5</span>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary-hover" href="#" role="button" id="dropdownTen"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > <i data-feather="more-vertical"></i>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownTen" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownTen"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownTen">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1411,41 +1491,46 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr> 
+                                    <tr>
                                         <td>
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/slack-logo.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a class="text-inherit text-decoration-none text-dark" href="#">Slack UI Design</a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a
+                                                            class="text-inherit text-decoration-none text-dark"
+                                                            href="#">Slack UI Design</a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>June 12</td>
                                         <td><span class="badge bg-danger">High</span></td>
-                                        <td>    
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg"
+                                                        class="rounded-circle">
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary-hover" href="#" role="button" id="dropdownTen"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > <i data-feather="more-vertical"></i>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownTen" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownTen"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownTen">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1453,41 +1538,46 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr> 
+                                    <tr>
                                         <td>
-                                            <div class="d-flex align-items-center gap-3"> 
-                                                <div> 
-                                                    <div> 
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div>
+                                                    <div>
                                                         <img src="/assets/images/slack-logo.svg" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="lh-1"> 
-                                                    <h5 class="mb-1"><a class="text-inherit text-decoration-none text-dark" href="#">Slack UI Design</a></h5>
+                                                <div class="lh-1">
+                                                    <h5 class="mb-1"><a
+                                                            class="text-inherit text-decoration-none text-dark"
+                                                            href="#">Slack UI Design</a></h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>June 12</td>
                                         <td><span class="badge bg-danger">High</span></td>
-                                        <td>    
-                                            <div class="avatar-group"> 
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg" class="rounded-circle">
+                                        <td>
+                                            <div class="avatar-group">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-4.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-5.jpg"
+                                                        class="rounded-circle">
                                                 </span>
-                                                <span class="avatar avatar-sm"> 
-                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg" class="rounded-circle">
+                                                <span class="avatar avatar-sm">
+                                                    <img alt="avatar" src="/assets/images/avatar-6.jpg"
+                                                        class="rounded-circle">
                                                 </span>
                                             </div>
                                         </td>
-                                        <td> 
-                                            <div class="dropdown"> 
-                                                <a class="text-body text-primary-hover" href="#" role="button" id="dropdownTen"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                > <i data-feather="more-vertical"></i>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-body text-primary-hover" href="#" role="button"
+                                                    id="dropdownTen" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> <i data-feather="more-vertical"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownTen"> 
+                                                <div class="dropdown-menu" aria-labelledby="dropdownTen">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
@@ -1510,9 +1600,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-<script>
-    feather.replace();
-</script>
+    <script>
+        feather.replace();
+    </script>
 
 
     <script>
